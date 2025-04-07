@@ -5,32 +5,32 @@
 
 @layer base {
   :root {
-    --background: 43 100% 15%; /* Dark golden brown background */
+    --background: 43 100% 12%; /* Dark golden background */
     --foreground: 39 100% 90%; /* Light golden foreground */
     --primary: 43 100% 56%; /* Rich golden yellow */
     --primary-foreground: 36 100% 12%; /* Dark background for contrast */
     
-    --card: 222 47% 14%;
-    --card-foreground: 210 40% 98%;
+    --card: 43 80% 20%; /* Golden brown card background */
+    --card-foreground: 39 100% 90%; /* Light golden text */
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 43 80% 15%; /* Dark golden popover */
+    --popover-foreground: 39 100% 90%; /* Light golden popover text */
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 43 70% 25%; /* Golden secondary color */
+    --secondary-foreground: 39 100% 90%; /* Light golden secondary text */
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 43 50% 30%; /* Muted golden color */
+    --muted-foreground: 39 100% 85%; /* Light muted golden text */
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 43 60% 35%; /* Golden accent */
+    --accent-foreground: 39 100% 90%; /* Light golden accent text */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 20 80% 40%; /* Warm reddish tone */
+    --destructive-foreground: 39 100% 90%; /* Light golden destructive text */
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 208 100% 56%;
+    --border: 43 50% 40%; /* Golden border */
+    --input: 43 60% 35%; /* Golden input */
+    --ring: 43 100% 56%; /* Golden ring */
   }
 }
 
