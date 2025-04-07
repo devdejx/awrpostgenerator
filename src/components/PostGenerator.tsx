@@ -211,17 +211,17 @@ const PostGenerator = () => {
   };
 
   return (
-    <Card className="p-4 bg-white">
+    <Card className="p-4 bg-white"> {/* Ensure this is white */}
       <div className="space-y-4 text-black">
         <div>
-          <label className="block text-sm font-medium text-black mb-1"> {/* Changed text color to black */}
+          <label className="block text-sm font-medium text-gray-700 mb-1">
             Post Type
           </label>
           <Select value={postType} onValueChange={setPostType}>
-            <SelectTrigger className="w-full bg-white">
+            <SelectTrigger className="w-full bg-white"> {/* Ensure white background */}
               <SelectValue placeholder="Select post type" />
             </SelectTrigger>
-            <SelectContent className="bg-white">
+            <SelectContent className="bg-white"> {/* White dropdown */}
               {POST_TYPES.map((type) => (
                 <SelectItem key={type.value} value={type.value}>
                   {type.label}
@@ -233,7 +233,7 @@ const PostGenerator = () => {
 
         <div>
           <div className="flex justify-between items-center mb-1">
-            <label className="block text-sm font-medium text-black"> {/* Changed text color to black */}
+            <label className="block text-sm font-medium text-gray-700">
               Message
             </label>
             <div className="flex items-center gap-2">
@@ -267,7 +267,7 @@ const PostGenerator = () => {
             placeholder="Enter your message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="min-h-[100px] bg-white"
+            className="min-h-[100px] bg-white" // Ensure white background
           />
         </div>
 
@@ -304,10 +304,7 @@ const PostGenerator = () => {
         </div>
 
         <div className="flex space-x-2">
-          <Button 
-            onClick={generatePost} 
-            className="w-full border-[#D4AF37] hover:border-[#FFD700]" // Added golden border
-          >
+          <Button onClick={generatePost} className="w-full">
             Create Post
           </Button>
           <Button
