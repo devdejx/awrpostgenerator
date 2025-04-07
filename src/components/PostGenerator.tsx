@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -63,13 +64,13 @@ const generateContentFromWebsite = async (source = "random") => {
   ];
   
   const mediumContents = [
-    "AWR Life By Design is a philosophy rooted in empowerment and mindfulness.",
-    "Life By Design is about taking control of your personal journey through intentional living.",
-    "We're transforming how people approach planning for retirement and beyond.",
-    "The AWR platform provides tools for financial independence and personal fulfillment.",
-    "Our purpose is to empower individuals to design lives they'll love today and tomorrow.",
-    "True wealth includes health, relationships, purpose, and financial independence.",
-    "The traditional retirement model is becoming obsolete as longevity increases.",
+    "Retirement planning requires a holistic approach to personal finance.",
+    "Understanding your long-term financial goals is key to successful retirement.",
+    "Wealth is more than just money - it's about creating a fulfilling lifestyle.",
+    "Preparing for retirement involves financial, health, and personal growth strategies.",
+    "Your retirement journey is unique and deserves careful, personalized planning.",
+    "Strategic financial planning can help you achieve greater personal freedom.",
+    "Modern retirement approaches focus on flexibility and continuous personal development.",
   ];
   
   await new Promise(resolve => setTimeout(resolve, 1000));
