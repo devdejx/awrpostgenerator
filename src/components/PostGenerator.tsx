@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -210,17 +211,17 @@ const PostGenerator = () => {
   };
 
   return (
-    <Card className="p-4 bg-white">
+    <Card className="p-4 bg-white"> {/* Ensure this is white */}
       <div className="space-y-4 text-black">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Post Type
           </label>
           <Select value={postType} onValueChange={setPostType}>
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full bg-white"> {/* Ensure white background */}
               <SelectValue placeholder="Select post type" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white"> {/* White dropdown */}
               {POST_TYPES.map((type) => (
                 <SelectItem key={type.value} value={type.value}>
                   {type.label}
@@ -237,10 +238,10 @@ const PostGenerator = () => {
             </label>
             <div className="flex items-center gap-2">
               <Select value={contentSource} onValueChange={setContentSource}>
-                <SelectTrigger className="h-8 w-32">
+                <SelectTrigger className="h-8 w-32 bg-white"> {/* White background */}
                   <SelectValue placeholder="Source" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white"> {/* White dropdown */}
                   <SelectItem value="random">Both Sources</SelectItem>
                   <SelectItem value="website">Website</SelectItem>
                   <SelectItem value="medium">Medium</SelectItem>
@@ -266,7 +267,7 @@ const PostGenerator = () => {
             placeholder="Enter your message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="min-h-[100px]"
+            className="min-h-[100px] bg-white" // Ensure white background
           />
         </div>
 
