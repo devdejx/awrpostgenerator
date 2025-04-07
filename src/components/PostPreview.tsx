@@ -9,12 +9,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const PostPreview = () => {
   const { post } = usePostStore();
-  const toast = useToast();
+  const { toast } = useToast();
   const [copied, setCopied] = useState(false);
 
   const handleCopyToClipboard = () => {
     if (!post.content) {
-      toast.error("Najprej ustvarite objavo");
+      toast({
+        title: "Napaka",
+        description: "Najprej ustvarite objavo",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -22,11 +26,18 @@ const PostPreview = () => {
       .writeText(post.content)
       .then(() => {
         setCopied(true);
-        toast.success("Kopirano v odložišče!");
+        toast({
+          title: "Uspešno!",
+          description: "Kopirano v odložišče!",
+        });
         setTimeout(() => setCopied(false), 2000);
       })
       .catch(() => {
-        toast.error("Napaka pri kopiranju");
+        toast({
+          title: "Napaka",
+          description: "Napaka pri kopiranju",
+          variant: "destructive",
+        });
       });
   };
 

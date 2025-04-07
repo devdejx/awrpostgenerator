@@ -56,7 +56,7 @@ const POST_TYPES = [
 
 const PostGenerator = () => {
   const { post, setPost } = usePostStore();
-  const toast = useToast();
+  const { toast } = useToast();
   const [message, setMessage] = useState("");
   const [postType, setPostType] = useState("announcement");
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -78,7 +78,11 @@ const PostGenerator = () => {
 
   const generatePost = () => {
     if (!message.trim()) {
-      toast.error("Prosim vnesite sporočilo");
+      toast({
+        title: "Napaka",
+        description: "Prosim vnesite sporočilo",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -98,7 +102,10 @@ const PostGenerator = () => {
       timestamp: new Date().toISOString(),
     });
 
-    toast.success("Objava uspešno ustvarjena!");
+    toast({
+      title: "Uspešno!",
+      description: "Objava uspešno ustvarjena!",
+    });
   };
 
   const resetForm = () => {
