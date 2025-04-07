@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/sonner";
+import { useToast } from "@/hooks/use-toast";
 import { Image as ImageIcon, RefreshCw } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 
