@@ -6,11 +6,13 @@ import { useToast } from "@/hooks/use-toast";
 import { Copy, Share2 } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const PostPreview = () => {
   const { post } = usePostStore();
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleCopyToClipboard = () => {
     if (!post.content) {
@@ -55,8 +57,6 @@ const PostPreview = () => {
     let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.content)}`;
     
     // If there's an image, add it to the URL as a media parameter
-    // Note: Twitter's Web Intent API doesn't directly support image sharing,
-    // but we can include the image URL to make it easier for users to add it manually
     if (post.image) {
       toast({
         title: "Notice",
@@ -88,36 +88,36 @@ const PostPreview = () => {
   });
 
   return (
-    <Card className="border border-gray-200 p-4">
-      <div className="space-y-4">
-        <div className="flex items-start space-x-3">
-          <Avatar>
+    <Card className="border border-gray-200 bg-white p-3 sm:p-4 max-w-full overflow-hidden">
+      <div className="space-y-3 sm:space-y-4">
+        <div className="flex items-start space-x-2 sm:space-x-3">
+          <Avatar className={isMobile ? "h-9 w-9" : "h-10 w-10"}>
             <AvatarImage src="/placeholder.svg" alt="Profile" />
             <AvatarFallback>X</AvatarFallback>
           </Avatar>
-          <div className="flex-1">
-            <div className="flex items-center">
-              <span className="font-bold">User</span>
-              <span className="text-gray-500 text-sm ml-2">@username</span>
-              <span className="text-gray-500 mx-1">·</span>
-              <span className="text-gray-500 text-sm">{formattedDate}</span>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center flex-wrap">
+              <span className="font-bold text-black text-sm sm:text-base">User</span>
+              <span className="text-gray-500 text-xs sm:text-sm ml-1 sm:ml-2">@username</span>
+              <span className="text-gray-500 mx-1 text-xs sm:text-sm">·</span>
+              <span className="text-gray-500 text-xs sm:text-sm">{formattedDate}</span>
             </div>
-            <p className="mt-1 text-gray-800 whitespace-pre-wrap">{post.content}</p>
+            <p className="mt-1 text-gray-800 whitespace-pre-wrap text-sm sm:text-base break-words">{post.content}</p>
             {post.image && (
-              <div className="mt-3">
+              <div className="mt-2 sm:mt-3">
                 <img
                   src={post.image}
                   alt="Post image"
-                  className="rounded-lg border border-gray-200 max-h-80 object-cover w-full"
+                  className="rounded-lg border border-gray-200 max-h-64 sm:max-h-80 object-cover w-full"
                 />
               </div>
             )}
-            <div className="mt-3 flex items-center space-x-12 text-gray-500 text-sm pt-2 border-t border-gray-100">
+            <div className="mt-2 sm:mt-3 flex items-center justify-between text-gray-500 text-xs sm:text-sm pt-2 border-t border-gray-100">
               <div className="flex items-center space-x-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -133,8 +133,8 @@ const PostPreview = () => {
               <div className="flex items-center space-x-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -153,8 +153,8 @@ const PostPreview = () => {
               <div className="flex items-center space-x-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -170,8 +170,8 @@ const PostPreview = () => {
               <div className="flex items-center space-x-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -190,21 +190,21 @@ const PostPreview = () => {
           </div>
         </div>
 
-        <div className="pt-4 border-t border-gray-200 flex gap-2">
+        <div className="pt-3 border-t border-gray-200 flex flex-col sm:flex-row gap-2">
           <Button
             onClick={handleCopyToClipboard}
             variant="outline"
-            className="flex items-center space-x-2 w-full"
+            className="flex items-center justify-center space-x-2 w-full text-xs sm:text-sm h-9"
           >
-            <Copy className="h-4 w-4" />
+            <Copy className="h-3 w-3 sm:h-4 sm:w-4" />
             <span>{copied ? "Copied!" : "Copy text"}</span>
           </Button>
           
           <Button
             onClick={shareToTwitter}
-            className="flex items-center space-x-2 w-full"
+            className="flex items-center justify-center space-x-2 w-full text-xs sm:text-sm h-9"
           >
-            <Share2 className="h-4 w-4" />
+            <Share2 className="h-3 w-3 sm:h-4 sm:w-4" />
             <span>Post to X</span>
           </Button>
         </div>
