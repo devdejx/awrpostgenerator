@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 36 100% 12%; /* Dark golden brown background */
+    --background: 43 100% 15%; /* Dark golden brown background */
     --foreground: 39 100% 90%; /* Light golden foreground */
     --primary: 43 100% 56%; /* Rich golden yellow */
     --primary-foreground: 36 100% 12%; /* Dark background for contrast */
