@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import PostGenerator from "@/components/PostGenerator";
 import PostPreview from "@/components/PostPreview";
@@ -10,8 +9,12 @@ const Index = () => {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <div className="h-12 w-12 rounded-full awr-gradient flex items-center justify-center mr-3 glow">
-              <span className="text-white font-bold text-lg">AWR</span>
+            <div className="h-24 w-24 rounded-full flex items-center justify-center mr-3 glow">
+              <img 
+                src="/awr-logo.png" 
+                alt="AWR Lifestyle Logo" 
+                className="max-w-full max-h-full object-contain"
+              />
             </div>
             <h1 className="text-4xl font-extrabold text-white">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">
