@@ -38,9 +38,9 @@ const POST_TYPES = [
     value: "quote",
     label: "Citat",
     templates: [
-      ""{message}" #modrost #citat",
-      "Misel dneva: "{message}" ✨",
-      "Navdih za danes: "{message}" 💭",
+      "\"{message}\" #modrost #citat",
+      "Misel dneva: \"{message}\" ✨",
+      "Navdih za danes: \"{message}\" 💭",
     ],
   },
   {
