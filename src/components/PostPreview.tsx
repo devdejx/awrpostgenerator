@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Copy } from "lucide-react";
+import { Copy, Share2 } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -39,6 +39,25 @@ const PostPreview = () => {
           variant: "destructive",
         });
       });
+  };
+
+  const shareToTwitter = () => {
+    if (!post.content) {
+      toast({
+        title: "Napaka",
+        description: "Najprej ustvarite objavo",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.content)}`;
+    window.open(twitterUrl, '_blank');
+    
+    toast({
+      title: "Odpiranje X (Twitter)",
+      description: "Preusmerjamo vas na X, da dokončate objavo",
+    });
   };
 
   if (!post.content) {
@@ -159,7 +178,7 @@ const PostPreview = () => {
           </div>
         </div>
 
-        <div className="pt-4 border-t border-gray-200">
+        <div className="pt-4 border-t border-gray-200 flex gap-2">
           <Button
             onClick={handleCopyToClipboard}
             variant="outline"
@@ -167,6 +186,14 @@ const PostPreview = () => {
           >
             <Copy className="h-4 w-4" />
             <span>{copied ? "Kopirano!" : "Kopiraj besedilo"}</span>
+          </Button>
+          
+          <Button
+            onClick={shareToTwitter}
+            className="flex items-center space-x-2 w-full"
+          >
+            <Share2 className="h-4 w-4" />
+            <span>Objavi na X</span>
           </Button>
         </div>
       </div>
