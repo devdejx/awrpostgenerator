@@ -15,62 +15,90 @@ import { useToast } from "@/hooks/use-toast";
 import { Image as ImageIcon, RefreshCw, Wand2 } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 
+const CRYPTO_HASHTAGS = [
+  "#Bitcoin #Crypto #BTC",
+  "#Ethereum #ETH #Crypto",
+  "#Blockchain #Crypto #Web3",
+  "#DeFi #Crypto #Finance",
+  "#NFT #Crypto #DigitalAssets",
+  "#CryptoTrading #Bitcoin",
+  "#Altcoins #Crypto #InvestmentStrategy",
+];
+
+const CRYPTO_PROFILES = [
+  "@bitcoin @ethereum",
+  "@CoinDesk @cz_binance",
+  "@VitalikButerin @SatoshiLite",
+  "@MicroStrategy @APompliano",
+  "@CoinMarketCap @BitcoinMagazine",
+  "@cryptorecruiter @cz_binance",
+  "@PlanB @DocumentingBTC",
+];
+
+const getRandomCryptoHashtags = () => {
+  return CRYPTO_HASHTAGS[Math.floor(Math.random() * CRYPTO_HASHTAGS.length)];
+};
+
+const getRandomCryptoProfiles = () => {
+  return CRYPTO_PROFILES[Math.floor(Math.random() * CRYPTO_PROFILES.length)];
+};
+
 const POST_TYPES = [
   {
     value: "announcement",
     label: "Announcement",
     templates: [
-      "Important new event! 📢 {message}",
-      "News of the day: {message} #news",
-      "Attention! 🚨 {message}",
+      "Important new event from All Will Retire! 📢 {message} {hashtags} cc: {profiles}",
+      "News from All Will Retire: {message} #news {hashtags} cc: {profiles}",
+      "Attention! 🚨 All Will Retire announces: {message} {hashtags} cc: {profiles}",
     ],
   },
   {
     value: "question",
     label: "Question",
     templates: [
-      "What do you think about this? 🤔 {message}",
-      "{message} What's your opinion?",
-      "Thinking about... {message} You?",
+      "All Will Retire asks: What do you think about this? 🤔 {message} {hashtags} cc: {profiles}",
+      "{message} What's your opinion? - All Will Retire {hashtags} cc: {profiles}",
+      "All Will Retire is thinking about... {message} You? {hashtags} cc: {profiles}",
     ],
   },
   {
     value: "quote",
     label: "Quote",
     templates: [
-      "\"{message}\" #wisdom #quote",
-      "Thought of the day: \"{message}\" ✨",
-      "Inspiration for today: \"{message}\" 💭",
+      "All Will Retire shares: \"{message}\" #wisdom #quote {hashtags} cc: {profiles}",
+      "Thought of the day from All Will Retire: \"{message}\" ✨ {hashtags} cc: {profiles}",
+      "Inspiration by All Will Retire: \"{message}\" 💭 {hashtags} cc: {profiles}",
     ],
   },
   {
     value: "tip",
     label: "Tip",
     templates: [
-      "Pro tip: {message} #advice",
-      "Did you know? {message} 💡",
-      "Useful tip: {message} ✅",
+      "Pro tip from All Will Retire: {message} #advice {hashtags} cc: {profiles}",
+      "All Will Retire tip: Did you know? {message} 💡 {hashtags} cc: {profiles}",
+      "Useful tip from All Will Retire: {message} ✅ {hashtags} cc: {profiles}",
     ],
   },
 ];
 
 const generateContentFromWebsite = async (source = "random") => {
   const websiteContents = [
-    "Planning for retirement is crucial. Start early and be consistent with your savings.",
-    "Retirement isn't just about finances, it's also about having a purpose and staying active.",
-    "Diversifying your retirement portfolio can help protect against market volatility.",
-    "Consider your healthcare needs when planning for retirement. Medical costs can be significant.",
-    "Social security benefits alone may not be enough for a comfortable retirement.",
+    "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings.",
+    "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active.",
+    "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility.",
+    "All Will Retire insight: Consider your healthcare needs when planning for retirement. Medical costs can be significant.",
+    "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement.",
   ];
   
   const mediumContents = [
-    "Retirement planning requires a holistic approach to personal finance.",
-    "Understanding your long-term financial goals is key to successful retirement.",
-    "Wealth is more than just money - it's about creating a fulfilling lifestyle.",
-    "Preparing for retirement involves financial, health, and personal growth strategies.",
-    "Your retirement journey is unique and deserves careful, personalized planning.",
-    "Strategic financial planning can help you achieve greater personal freedom.",
-    "Modern retirement approaches focus on flexibility and continuous personal development.",
+    "All Will Retire philosophy: Retirement planning requires a holistic approach to personal finance.",
+    "All Will Retire wisdom: Understanding your long-term financial goals is key to successful retirement.",
+    "All Will Retire perspective: Wealth is more than just money - it's about creating a fulfilling lifestyle.",
+    "All Will Retire approach: Preparing for retirement involves financial, health, and personal growth strategies.",
+    "All Will Retire belief: Your retirement journey is unique and deserves careful, personalized planning.",
+    "All Will Retire principle: Strategic financial planning can help you achieve greater personal freedom.",
+    "All Will Retire concept: Modern retirement approaches focus on flexibility and continuous personal development.",
   ];
   
   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -126,7 +154,14 @@ const PostGenerator = () => {
       selectedType.templates[
         Math.floor(Math.random() * selectedType.templates.length)
       ];
-    const generatedMessage = randomTemplate.replace("{message}", message);
+      
+    const hashtags = getRandomCryptoHashtags();
+    const profiles = getRandomCryptoProfiles();
+    
+    const generatedMessage = randomTemplate
+      .replace("{message}", message)
+      .replace("{hashtags}", hashtags)
+      .replace("{profiles}", profiles);
 
     setPost({
       content: generatedMessage,
@@ -183,7 +218,7 @@ const PostGenerator = () => {
             Post Type
           </label>
           <Select value={postType} onValueChange={setPostType}>
-            <SelectTrigger>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Select post type" />
             </SelectTrigger>
             <SelectContent>
