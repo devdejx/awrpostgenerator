@@ -12,7 +12,7 @@ const Index = () => {
           <div className="flex items-center justify-center mb-4">
             <div className="h-48 w-48 flex items-center justify-center mr-3 glow overflow-hidden">
               <img 
-                src="/awr-logo.png" 
+                src="awr-logo.png" 
                 alt="AWR Lifestyle Logo" 
                 className="h-40 w-40 object-cover"
               />
