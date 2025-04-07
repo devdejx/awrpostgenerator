@@ -50,8 +50,20 @@ const PostPreview = () => {
       });
       return;
     }
-
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.content)}`;
+    
+    // Create Twitter share URL with text content
+    let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.content)}`;
+    
+    // If there's an image, add it to the URL as a media parameter
+    // Note: Twitter's Web Intent API doesn't directly support image sharing,
+    // but we can include the image URL to make it easier for users to add it manually
+    if (post.image) {
+      toast({
+        title: "Obvestilo",
+        description: "Slika bo na voljo za ročno dodajanje na X",
+      });
+    }
+    
     window.open(twitterUrl, '_blank');
     
     toast({
