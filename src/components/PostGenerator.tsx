@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -54,9 +53,7 @@ const POST_TYPES = [
   },
 ];
 
-// Mock function to generate content from website
 const generateContentFromWebsite = async (source = "random") => {
-  // Content from AllWillRetire website
   const websiteContents = [
     "Planning for retirement is crucial. Start early and be consistent with your savings.",
     "Retirement isn't just about finances, it's also about having a purpose and staying active.",
@@ -65,7 +62,6 @@ const generateContentFromWebsite = async (source = "random") => {
     "Social security benefits alone may not be enough for a comfortable retirement.",
   ];
   
-  // Content from Medium article
   const mediumContents = [
     "AWR Life By Design is a philosophy rooted in empowerment and mindfulness.",
     "Life By Design is about taking control of your personal journey through intentional living.",
@@ -76,16 +72,13 @@ const generateContentFromWebsite = async (source = "random") => {
     "The traditional retirement model is becoming obsolete as longevity increases.",
   ];
   
-  // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 1000));
   
-  // Return content based on source
   if (source === "medium") {
     return mediumContents[Math.floor(Math.random() * mediumContents.length)];
   } else if (source === "website") {
     return websiteContents[Math.floor(Math.random() * websiteContents.length)];
   } else {
-    // Combine both sources for random selection
     const allContents = [...websiteContents, ...mediumContents];
     return allContents[Math.floor(Math.random() * allContents.length)];
   }
@@ -208,8 +201,8 @@ const PostGenerator = () => {
               Message
             </label>
             <div className="flex items-center gap-2">
-              <Select value={contentSource} onValueChange={setContentSource} className="w-32">
-                <SelectTrigger className="h-8">
+              <Select value={contentSource} onValueChange={setContentSource}>
+                <SelectTrigger className="h-8 w-32">
                   <SelectValue placeholder="Source" />
                 </SelectTrigger>
                 <SelectContent>
