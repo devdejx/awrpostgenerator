@@ -1,21 +1,19 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-
+    --background: 36 100% 12%; // Dark golden brown background
+    --foreground: 39 100% 90%; // Light golden foreground
+    --primary: 43 100% 56%; // Rich golden yellow
+    --primary-foreground: 36 100% 12%; // Dark background for contrast
+    
     --card: 222 47% 14%;
     --card-foreground: 210 40% 98%;
 
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 208 100% 56%; /* AWR blue */
-    --primary-foreground: 210 40% 98%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -47,7 +45,7 @@
 }
 
 .awr-gradient {
-  background: linear-gradient(135deg, hsl(var(--primary)) 0%, #0057FF 100%);
+  background: linear-gradient(135deg, hsl(43, 100%, 56%) 0%, #D4AF37 100%);
 }
 
 .card-shadow {
@@ -60,22 +58,22 @@
 }
 
 .glow {
-  box-shadow: 0 0 20px 5px rgba(0, 115, 255, 0.15);
+  box-shadow: 0 0 20px 5px rgba(212, 175, 55, 0.3);
 }
 
 .dot-pattern {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(212, 175, 55, 0.1) 1px, transparent 0);
   background-size: 20px 20px;
 }
 
 .glass-effect {
   backdrop-filter: blur(12px);
-  background: rgba(30, 35, 51, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(64, 49, 21, 0.5);
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, #0073ff, #00c2ff);
+  background: linear-gradient(90deg, #D4AF37, #FFD700);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

@@ -14,7 +14,7 @@ const Index = () => {
               <span className="text-white font-bold text-lg">AWR</span>
             </div>
             <h1 className="text-4xl font-extrabold text-white">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">
                 All Will Retire
               </span> 
               <span className="text-white"> Post Generator</span>
@@ -24,17 +24,17 @@ const Index = () => {
         </div>
 
         <Tabs defaultValue="create" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-8 glass-effect border border-white/10 p-1 rounded-lg">
-            <TabsTrigger value="create" className="font-medium data-[state=active]:bg-primary data-[state=active]:text-white">Create Post</TabsTrigger>
-            <TabsTrigger value="preview" className="font-medium data-[state=active]:bg-primary data-[state=active]:text-white">Preview</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-8 glass-effect border border-[#D4AF37]/20 p-1 rounded-lg">
+            <TabsTrigger value="create" className="font-medium data-[state=active]:bg-primary data-[state=active]:text-background">Create Post</TabsTrigger>
+            <TabsTrigger value="preview" className="font-medium data-[state=active]:bg-primary data-[state=active]:text-background">Preview</TabsTrigger>
           </TabsList>
           <TabsContent value="create">
-            <div className="glass-effect rounded-xl glow p-6 border border-white/10">
+            <div className="glass-effect rounded-xl glow p-6 border border-[#D4AF37]/20">
               <PostGenerator />
             </div>
           </TabsContent>
           <TabsContent value="preview">
-            <div className="glass-effect rounded-xl glow p-6 border border-white/10">
+            <div className="glass-effect rounded-xl glow p-6 border border-[#D4AF37]/20">
               <PostPreview />
             </div>
           </TabsContent>
