@@ -6,11 +6,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background hero-pattern py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background dot-pattern py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <div className="h-12 w-12 rounded-full awr-gradient flex items-center justify-center mr-3">
+            <div className="h-12 w-12 rounded-full awr-gradient flex items-center justify-center mr-3 glow">
               <span className="text-white font-bold text-lg">AWR</span>
             </div>
             <h1 className="text-4xl font-extrabold text-white">
@@ -24,17 +24,17 @@ const Index = () => {
         </div>
 
         <Tabs defaultValue="create" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-8 bg-card/50 border border-border p-1 rounded-lg">
-            <TabsTrigger value="create" className="font-medium data-[state=active]:bg-primary">Create Post</TabsTrigger>
-            <TabsTrigger value="preview" className="font-medium data-[state=active]:bg-primary">Preview</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-8 glass-effect border border-white/10 p-1 rounded-lg">
+            <TabsTrigger value="create" className="font-medium data-[state=active]:bg-primary data-[state=active]:text-white">Create Post</TabsTrigger>
+            <TabsTrigger value="preview" className="font-medium data-[state=active]:bg-primary data-[state=active]:text-white">Preview</TabsTrigger>
           </TabsList>
           <TabsContent value="create">
-            <div className="bg-card rounded-xl card-shadow p-6 border border-border">
+            <div className="glass-effect rounded-xl glow p-6 border border-white/10">
               <PostGenerator />
             </div>
           </TabsContent>
           <TabsContent value="preview">
-            <div className="bg-card rounded-xl card-shadow p-6 border border-border">
+            <div className="glass-effect rounded-xl glow p-6 border border-white/10">
               <PostPreview />
             </div>
           </TabsContent>
