@@ -9,7 +9,7 @@ const Index = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="min-h-screen bg-gray-50 dot-pattern py-6 sm:py-12 px-3 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background dot-pattern py-6 sm:py-12 px-3 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between mb-8 md:mb-12">
           <div className="w-full md:w-1/3 flex justify-center md:justify-start mb-6 md:mb-0">
@@ -23,28 +23,28 @@ const Index = () => {
           </div>
           
           <div className="w-full md:w-2/3 text-center md:text-right mt-4 md:mt-0">
-            <h1 className={`${isMobile ? 'text-3xl' : 'text-4xl'} font-extrabold text-gray-800 mb-2 sm:mb-3`}>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700">
+            <h1 className={`${isMobile ? 'text-3xl' : 'text-4xl'} font-extrabold text-white mb-2 sm:mb-3`}>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">
                 All Will Retire
               </span> 
-              <span className="text-gray-800"> Post Generator</span>
+              <span className="text-white"> Post Generator</span>
             </h1>
-            <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-gray-600`}>Create engaging crypto content for X with just a few clicks</p>
+            <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-gray-400`}>Create engaging crypto content for X with just a few clicks</p>
           </div>
         </div>
 
         <Tabs defaultValue="create" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6 sm:mb-8 glass-effect border border-blue-200 p-1 rounded-lg">
-            <TabsTrigger value="create" className="font-medium data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm">Create Post</TabsTrigger>
-            <TabsTrigger value="preview" className="font-medium data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm">Preview</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-6 sm:mb-8 glass-effect border border-[#D4AF37]/20 p-1 rounded-lg">
+            <TabsTrigger value="create" className="font-medium data-[state=active]:bg-primary data-[state=active]:text-background">Create Post</TabsTrigger>
+            <TabsTrigger value="preview" className="font-medium data-[state=active]:bg-primary data-[state=active]:text-background">Preview</TabsTrigger>
           </TabsList>
           <TabsContent value="create">
-            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-gray-100">
+            <div className="glass-effect rounded-xl glow p-4 sm:p-6 border border-[#D4AF37]/20">
               <PostGenerator />
             </div>
           </TabsContent>
           <TabsContent value="preview">
-            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-gray-100">
+            <div className="glass-effect rounded-xl glow p-4 sm:p-6 border border-[#D4AF37]/20">
               <PostPreview />
             </div>
           </TabsContent>
