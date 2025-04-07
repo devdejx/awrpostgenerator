@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -13,7 +14,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Image as ImageIcon, RefreshCw } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
-import AIContentGenerator from "./AIContentGenerator";
 
 const POST_TYPES = [
   {
@@ -115,15 +115,9 @@ const PostGenerator = () => {
     setImagePreview(null);
   };
 
-  const handleAIGeneratedContent = (content: string) => {
-    setMessage(content);
-  };
-
   return (
     <Card className="p-4">
       <div className="space-y-4">
-        <AIContentGenerator onContentGenerated={handleAIGeneratedContent} />
-        
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Tip objave
