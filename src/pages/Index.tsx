@@ -9,21 +9,12 @@ const Index = () => {
     <div className="min-h-screen bg-background dot-pattern py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <div className="flex items-center justify-center mb-4">
-            <div className="h-48 w-48 flex items-center justify-center mr-3 glow overflow-hidden">
-              <img 
-                src="awr-logo.png" 
-                alt="AWR Lifestyle Logo" 
-                className="h-40 w-40 object-cover"
-              />
-            </div>
-            <h1 className="text-4xl font-extrabold text-white">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">
-                All Will Retire
-              </span> 
-              <span className="text-white"> Post Generator</span>
-            </h1>
-          </div>
+          <h1 className="text-4xl font-extrabold text-white mb-3">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">
+              All Will Retire
+            </span> 
+            <span className="text-white"> Post Generator</span>
+          </h1>
           <p className="mt-3 text-xl text-gray-400">Create engaging crypto content for X with just a few clicks</p>
         </div>
 
