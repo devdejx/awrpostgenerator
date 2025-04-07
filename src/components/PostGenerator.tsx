@@ -55,10 +55,9 @@ const POST_TYPES = [
 ];
 
 // Mock function to generate content from website
-const generateContentFromWebsite = async () => {
-  // In a real implementation, this would be an API call to fetch and process content
-  // For demo purposes, we'll return predefined content related to the website
-  const possibleContents = [
+const generateContentFromWebsite = async (source = "random") => {
+  // Content from AllWillRetire website
+  const websiteContents = [
     "Planning for retirement is crucial. Start early and be consistent with your savings.",
     "Retirement isn't just about finances, it's also about having a purpose and staying active.",
     "Diversifying your retirement portfolio can help protect against market volatility.",
@@ -66,11 +65,30 @@ const generateContentFromWebsite = async () => {
     "Social security benefits alone may not be enough for a comfortable retirement.",
   ];
   
+  // Content from Medium article
+  const mediumContents = [
+    "AWR Life By Design is a philosophy rooted in empowerment and mindfulness.",
+    "Life By Design is about taking control of your personal journey through intentional living.",
+    "We're transforming how people approach planning for retirement and beyond.",
+    "The AWR platform provides tools for financial independence and personal fulfillment.",
+    "Our purpose is to empower individuals to design lives they'll love today and tomorrow.",
+    "True wealth includes health, relationships, purpose, and financial independence.",
+    "The traditional retirement model is becoming obsolete as longevity increases.",
+  ];
+  
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 1000));
   
-  // Return random content
-  return possibleContents[Math.floor(Math.random() * possibleContents.length)];
+  // Return content based on source
+  if (source === "medium") {
+    return mediumContents[Math.floor(Math.random() * mediumContents.length)];
+  } else if (source === "website") {
+    return websiteContents[Math.floor(Math.random() * websiteContents.length)];
+  } else {
+    // Combine both sources for random selection
+    const allContents = [...websiteContents, ...mediumContents];
+    return allContents[Math.floor(Math.random() * allContents.length)];
+  }
 };
 
 const PostGenerator = () => {
@@ -81,6 +99,7 @@ const PostGenerator = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [contentSource, setContentSource] = useState("random");
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -138,11 +157,18 @@ const PostGenerator = () => {
   const handleAutoGenerate = async () => {
     setIsGenerating(true);
     try {
-      const content = await generateContentFromWebsite();
+      const content = await generateContentFromWebsite(contentSource);
       setMessage(content);
+      
+      const sourceLabel = contentSource === "medium" 
+        ? "Medium Article" 
+        : contentSource === "website" 
+          ? "AllWillRetire.com" 
+          : "AllWillRetire sources";
+          
       toast({
         title: "Success!",
-        description: "Content generated from AllWillRetire.com",
+        description: `Content generated from ${sourceLabel}`,
       });
     } catch (error) {
       toast({
@@ -181,20 +207,32 @@ const PostGenerator = () => {
             <label className="block text-sm font-medium text-gray-700">
               Message
             </label>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleAutoGenerate}
-              disabled={isGenerating}
-              className="flex items-center gap-1"
-            >
-              {isGenerating ? (
-                <RefreshCw className="h-4 w-4 animate-spin" />
-              ) : (
-                <Wand2 className="h-4 w-4" />
-              )}
-              Auto Generate
-            </Button>
+            <div className="flex items-center gap-2">
+              <Select value={contentSource} onValueChange={setContentSource} className="w-32">
+                <SelectTrigger className="h-8">
+                  <SelectValue placeholder="Source" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="random">Both Sources</SelectItem>
+                  <SelectItem value="website">Website</SelectItem>
+                  <SelectItem value="medium">Medium</SelectItem>
+                </SelectContent>
+              </Select>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleAutoGenerate}
+                disabled={isGenerating}
+                className="flex items-center gap-1"
+              >
+                {isGenerating ? (
+                  <RefreshCw className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Wand2 className="h-4 w-4" />
+                )}
+                Auto Generate
+              </Button>
+            </div>
           </div>
           <Textarea
             placeholder="Enter your message..."
