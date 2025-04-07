@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -211,8 +210,8 @@ const PostGenerator = () => {
   };
 
   return (
-    <Card className="p-4">
-      <div className="space-y-4">
+    <Card className="p-4 bg-white">
+      <div className="space-y-4 text-black">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Post Type
