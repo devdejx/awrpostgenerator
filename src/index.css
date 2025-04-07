@@ -5,76 +5,72 @@
 
 @layer base {
   :root {
-    --background: 43 100% 12%; /* Dark golden background */
-    --foreground: 39 100% 90%; /* Light golden foreground */
-    --primary: 43 100% 56%; /* Rich golden yellow */
-    --primary-foreground: 36 100% 12%; /* Dark background for contrast */
+    --background: 0 0% 100%; /* Pure white background */
+    --foreground: 240 10% 3.9%; /* Very dark text for contrast */
     
-    --card: 43 80% 20%; /* Golden brown card background */
-    --card-foreground: 39 100% 90%; /* Light golden text */
+    --card: 0 0% 100%; /* White card background */
+    --card-foreground: 240 10% 3.9%; /* Dark text for cards */
 
-    --popover: 43 80% 15%; /* Dark golden popover */
-    --popover-foreground: 39 100% 90%; /* Light golden popover text */
+    --primary: 240 5.9% 10%; /* Dark primary color */
+    --primary-foreground: 0 0% 98%; /* Light text for primary elements */
 
-    --secondary: 43 70% 25%; /* Golden secondary color */
-    --secondary-foreground: 39 100% 90%; /* Light golden secondary text */
+    --secondary: 240 4.8% 95.9%; /* Very light grey for secondary elements */
+    --secondary-foreground: 240 5.9% 10%; /* Dark text for secondary elements */
 
-    --muted: 43 50% 30%; /* Muted golden color */
-    --muted-foreground: 39 100% 85%; /* Light muted golden text */
+    --muted: 240 4.8% 95.9%; /* Light grey for muted elements */
+    --muted-foreground: 240 3.8% 46.1%; /* Grey text for muted elements */
 
-    --accent: 43 60% 35%; /* Golden accent */
-    --accent-foreground: 39 100% 90%; /* Light golden accent text */
+    --accent: 240 4.8% 95.9%; /* Light accent color */
+    --accent-foreground: 240 5.9% 10%; /* Dark text for accent elements */
 
-    --destructive: 20 80% 40%; /* Warm reddish tone */
-    --destructive-foreground: 39 100% 90%; /* Light golden destructive text */
+    --destructive: 0 84.2% 60.2%; /* Red for destructive actions */
+    --destructive-foreground: 0 0% 98%; /* Light text for destructive elements */
 
-    --border: 43 50% 40%; /* Golden border */
-    --input: 43 60% 35%; /* Golden input */
-    --ring: 43 100% 56%; /* Golden ring */
+    --border: 240 5.9% 90%; /* Light border color */
+    --input: 240 5.9% 90%; /* Light input border */
+    --ring: 240 5.9% 10%; /* Dark ring color for focus states */
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-black;
     font-family: 'Inter', sans-serif;
   }
 }
 
 .awr-gradient {
-  background: linear-gradient(135deg, hsl(43, 100%, 56%) 0%, #D4AF37 100%);
+  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
 }
 
 .card-shadow {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .hero-pattern {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px);
   background-size: 30px 30px;
 }
 
 .glow {
-  box-shadow: 0 0 20px 5px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
 }
 
 .dot-pattern {
-  background-image: radial-gradient(circle at 1px 1px, rgba(212, 175, 55, 0.1) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.1) 1px, transparent 0);
   background-size: 20px 20px;
 }
 
 .glass-effect {
   backdrop-filter: blur(12px);
-  background: rgba(64, 49, 21, 0.5);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, #D4AF37, #FFD700);
+  background: linear-gradient(90deg, #333, #000);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
