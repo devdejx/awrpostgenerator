@@ -18,38 +18,38 @@ import { usePostStore } from "@/store/postStore";
 const POST_TYPES = [
   {
     value: "announcement",
-    label: "Obvestilo",
+    label: "Announcement",
     templates: [
-      "Nov pomemben dogodek! 📢 {message}",
-      "Novica dneva: {message} #novica",
-      "Pozor! 🚨 {message}",
+      "Important new event! 📢 {message}",
+      "News of the day: {message} #news",
+      "Attention! 🚨 {message}",
     ],
   },
   {
     value: "question",
-    label: "Vprašanje",
+    label: "Question",
     templates: [
-      "Kaj mislite o tem? 🤔 {message}",
-      "{message} Kakšno je vaše mnenje?",
-      "Razmišljam... {message} Vi?",
+      "What do you think about this? 🤔 {message}",
+      "{message} What's your opinion?",
+      "Thinking about... {message} You?",
     ],
   },
   {
     value: "quote",
-    label: "Citat",
+    label: "Quote",
     templates: [
-      "\"{message}\" #modrost #citat",
-      "Misel dneva: \"{message}\" ✨",
-      "Navdih za danes: \"{message}\" 💭",
+      "\"{message}\" #wisdom #quote",
+      "Thought of the day: \"{message}\" ✨",
+      "Inspiration for today: \"{message}\" 💭",
     ],
   },
   {
     value: "tip",
-    label: "Nasvet",
+    label: "Tip",
     templates: [
-      "Pro nasvet: {message} #nasvet",
-      "Ali ste vedeli? {message} 💡",
-      "Koristen nasvet: {message} ✅",
+      "Pro tip: {message} #advice",
+      "Did you know? {message} 💡",
+      "Useful tip: {message} ✅",
     ],
   },
 ];
@@ -79,8 +79,8 @@ const PostGenerator = () => {
   const generatePost = () => {
     if (!message.trim()) {
       toast({
-        title: "Napaka",
-        description: "Prosim vnesite sporočilo",
+        title: "Error",
+        description: "Please enter a message",
         variant: "destructive",
       });
       return;
@@ -103,8 +103,8 @@ const PostGenerator = () => {
     });
 
     toast({
-      title: "Uspešno!",
-      description: "Objava uspešno ustvarjena!",
+      title: "Success!",
+      description: "Post successfully created!",
     });
   };
 
@@ -120,11 +120,11 @@ const PostGenerator = () => {
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Tip objave
+            Post Type
           </label>
           <Select value={postType} onValueChange={setPostType}>
             <SelectTrigger>
-              <SelectValue placeholder="Izberite tip objave" />
+              <SelectValue placeholder="Select post type" />
             </SelectTrigger>
             <SelectContent>
               {POST_TYPES.map((type) => (
@@ -138,10 +138,10 @@ const PostGenerator = () => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Sporočilo
+            Message
           </label>
           <Textarea
-            placeholder="Vnesite svoje sporočilo..."
+            placeholder="Enter your message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="min-h-[100px]"
@@ -150,7 +150,7 @@ const PostGenerator = () => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Dodaj sliko (neobvezno)
+            Add image (optional)
           </label>
           <div className="flex items-center space-x-2">
             <label className="cursor-pointer">
@@ -165,7 +165,7 @@ const PostGenerator = () => {
               />
             </label>
             <span className="text-sm text-gray-500">
-              {imageFile ? imageFile.name : "Nobena slika ni izbrana"}
+              {imageFile ? imageFile.name : "No image selected"}
             </span>
           </div>
 
@@ -182,13 +182,13 @@ const PostGenerator = () => {
 
         <div className="flex space-x-2">
           <Button onClick={generatePost} className="w-full">
-            Ustvari objavo
+            Create Post
           </Button>
           <Button
             variant="outline"
             onClick={resetForm}
             className="w-auto p-2"
-            title="Ponastavi obrazec"
+            title="Reset form"
           >
             <RefreshCw className="h-5 w-5" />
           </Button>

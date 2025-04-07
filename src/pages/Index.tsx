@@ -10,13 +10,13 @@ const Index = () => {
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-primary">X Post Generator</h1>
-          <p className="mt-2 text-gray-600">Ustvarite privlačne objave za X (Twitter) z le nekaj kliki</p>
+          <p className="mt-2 text-gray-600">Create engaging posts for X (Twitter) with just a few clicks</p>
         </div>
 
         <Tabs defaultValue="create" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-8">
-            <TabsTrigger value="create">Ustvari objavo</TabsTrigger>
-            <TabsTrigger value="preview">Predogled</TabsTrigger>
+            <TabsTrigger value="create">Create Post</TabsTrigger>
+            <TabsTrigger value="preview">Preview</TabsTrigger>
           </TabsList>
           <TabsContent value="create">
             <div className="bg-white rounded-lg shadow-lg p-6">

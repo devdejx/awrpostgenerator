@@ -15,8 +15,8 @@ const PostPreview = () => {
   const handleCopyToClipboard = () => {
     if (!post.content) {
       toast({
-        title: "Napaka",
-        description: "Najprej ustvarite objavo",
+        title: "Error",
+        description: "Create a post first",
         variant: "destructive",
       });
       return;
@@ -27,15 +27,15 @@ const PostPreview = () => {
       .then(() => {
         setCopied(true);
         toast({
-          title: "Uspešno!",
-          description: "Kopirano v odložišče!",
+          title: "Success!",
+          description: "Copied to clipboard!",
         });
         setTimeout(() => setCopied(false), 2000);
       })
       .catch(() => {
         toast({
-          title: "Napaka",
-          description: "Napaka pri kopiranju",
+          title: "Error",
+          description: "Error copying text",
           variant: "destructive",
         });
       });
@@ -44,8 +44,8 @@ const PostPreview = () => {
   const shareToTwitter = () => {
     if (!post.content) {
       toast({
-        title: "Napaka",
-        description: "Najprej ustvarite objavo",
+        title: "Error",
+        description: "Create a post first",
         variant: "destructive",
       });
       return;
@@ -59,16 +59,16 @@ const PostPreview = () => {
     // but we can include the image URL to make it easier for users to add it manually
     if (post.image) {
       toast({
-        title: "Obvestilo",
-        description: "Slika bo na voljo za ročno dodajanje na X",
+        title: "Notice",
+        description: "Image will be available for manual adding on X",
       });
     }
     
     window.open(twitterUrl, '_blank');
     
     toast({
-      title: "Odpiranje X (Twitter)",
-      description: "Preusmerjamo vas na X, da dokončate objavo",
+      title: "Opening X (Twitter)",
+      description: "Redirecting you to X to complete your post",
     });
   };
 
@@ -76,13 +76,13 @@ const PostPreview = () => {
     return (
       <div className="text-center py-12">
         <p className="text-gray-500">
-          Najprej ustvarite objavo za ogled predogleda
+          Create a post first to see the preview
         </p>
       </div>
     );
   }
 
-  const formattedDate = new Date().toLocaleDateString("sl-SI", {
+  const formattedDate = new Date().toLocaleDateString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
   });
@@ -97,7 +97,7 @@ const PostPreview = () => {
           </Avatar>
           <div className="flex-1">
             <div className="flex items-center">
-              <span className="font-bold">Uporabnik</span>
+              <span className="font-bold">User</span>
               <span className="text-gray-500 text-sm ml-2">@username</span>
               <span className="text-gray-500 mx-1">·</span>
               <span className="text-gray-500 text-sm">{formattedDate}</span>
@@ -197,7 +197,7 @@ const PostPreview = () => {
             className="flex items-center space-x-2 w-full"
           >
             <Copy className="h-4 w-4" />
-            <span>{copied ? "Kopirano!" : "Kopiraj besedilo"}</span>
+            <span>{copied ? "Copied!" : "Copy text"}</span>
           </Button>
           
           <Button
@@ -205,7 +205,7 @@ const PostPreview = () => {
             className="flex items-center space-x-2 w-full"
           >
             <Share2 className="h-4 w-4" />
-            <span>Objavi na X</span>
+            <span>Post to X</span>
           </Button>
         </div>
       </div>
