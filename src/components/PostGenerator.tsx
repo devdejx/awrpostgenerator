@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Image as ImageIcon, RefreshCw } from "lucide-react";
+import { Image as ImageIcon, RefreshCw, Wand2 } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 
 const POST_TYPES = [
@@ -54,6 +54,25 @@ const POST_TYPES = [
   },
 ];
 
+// Mock function to generate content from website
+const generateContentFromWebsite = async () => {
+  // In a real implementation, this would be an API call to fetch and process content
+  // For demo purposes, we'll return predefined content related to the website
+  const possibleContents = [
+    "Planning for retirement is crucial. Start early and be consistent with your savings.",
+    "Retirement isn't just about finances, it's also about having a purpose and staying active.",
+    "Diversifying your retirement portfolio can help protect against market volatility.",
+    "Consider your healthcare needs when planning for retirement. Medical costs can be significant.",
+    "Social security benefits alone may not be enough for a comfortable retirement.",
+  ];
+  
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  // Return random content
+  return possibleContents[Math.floor(Math.random() * possibleContents.length)];
+};
+
 const PostGenerator = () => {
   const { post, setPost } = usePostStore();
   const { toast } = useToast();
@@ -61,6 +80,7 @@ const PostGenerator = () => {
   const [postType, setPostType] = useState("announcement");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -115,6 +135,26 @@ const PostGenerator = () => {
     setImagePreview(null);
   };
 
+  const handleAutoGenerate = async () => {
+    setIsGenerating(true);
+    try {
+      const content = await generateContentFromWebsite();
+      setMessage(content);
+      toast({
+        title: "Success!",
+        description: "Content generated from AllWillRetire.com",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to generate content",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
     <Card className="p-4">
       <div className="space-y-4">
@@ -137,9 +177,25 @@ const PostGenerator = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Message
-          </label>
+          <div className="flex justify-between items-center mb-1">
+            <label className="block text-sm font-medium text-gray-700">
+              Message
+            </label>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleAutoGenerate}
+              disabled={isGenerating}
+              className="flex items-center gap-1"
+            >
+              {isGenerating ? (
+                <RefreshCw className="h-4 w-4 animate-spin" />
+              ) : (
+                <Wand2 className="h-4 w-4" />
+              )}
+              Auto Generate
+            </Button>
+          </div>
           <Textarea
             placeholder="Enter your message..."
             value={message}
