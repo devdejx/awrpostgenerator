@@ -193,7 +193,7 @@ const generateContentFromWebsiteOriginal = async (source = "random", postType = 
     "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings.",
     "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active.",
     "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility.",
-    "All Will Retire insight: Consider your healthcare needs when planning for retirement. Medical costs can be significant.",
+    "All Will Retire insight: Consider healthcare needs when planning for retirement. Medical costs can be significant.",
     "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement.",
   ];
   
