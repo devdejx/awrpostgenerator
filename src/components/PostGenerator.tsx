@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -12,7 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Image as ImageIcon, RefreshCw, Wand2 } from "lucide-react";
+import { Image as ImageIcon, RefreshCw, Wand2, Video } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 
 const CRYPTO_HASHTAGS = [
@@ -82,7 +81,6 @@ const CRYPTO_PROFILES = [
 ];
 
 const RETIREMENT_BELIEVE_CONTENT = [
-  // Short texts (at least 10 words)
   {
     short: "All Will Retire believes: Pursue passions, find joy in hobbies that bring meaning beyond work activities.",
     long: "All Will Retire believes that pursuing your passions in retirement brings true fulfillment. Whether painting, gardening, or learning an instrument, hobbies create meaning beyond work by allowing you to explore creativity and personal growth without the constraints of a traditional career."
@@ -177,12 +175,10 @@ const POST_TYPES = [
 ];
 
 const generateContentFromWebsiteOriginal = async (source = "random", postType = "") => {
-  // For retirement-believe type, use our special content
   if (postType === "retirement-believe") {
     return RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
   }
 
-  // Original content for other post types
   const websiteContents = [
     "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings.",
     "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active.",
@@ -220,7 +216,9 @@ const PostGenerator = () => {
   const [postType, setPostType] = useState("retirement-believe");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [videoPreview, setVideoPreview] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isGeneratingVideo, setIsGeneratingVideo] = useState(false);
   const [contentSource, setContentSource] = useState("random");
   const [textLength, setTextLength] = useState("short");
 
@@ -267,6 +265,7 @@ const PostGenerator = () => {
     setPost({
       content: generatedMessage,
       image: imagePreview,
+      video: videoPreview,
       type: postType,
       timestamp: new Date().toISOString(),
     });
@@ -282,6 +281,7 @@ const PostGenerator = () => {
     setPostType("retirement-believe");
     setImageFile(null);
     setImagePreview(null);
+    setVideoPreview(null);
   };
 
   const generateContentFromWebsite = async (postType = "") => {
@@ -382,6 +382,29 @@ const PostGenerator = () => {
     }
   };
 
+  const handleGenerateVideo = async () => {
+    setIsGeneratingVideo(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      const placeholderVideo = "https://example.com/placeholder-video.mp4";
+      setVideoPreview(placeholderVideo);
+      
+      toast({
+        title: "Success!",
+        description: "Video placeholder generated",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to generate video",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGeneratingVideo(false);
+    }
+  };
+
   return (
     <Card className="p-4 bg-white">
       <div className="space-y-4 text-black">
@@ -447,22 +470,43 @@ const PostGenerator = () => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Add image (optional)
+            Media
           </label>
-          <div className="flex items-center space-x-2">
-            <label className="cursor-pointer">
-              <div className="flex h-10 w-10 items-center justify-center rounded-md border border-dashed border-gray-300 hover:border-primary">
-                <ImageIcon className="h-5 w-5 text-gray-400" />
-              </div>
-              <Input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleImageChange}
-              />
-            </label>
-            <span className="text-sm text-gray-500">
-              {imageFile ? imageFile.name : "No image selected"}
+          <div className="flex items-center space-x-3">
+            <div>
+              <label className="cursor-pointer block">
+                <div className="flex h-10 w-10 items-center justify-center rounded-md border border-dashed border-gray-300 hover:border-primary">
+                  <ImageIcon className="h-5 w-5 text-gray-400" />
+                </div>
+                <span className="text-xs text-gray-500 mt-1 block text-center">Add image</span>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImageChange}
+                />
+              </label>
+            </div>
+            
+            <div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleGenerateVideo}
+                disabled={isGeneratingVideo}
+                className="h-10 w-10 p-0 flex items-center justify-center"
+              >
+                {isGeneratingVideo ? (
+                  <RefreshCw className="h-5 w-5 animate-spin" />
+                ) : (
+                  <Video className="h-5 w-5 text-gray-400" />
+                )}
+              </Button>
+              <span className="text-xs text-gray-500 mt-1 block text-center">Auto video</span>
+            </div>
+            
+            <span className="text-sm text-gray-500 ml-2">
+              {imageFile ? imageFile.name : videoPreview ? "Video ready" : "No media selected"}
             </span>
           </div>
 
@@ -473,6 +517,13 @@ const PostGenerator = () => {
                 alt="Preview"
                 className="h-40 object-cover rounded-md"
               />
+            </div>
+          )}
+          
+          {videoPreview && !imagePreview && (
+            <div className="mt-4 flex items-center space-x-2">
+              <Video className="h-5 w-5 text-gray-500" />
+              <span className="text-sm text-gray-600">Video placeholder added (will display on X)</span>
             </div>
           )}
         </div>

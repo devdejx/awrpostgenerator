@@ -1,8 +1,9 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Copy, Share2 } from "lucide-react";
+import { Copy, Share2, Video } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -54,10 +55,10 @@ const PostPreview = () => {
     
     let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.content)}`;
     
-    if (post.image) {
+    if (post.image || post.video) {
       toast({
         title: "Notice",
-        description: "Image will be available for manual adding on X",
+        description: "Media will be available for manual adding on X",
       });
     }
     
@@ -107,6 +108,12 @@ const PostPreview = () => {
                   alt="Post image"
                   className="rounded-lg border border-gray-200 max-h-64 sm:max-h-80 object-cover w-full"
                 />
+              </div>
+            )}
+            {post.video && !post.image && (
+              <div className="mt-2 sm:mt-3 flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200">
+                <Video className="h-5 w-5 text-gray-500 mr-2" />
+                <span className="text-sm text-gray-600">Video content (will display on X)</span>
               </div>
             )}
             <div className="mt-2 sm:mt-3 flex items-center justify-between text-gray-500 text-xs sm:text-sm pt-2 border-t border-gray-100">

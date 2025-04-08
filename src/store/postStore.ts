@@ -4,6 +4,7 @@ import { create } from 'zustand';
 type Post = {
   content: string;
   image: string | null;
+  video: string | null;  // Added video field
   type: string;
   timestamp: string;
 };
@@ -17,6 +18,7 @@ export const usePostStore = create<PostState>((set) => ({
   post: {
     content: '',
     image: null,
+    video: null,  // Initialize video as null
     type: '',
     timestamp: '',
   },
