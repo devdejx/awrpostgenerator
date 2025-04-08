@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -32,6 +33,22 @@ const CRYPTO_PROFILES = [
   "@CoinMarketCap @BitcoinMagazine",
   "@cryptorecruiter @cz_binance",
   "@PlanB @DocumentingBTC",
+];
+
+const RETIREMENT_BELIEVE_CONTENT = [
+  "All Will Retire believes that pursuing your passions in retirement brings true fulfillment. Whether painting, gardening, or learning an instrument, hobbies create meaning beyond work.",
+  "All Will Retire values the importance of making memories with friends. Your retirement journey should include quality time with those who matter most, creating stories that last a lifetime.",
+  "All Will Retire understands that taking care of loved ones, especially aging parents, is a meaningful retirement priority. Financial freedom enables you to be there when family needs you most.",
+  "All Will Retire supports volunteering full-time during retirement. Dedicating your experience and time to nonprofit work creates powerful social impact while giving your days purpose.",
+  "All Will Retire encourages exploring new countries and cultures without budget constraints. Travel enriches retirement by broadening perspectives and creating unforgettable experiences.",
+  "All Will Retire recognizes the value in changing your environment - whether leaving city life for quiet farming or bringing your expertise from rural areas to urban innovation.",
+  "All Will Retire celebrates those who use their freedom to rescue animals and operate shelters. These compassionate ventures heal both animals and their caretakers.",
+  "All Will Retire promotes generous giving to causes you care about. Financial independence allows you to create lasting positive change through strategic philanthropy.",
+  "All Will Retire champions learning new skills throughout retirement. Continuous growth keeps your mind sharp and opens doors to exciting opportunities and connections.",
+  "All Will Retire inspires creative expression through writing books or creating art. Retirement provides the time and space to share your unique voice with the world.",
+  "All Will Retire prioritizes health and exercise as fundamental to a fulfilling retirement. Investing time in your wellbeing pays dividends through increased energy and longevity.",
+  "All Will Retire supports entrepreneurs who launch passion projects. Financial security gives you the freedom to start businesses aligned with your values without income pressure.",
+  "All Will Retire values supporting friends and family financially. True wealth includes helping loved ones achieve their dreams through mentorship and opportunity creation.",
 ];
 
 const getRandomCryptoHashtags = () => {
@@ -72,7 +89,13 @@ const POST_TYPES = [
   },
 ];
 
-const generateContentFromWebsite = async (source = "random") => {
+const generateContentFromWebsite = async (source = "random", postType = "") => {
+  // For retirement-believe type, use our special content
+  if (postType === "retirement-believe") {
+    return RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
+  }
+
+  // Original content for other post types
   const websiteContents = [
     "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings.",
     "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active.",
@@ -176,14 +199,19 @@ const PostGenerator = () => {
   const handleAutoGenerate = async () => {
     setIsGenerating(true);
     try {
-      const content = await generateContentFromWebsite(contentSource);
+      const content = await generateContentFromWebsite(contentSource, postType);
       setMessage(content);
       
-      const sourceLabel = contentSource === "medium" 
-        ? "Medium Article" 
-        : contentSource === "website" 
-          ? "AllWillRetire.com" 
-          : "AllWillRetire sources";
+      let sourceLabel;
+      if (postType === "retirement-believe") {
+        sourceLabel = "Retirement Ideas";
+      } else {
+        sourceLabel = contentSource === "medium" 
+          ? "Medium Article" 
+          : contentSource === "website" 
+            ? "AllWillRetire.com" 
+            : "AllWillRetire sources";
+      }
           
       toast({
         title: "Success!",
