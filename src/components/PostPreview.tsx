@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -109,6 +110,34 @@ const PostPreview = () => {
                 />
               </div>
             )}
+            {post.video && (
+              <div className="mt-2 sm:mt-3">
+                <div className="relative rounded-lg border border-gray-200 w-full aspect-video bg-gray-100 flex items-center justify-center">
+                  <img 
+                    src={post.video} 
+                    alt="Video preview" 
+                    className="max-h-64 sm:max-h-80 max-w-full object-contain"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 rounded-lg">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="48"
+                      height="48"
+                      viewBox="0 0 24 24"
+                      fill="white"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-white opacity-80"
+                    >
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            )}
+            
             <div className="mt-2 sm:mt-3 flex items-center justify-between text-gray-500 text-xs sm:text-sm pt-2 border-t border-gray-100">
               <div className="flex items-center space-x-1">
                 <svg
