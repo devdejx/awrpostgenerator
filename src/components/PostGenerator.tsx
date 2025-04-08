@@ -136,13 +136,12 @@ const RETIREMENT_BELIEVE_CONTENT = [
 ];
 
 const VIMEO_VIDEOS = [
-  "https://vimeo.com/919020577",
-  "https://vimeo.com/919020527",
-  "https://vimeo.com/919020448",
-  "https://vimeo.com/919020394",
-  "https://vimeo.com/919020329",
-  "https://vimeo.com/919020268",
-  "https://vimeo.com/919020203"
+  "https://vimeo.com/1073620983/639f4602df",
+  "https://vimeo.com/1073621013/b2ed1c4f0f",
+  "https://vimeo.com/1073621029/b524df5ac8",
+  "https://vimeo.com/1073621046/27ca5564b8",
+  "https://vimeo.com/1073621073/f2b42f7576",
+  "https://vimeo.com/1073621108/1c3560f64e"
 ];
 
 const getRandomCryptoHashtags = () => {
