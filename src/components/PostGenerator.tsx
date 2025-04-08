@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -45,39 +44,30 @@ const getRandomCryptoProfiles = () => {
 
 const POST_TYPES = [
   {
-    value: "announcement",
-    label: "Announcement",
+    value: "retirement-believe",
+    label: "Retirement Believe",
     templates: [
-      "Important new event from All Will Retire! 📢 {message} {hashtags} cc: {profiles}",
-      "News from All Will Retire: {message} #news {hashtags} cc: {profiles}",
-      "Attention! 🚨 All Will Retire announces: {message} {hashtags} cc: {profiles}",
+      "All Will Retire believes: {message} #RetirementWisdom {hashtags} cc: {profiles}",
+      "Our retirement philosophy: {message} 💡 {hashtags} cc: {profiles}",
+      "A core belief from All Will Retire: {message} 🌟 {hashtags} cc: {profiles}",
     ],
   },
   {
-    value: "question",
-    label: "Question",
+    value: "tell-our-story",
+    label: "Tell Our Story",
     templates: [
-      "All Will Retire asks: What do you think about this? 🤔 {message} {hashtags} cc: {profiles}",
-      "{message} What's your opinion? - All Will Retire {hashtags} cc: {profiles}",
-      "All Will Retire is thinking about... {message} You? {hashtags} cc: {profiles}",
+      "Our journey at All Will Retire: {message} #OurStory {hashtags} cc: {profiles}",
+      "A chapter from All Will Retire: {message} 📖 {hashtags} cc: {profiles}",
+      "Sharing our narrative: {message} 💬 {hashtags} cc: {profiles}",
     ],
   },
   {
-    value: "quote",
-    label: "Quote",
+    value: "what-a-gem",
+    label: "What a GEM",
     templates: [
-      "All Will Retire shares: \"{message}\" #wisdom #quote {hashtags} cc: {profiles}",
-      "Thought of the day from All Will Retire: \"{message}\" ✨ {hashtags} cc: {profiles}",
-      "Inspiration by All Will Retire: \"{message}\" 💭 {hashtags} cc: {profiles}",
-    ],
-  },
-  {
-    value: "tip",
-    label: "Tip",
-    templates: [
-      "Pro tip from All Will Retire: {message} #advice {hashtags} cc: {profiles}",
-      "All Will Retire tip: Did you know? {message} 💡 {hashtags} cc: {profiles}",
-      "Useful tip from All Will Retire: {message} ✅ {hashtags} cc: {profiles}",
+      "Discover a gem from All Will Retire: {message} #GemOfWisdom {hashtags} cc: {profiles}",
+      "A sparkling insight: {message} ✨ {hashtags} cc: {profiles}",
+      "GEM alert from All Will Retire: {message} 💎 {hashtags} cc: {profiles}",
     ],
   },
 ];
@@ -117,7 +107,7 @@ const PostGenerator = () => {
   const { post, setPost } = usePostStore();
   const { toast } = useToast();
   const [message, setMessage] = useState("");
-  const [postType, setPostType] = useState("announcement");
+  const [postType, setPostType] = useState("retirement-believe");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -178,7 +168,7 @@ const PostGenerator = () => {
 
   const resetForm = () => {
     setMessage("");
-    setPostType("announcement");
+    setPostType("retirement-believe");
     setImageFile(null);
     setImagePreview(null);
   };
