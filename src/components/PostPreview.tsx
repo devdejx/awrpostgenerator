@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -53,10 +52,8 @@ const PostPreview = () => {
       return;
     }
     
-    // Create Twitter share URL with text content
     let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.content)}`;
     
-    // If there's an image, add it to the URL as a media parameter
     if (post.image) {
       toast({
         title: "Notice",
