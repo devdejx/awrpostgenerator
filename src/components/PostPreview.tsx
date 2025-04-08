@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Copy, Share2, Video } from "lucide-react";
+import { Copy, Share2 } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -87,9 +87,12 @@ const PostPreview = () => {
 
   // Extract video ID from Vimeo URL if we have one
   const getVimeoEmbedUrl = (url: string) => {
-    // Handle formats like https://vimeo.com/919020577
-    const match = url.match(/vimeo\.com\/(\d+)/);
-    if (match && match[1]) {
+    // Handle formats like https://vimeo.com/1073620983/639f4602df
+    const match = url.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
+    if (match) {
+      if (match[2]) { // If there's a hash part like "639f4602df"
+        return `https://player.vimeo.com/video/${match[1]}/${match[2]}`;
+      }
       return `https://player.vimeo.com/video/${match[1]}`;
     }
     return url;
@@ -120,12 +123,12 @@ const PostPreview = () => {
                 />
               </div>
             )}
-            {post.video && !post.image && (
+            {post.video && (
               <div className="mt-2 sm:mt-3">
-                <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+                <div className="rounded-lg overflow-hidden">
                   <iframe 
                     src={getVimeoEmbedUrl(post.video)}
-                    className="w-full h-60 rounded-lg border border-gray-200"
+                    className="w-full aspect-video rounded-lg border border-gray-200"
                     frameBorder="0" 
                     allow="autoplay; fullscreen; picture-in-picture" 
                     allowFullScreen
