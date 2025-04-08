@@ -244,21 +244,57 @@ const PostGenerator = () => {
     }
     
     const websiteContents = [
-      "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings.",
-      "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active.",
-      "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility.",
-      "All Will Retire insight: Consider your healthcare needs when planning for retirement. Medical costs can be significant.",
-      "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement.",
+      {
+        short: "All Will Retire explains: Planning for retirement is crucial.",
+        long: "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings."
+      },
+      {
+        short: "All Will Retire advises: Retirement isn't just about finances.",
+        long: "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active."
+      },
+      {
+        short: "All Will Retire recommends: Diversify your retirement portfolio.",
+        long: "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility."
+      },
+      {
+        short: "All Will Retire insight: Consider healthcare in retirement planning.",
+        long: "All Will Retire insight: Consider your healthcare needs when planning for retirement. Medical costs can be significant."
+      },
+      {
+        short: "All Will Retire reminder: Social security may not be enough.",
+        long: "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement."
+      },
     ];
     
     const mediumContents = [
-      "All Will Retire philosophy: Retirement planning requires a holistic approach to personal finance.",
-      "All Will Retire wisdom: Understanding your long-term financial goals is key to successful retirement.",
-      "All Will Retire perspective: Wealth is more than just money - it's about creating a fulfilling lifestyle.",
-      "All Will Retire approach: Preparing for retirement involves financial, health, and personal growth strategies.",
-      "All Will Retire belief: Your retirement journey is unique and deserves careful, personalized planning.",
-      "All Will Retire principle: Strategic financial planning can help you achieve greater personal freedom.",
-      "All Will Retire concept: Modern retirement approaches focus on flexibility and continuous personal development.",
+      {
+        short: "All Will Retire philosophy: Holistic approach to retirement.",
+        long: "All Will Retire philosophy: Retirement planning requires a holistic approach to personal finance."
+      },
+      {
+        short: "All Will Retire wisdom: Define your long-term financial goals.",
+        long: "All Will Retire wisdom: Understanding your long-term financial goals is key to successful retirement."
+      },
+      {
+        short: "All Will Retire perspective: Wealth is more than money.",
+        long: "All Will Retire perspective: Wealth is more than just money - it's about creating a fulfilling lifestyle."
+      },
+      {
+        short: "All Will Retire approach: Financial, health, and personal growth.",
+        long: "All Will Retire approach: Preparing for retirement involves financial, health, and personal growth strategies."
+      },
+      {
+        short: "All Will Retire belief: Your retirement journey is unique.",
+        long: "All Will Retire belief: Your retirement journey is unique and deserves careful, personalized planning."
+      },
+      {
+        short: "All Will Retire principle: Strategic planning for freedom.",
+        long: "All Will Retire principle: Strategic financial planning can help you achieve greater personal freedom."
+      },
+      {
+        short: "All Will Retire concept: Modern retirement is flexible.",
+        long: "All Will Retire concept: Modern retirement approaches focus on flexibility and continuous personal development."
+      },
     ];
     
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -273,7 +309,7 @@ const PostGenerator = () => {
     }
 
     const content = allContents[Math.floor(Math.random() * allContents.length)];
-    return content;
+    return textLength === "short" ? content.short : content.long;
   };
 
   const handleAutoGenerate = async () => {
