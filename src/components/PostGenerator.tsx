@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -209,17 +210,17 @@ const PostGenerator = () => {
   };
 
   return (
-    <Card className="p-4 bg-white"> {/* Ensure this is white */}
+    <Card className="p-4 bg-white">
       <div className="space-y-4 text-black">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Post Type
           </label>
           <Select value={postType} onValueChange={setPostType}>
-            <SelectTrigger className="w-full bg-white"> {/* Ensure white background */}
+            <SelectTrigger className="w-full bg-white">
               <SelectValue placeholder="Select post type" />
             </SelectTrigger>
-            <SelectContent className="bg-white"> {/* White dropdown */}
+            <SelectContent className="bg-white">
               {POST_TYPES.map((type) => (
                 <SelectItem key={type.value} value={type.value}>
                   {type.label}
@@ -236,10 +237,10 @@ const PostGenerator = () => {
             </label>
             <div className="flex items-center gap-2">
               <Select value={contentSource} onValueChange={setContentSource}>
-                <SelectTrigger className="h-8 w-32 bg-white"> {/* White background */}
+                <SelectTrigger className="h-8 w-32 bg-white">
                   <SelectValue placeholder="Source" />
                 </SelectTrigger>
-                <SelectContent className="bg-white"> {/* White dropdown */}
+                <SelectContent className="bg-white">
                   <SelectItem value="random">Both Sources</SelectItem>
                   <SelectItem value="website">Website</SelectItem>
                   <SelectItem value="medium">Medium</SelectItem>
@@ -265,7 +266,7 @@ const PostGenerator = () => {
             placeholder="Enter your message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="min-h-[100px] bg-white" // Ensure white background
+            className="min-h-[100px] bg-white"
           />
         </div>
 
@@ -304,7 +305,7 @@ const PostGenerator = () => {
         <div className="flex space-x-2">
           <Button 
             onClick={generatePost} 
-            className="w-full border-2 border-[#D4AF37] hover:bg-[#D4AF37]/10" // Add golden border
+            className="w-full border-2 border-[#D4AF37] hover:bg-[#D4AF37]/10"
           >
             Create Post
           </Button>
