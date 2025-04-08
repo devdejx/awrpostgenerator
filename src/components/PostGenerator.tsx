@@ -135,6 +135,16 @@ const RETIREMENT_BELIEVE_CONTENT = [
   },
 ];
 
+const VIMEO_VIDEOS = [
+  "https://vimeo.com/919020577",
+  "https://vimeo.com/919020527",
+  "https://vimeo.com/919020448",
+  "https://vimeo.com/919020394",
+  "https://vimeo.com/919020329",
+  "https://vimeo.com/919020268",
+  "https://vimeo.com/919020203"
+];
+
 const getRandomCryptoHashtags = () => {
   const selectedHashtags = CRYPTO_HASHTAGS[Math.floor(Math.random() * CRYPTO_HASHTAGS.length)];
   return selectedHashtags;
@@ -230,6 +240,7 @@ const PostGenerator = () => {
       reader.onload = (e) => {
         if (e.target?.result) {
           setImagePreview(e.target.result as string);
+          setVideoPreview(null);
         }
       };
       reader.readAsDataURL(file);
@@ -385,14 +396,17 @@ const PostGenerator = () => {
   const handleGenerateVideo = async () => {
     setIsGeneratingVideo(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise(resolve => setTimeout(resolve, 800));
       
-      const placeholderVideo = "https://example.com/placeholder-video.mp4";
-      setVideoPreview(placeholderVideo);
+      const randomVideo = VIMEO_VIDEOS[Math.floor(Math.random() * VIMEO_VIDEOS.length)];
+      setVideoPreview(randomVideo);
+      
+      setImagePreview(null);
+      setImageFile(null);
       
       toast({
         title: "Success!",
-        description: "Video placeholder generated",
+        description: "Vimeo video selected",
       });
     } catch (error) {
       toast({
@@ -495,6 +509,7 @@ const PostGenerator = () => {
                 onClick={handleGenerateVideo}
                 disabled={isGeneratingVideo}
                 className="h-10 w-10 p-0 flex items-center justify-center"
+                title="Get random Vimeo video"
               >
                 {isGeneratingVideo ? (
                   <RefreshCw className="h-5 w-5 animate-spin" />
@@ -502,11 +517,11 @@ const PostGenerator = () => {
                   <Video className="h-5 w-5 text-gray-400" />
                 )}
               </Button>
-              <span className="text-xs text-gray-500 mt-1 block text-center">Auto video</span>
+              <span className="text-xs text-gray-500 mt-1 block text-center">Random video</span>
             </div>
             
             <span className="text-sm text-gray-500 ml-2">
-              {imageFile ? imageFile.name : videoPreview ? "Video ready" : "No media selected"}
+              {imageFile ? imageFile.name : videoPreview ? "Vimeo video selected" : "No media selected"}
             </span>
           </div>
 
@@ -521,9 +536,13 @@ const PostGenerator = () => {
           )}
           
           {videoPreview && !imagePreview && (
-            <div className="mt-4 flex items-center space-x-2">
+            <div className="mt-4 flex items-center space-x-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
               <Video className="h-5 w-5 text-gray-500" />
-              <span className="text-sm text-gray-600">Video placeholder added (will display on X)</span>
+              <span className="text-sm text-gray-600 truncate">
+                <a href={videoPreview} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                  {videoPreview}
+                </a>
+              </span>
             </div>
           )}
         </div>

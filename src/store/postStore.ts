@@ -4,7 +4,7 @@ import { create } from 'zustand';
 type Post = {
   content: string;
   image: string | null;
-  video: string | null;  // Added video field
+  video: string | null;  // Video field for storing Vimeo video URL
   type: string;
   timestamp: string;
 };

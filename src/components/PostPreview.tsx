@@ -85,6 +85,16 @@ const PostPreview = () => {
     minute: "2-digit",
   });
 
+  // Extract video ID from Vimeo URL if we have one
+  const getVimeoEmbedUrl = (url: string) => {
+    // Handle formats like https://vimeo.com/919020577
+    const match = url.match(/vimeo\.com\/(\d+)/);
+    if (match && match[1]) {
+      return `https://player.vimeo.com/video/${match[1]}`;
+    }
+    return url;
+  };
+
   return (
     <Card className="border border-gray-200 bg-white p-3 sm:p-4 max-w-full overflow-hidden">
       <div className="space-y-3 sm:space-y-4">
@@ -111,9 +121,17 @@ const PostPreview = () => {
               </div>
             )}
             {post.video && !post.image && (
-              <div className="mt-2 sm:mt-3 flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200">
-                <Video className="h-5 w-5 text-gray-500 mr-2" />
-                <span className="text-sm text-gray-600">Video content (will display on X)</span>
+              <div className="mt-2 sm:mt-3">
+                <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+                  <iframe 
+                    src={getVimeoEmbedUrl(post.video)}
+                    className="w-full h-60 rounded-lg border border-gray-200"
+                    frameBorder="0" 
+                    allow="autoplay; fullscreen; picture-in-picture" 
+                    allowFullScreen
+                    title="Vimeo video"
+                  ></iframe>
+                </div>
               </div>
             )}
             <div className="mt-2 sm:mt-3 flex items-center justify-between text-gray-500 text-xs sm:text-sm pt-2 border-t border-gray-100">
