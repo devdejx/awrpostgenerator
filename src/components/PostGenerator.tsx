@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -36,19 +35,59 @@ const CRYPTO_PROFILES = [
 ];
 
 const RETIREMENT_BELIEVE_CONTENT = [
-  "All Will Retire believes that pursuing your passions in retirement brings true fulfillment. Whether painting, gardening, or learning an instrument, hobbies create meaning beyond work.",
-  "All Will Retire values the importance of making memories with friends. Your retirement journey should include quality time with those who matter most, creating stories that last a lifetime.",
-  "All Will Retire understands that taking care of loved ones, especially aging parents, is a meaningful retirement priority. Financial freedom enables you to be there when family needs you most.",
-  "All Will Retire supports volunteering full-time during retirement. Dedicating your experience and time to nonprofit work creates powerful social impact while giving your days purpose.",
-  "All Will Retire encourages exploring new countries and cultures without budget constraints. Travel enriches retirement by broadening perspectives and creating unforgettable experiences.",
-  "All Will Retire recognizes the value in changing your environment - whether leaving city life for quiet farming or bringing your expertise from rural areas to urban innovation.",
-  "All Will Retire celebrates those who use their freedom to rescue animals and operate shelters. These compassionate ventures heal both animals and their caretakers.",
-  "All Will Retire promotes generous giving to causes you care about. Financial independence allows you to create lasting positive change through strategic philanthropy.",
-  "All Will Retire champions learning new skills throughout retirement. Continuous growth keeps your mind sharp and opens doors to exciting opportunities and connections.",
-  "All Will Retire inspires creative expression through writing books or creating art. Retirement provides the time and space to share your unique voice with the world.",
-  "All Will Retire prioritizes health and exercise as fundamental to a fulfilling retirement. Investing time in your wellbeing pays dividends through increased energy and longevity.",
-  "All Will Retire supports entrepreneurs who launch passion projects. Financial security gives you the freedom to start businesses aligned with your values without income pressure.",
-  "All Will Retire values supporting friends and family financially. True wealth includes helping loved ones achieve their dreams through mentorship and opportunity creation.",
+  // Short texts
+  {
+    short: "All Will Retire believes: Pursue passions, find joy in hobbies that bring meaning beyond work.",
+    long: "All Will Retire believes that pursuing your passions in retirement brings true fulfillment. Whether painting, gardening, or learning an instrument, hobbies create meaning beyond work by allowing you to explore creativity and personal growth without the constraints of a traditional career."
+  },
+  {
+    short: "Memories with friends make retirement truly special, creating lasting stories of connection.",
+    long: "All Will Retire values the importance of making memories with friends. Your retirement journey should include quality time with those who matter most, creating stories that last a lifetime, deepening relationships, and finding joy in shared experiences that transcend the boundaries of work and routine."
+  },
+  {
+    short: "Taking care of loved ones is a meaningful retirement priority.",
+    long: "All Will Retire understands that taking care of loved ones, especially aging parents, is a meaningful retirement priority. Financial freedom enables you to be there when family needs you most, providing support, care, and quality time that strengthens familial bonds and ensures their well-being."
+  },
+  {
+    short: "Volunteering full-time creates powerful social impact and gives your days purpose.",
+    long: "All Will Retire supports volunteering full-time during retirement. Dedicating your experience and time to nonprofit work creates powerful social impact while giving your days purpose, allowing you to contribute to causes you care about and make a difference in the lives of others."
+  },
+  {
+    short: "Exploring new countries enriches retirement by broadening perspectives.",
+    long: "All Will Retire encourages exploring new countries and cultures without budget constraints. Travel enriches retirement by broadening perspectives and creating unforgettable experiences, exposing you to diverse ways of life, fostering personal growth, and creating lasting memories."
+  },
+  {
+    short: "Changing your environment can bring new life experiences.",
+    long: "All Will Retire recognizes the value in changing your environment - whether leaving city life for quiet farming or bringing your expertise from rural areas to urban innovation. A change of scenery can spark creativity, offer new challenges, and provide a fresh perspective on life."
+  },
+  {
+    short: "Rescuing animals heals both animals and their caretakers.",
+    long: "All Will Retire celebrates those who use their freedom to rescue animals and operate shelters. These compassionate ventures heal both animals and their caretakers, providing a sense of purpose, companionship, and the satisfaction of making a positive impact on the lives of vulnerable creatures."
+  },
+  {
+    short: "Generous giving creates lasting positive change through strategic philanthropy.",
+    long: "All Will Retire promotes generous giving to causes you care about. Financial independence allows you to create lasting positive change through strategic philanthropy, enabling you to support organizations and initiatives that align with your values and contribute to a better world."
+  },
+  {
+    short: "Learning new skills keeps your mind sharp and opens doors to opportunities.",
+    long: "All Will Retire champions learning new skills throughout retirement. Continuous growth keeps your mind sharp and opens doors to exciting opportunities and connections, allowing you to explore new interests, stay mentally engaged, and adapt to the ever-changing world around you."
+  },
+  {
+    short: "Creative expression allows you to share your unique voice with the world.",
+    long: "All Will Retire inspires creative expression through writing books or creating art. Retirement provides the time and space to share your unique voice with the world, allowing you to explore your artistic talents, express your thoughts and feelings, and leave a lasting legacy."
+  },
+  {
+    short: "Health and exercise are fundamental to a fulfilling retirement.",
+    long: "All Will Retire prioritizes health and exercise as fundamental to a fulfilling retirement. Investing time in your wellbeing pays dividends through increased energy and longevity, allowing you to enjoy your retirement years to the fullest and maintain an active and independent lifestyle."
+  },
+  {
+    short: "Entrepreneurs can launch passion projects without income pressure.",
+    long: "All Will Retire supports entrepreneurs who launch passion projects. Financial security gives you the freedom to start businesses aligned with your values without income pressure, allowing you to pursue your entrepreneurial dreams, create something meaningful, and contribute to the economy."
+  },
+  {
+    short: "Supporting friends and family helps loved ones achieve their dreams.",
+    long: "All Will Retire values supporting friends and family financially. True wealth includes helping loved ones achieve their dreams through mentorship and opportunity creation, strengthening relationships, and creating a ripple effect of positive impact within your community."
+  },
 ];
 
 const getRandomCryptoHashtags = () => {
@@ -89,7 +128,7 @@ const POST_TYPES = [
   },
 ];
 
-const generateContentFromWebsite = async (source = "random", postType = "") => {
+const generateContentFromWebsiteOriginal = async (source = "random", postType = "") => {
   // For retirement-believe type, use our special content
   if (postType === "retirement-believe") {
     return RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
@@ -135,6 +174,7 @@ const PostGenerator = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [contentSource, setContentSource] = useState("random");
+  const [textLength, setTextLength] = useState("short");
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -196,26 +236,56 @@ const PostGenerator = () => {
     setImagePreview(null);
   };
 
+  const generateContentFromWebsite = async (postType = "") => {
+    if (postType === "retirement-believe") {
+      const content = RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
+      return textLength === "short" ? content.short : content.long;
+    }
+    
+    const websiteContents = [
+      "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings.",
+      "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active.",
+      "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility.",
+      "All Will Retire insight: Consider your healthcare needs when planning for retirement. Medical costs can be significant.",
+      "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement.",
+    ];
+    
+    const mediumContents = [
+      "All Will Retire philosophy: Retirement planning requires a holistic approach to personal finance.",
+      "All Will Retire wisdom: Understanding your long-term financial goals is key to successful retirement.",
+      "All Will Retire perspective: Wealth is more than just money - it's about creating a fulfilling lifestyle.",
+      "All Will Retire approach: Preparing for retirement involves financial, health, and personal growth strategies.",
+      "All Will Retire belief: Your retirement journey is unique and deserves careful, personalized planning.",
+      "All Will Retire principle: Strategic financial planning can help you achieve greater personal freedom.",
+      "All Will Retire concept: Modern retirement approaches focus on flexibility and continuous personal development.",
+    ];
+    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    let allContents = [];
+    if (contentSource === "medium") {
+      allContents = mediumContents;
+    } else if (contentSource === "website") {
+      allContents = websiteContents;
+    } else {
+      allContents = [...websiteContents, ...mediumContents];
+    }
+
+    const content = allContents[Math.floor(Math.random() * allContents.length)];
+    return content;
+  };
+
   const handleAutoGenerate = async () => {
     setIsGenerating(true);
     try {
-      const content = await generateContentFromWebsite(contentSource, postType);
+      const content = await generateContentFromWebsite(postType);
       setMessage(content);
       
-      let sourceLabel;
-      if (postType === "retirement-believe") {
-        sourceLabel = "Retirement Ideas";
-      } else {
-        sourceLabel = contentSource === "medium" 
-          ? "Medium Article" 
-          : contentSource === "website" 
-            ? "AllWillRetire.com" 
-            : "AllWillRetire sources";
-      }
+      let sourceLabel = textLength === "short" ? "Short Text" : "Long Text";
           
       toast({
         title: "Success!",
-        description: `Content generated from ${sourceLabel}`,
+        description: `Content generated (${sourceLabel})`,
       });
     } catch (error) {
       toast({
@@ -255,14 +325,13 @@ const PostGenerator = () => {
               Message
             </label>
             <div className="flex items-center gap-2">
-              <Select value={contentSource} onValueChange={setContentSource}>
+              <Select value={textLength} onValueChange={setTextLength}>
                 <SelectTrigger className="h-8 w-32 bg-white text-black">
-                  <SelectValue placeholder="Source" />
+                  <SelectValue placeholder="Text Length" />
                 </SelectTrigger>
                 <SelectContent className="bg-white text-black">
-                  <SelectItem value="random" className="text-black">Both Sources</SelectItem>
-                  <SelectItem value="website" className="text-black">Website</SelectItem>
-                  <SelectItem value="medium" className="text-black">Medium</SelectItem>
+                  <SelectItem value="short" className="text-black">Short</SelectItem>
+                  <SelectItem value="long" className="text-black">Long</SelectItem>
                 </SelectContent>
               </Select>
               <Button
