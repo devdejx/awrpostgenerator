@@ -16,13 +16,59 @@ import { Image as ImageIcon, RefreshCw, Wand2 } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 
 const CRYPTO_HASHTAGS = [
-  "#Bitcoin #Crypto #BTC",
-  "#Ethereum #ETH #Crypto",
-  "#Blockchain #Crypto #Web3",
-  "#DeFi #Crypto #Finance",
-  "#NFT #Crypto #DigitalAssets",
-  "#CryptoTrading #Bitcoin",
-  "#Altcoins #Crypto #InvestmentStrategy",
+  "#crypto #cryptocurrency #bitcoin #blockchain",
+  "#ethereum #btc #trading #cryptonews",
+  "#cryptotrading #nft #forex #money #eth",
+  "#investing #investment #cryptocurrencies #bitcoins",
+  "#binance #bitcoinnews #invest #bitcoinmining",
+  "#business #trader #entrepreneur #forextrader",
+  "#nfts #finance #stocks #dogecoin #cryptoworld",
+  "#bitcointrading #investor #nftart #xrp",
+  "#cryptoinvestor #cryptoart #coinbase #stockmarket",
+  "#litecoin #hodl #bitcoincash #altcoin #defi",
+  "#art #ripple #nftcommunity #web3 #metaverse",
+  "#forextrading #blockchaintechnology #motivation",
+  "#nftcollector #digitalart #cryptomarket #mining",
+  "#cryptomemes #altcoins #cryptomining #forexsignals",
+  "#financialfreedom #100xGem #1000xGem #Gem",
+  "#CultureCoin #MovementCoin #HotCrypto #MemeCoin",
+  "#CryptoGem #NextBigThing #Moonshot #AltcoinGem",
+  "#LowCapGem #DeFiGem #CryptoFinds #HiddenGem",
+  "#CryptoMoonshot #Next100x #MicroCap #SmallCapGem",
+  "#CryptoTreasure #EmergingCrypto #CryptoLaunch",
+  "#NewCrypto #CryptoAlert #CryptoBoom #CryptoTrend",
+  "#CryptoBuzz #CryptoPick #NextAltcoin #CryptoPotential",
+  "#CryptoInvestment #CryptoDiscovery #CryptoOpportunity",
+  "#CryptoProspect #CryptoInsider #CryptoWatch",
+  "#CryptoRadar #CryptoSpotlight #CryptoInsights",
+  "#CryptoSignals #CryptoPicks #CryptoGems",
+  "#CryptoTrends #CryptoNews #CryptoUpdates",
+  "#CryptoMarket #CryptoCommunity #CryptoTalk",
+  "#CryptoChat #CryptoDiscussion #CryptoFans",
+  "#CryptoLovers #CryptoEnthusiast #CryptoInvestor",
+  "#CryptoTrader #CryptoTips #CryptoAdvice",
+  "#CryptoGuide #CryptoEducation #CryptoLearning",
+  "#CryptoStrategy #CryptoPlan #CryptoGoals",
+  "#CryptoSuccess #CryptoJourney #CryptoPath",
+  "#CryptoRoadmap #CryptoVision #CryptoFuture",
+  "#CryptoNow #CryptoToday #CryptoWorld",
+  "#CryptoSpace #CryptoSphere #CryptoZone",
+  "#CryptoHub #CryptoNetwork #CryptoPlatform",
+  "#CryptoEcosystem #CryptoInnovation #CryptoTech",
+  "#CryptoSolutions #CryptoServices #CryptoTools",
+  "#Murad #Muradism #InMuradWeTrust #MuradCoin",
+  "#MuradGems #MuradEffect #Murad100x #MuradAlpha",
+  "#MuradPilled #MuradSeason #CZBinance #VitalikButerin",
+  "#ElonMusk #APompliano #Saylor #ErikVoorhees",
+  "#RogerVer #CryptoCobain #GirlGoneCrypto",
+  "#MissTeenCrypto #TheCryptoLark #IvanOnTech",
+  "#RaoulGMI #DTAPCAP #WillyWoo #CryptoWendyO",
+  "#CryptoJack #Lopp #CryptoVet #JustinSun",
+  "#WaqarZaka #PlanB #WillClemente #AriPaul",
+  "#JackMallers #Balaji #NayibBukele #JamesonLopp",
+  "#LauraShin #MarcAndreessen #PaulGraham #ChrisDixon",
+  "#CryptoYoda #CryptoCred #CryptoDonAlt #CryptoMichaël",
+  "#TheMoonCarl #CryptoBirb #AltcoinPsycho #CryptoRand",
 ];
 
 const CRYPTO_PROFILES = [
@@ -92,7 +138,8 @@ const RETIREMENT_BELIEVE_CONTENT = [
 ];
 
 const getRandomCryptoHashtags = () => {
-  return CRYPTO_HASHTAGS[Math.floor(Math.random() * CRYPTO_HASHTAGS.length)];
+  const selectedHashtags = CRYPTO_HASHTAGS[Math.floor(Math.random() * CRYPTO_HASHTAGS.length)];
+  return selectedHashtags;
 };
 
 const getRandomCryptoProfiles = () => {
@@ -452,4 +499,3 @@ const PostGenerator = () => {
 };
 
 export default PostGenerator;
-
