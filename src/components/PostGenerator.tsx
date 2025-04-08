@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -328,11 +327,7 @@ const PostGenerator = () => {
             <div className="flex items-center gap-2">
               <Select value={textLength} onValueChange={setTextLength}>
                 <SelectTrigger className="h-8 w-32 bg-white text-black">
-                  <SelectValue placeholder="Text Length">
-                    {textLength === "short" ? "Short" : 
-                     textLength === "long" ? "Long" : 
-                     "Text Length"}
-                  </SelectValue>
+                  <SelectValue placeholder="Text Length" />
                 </SelectTrigger>
                 <SelectContent className="bg-white text-black">
                   <SelectItem value="short" className="text-black">Short</SelectItem>
