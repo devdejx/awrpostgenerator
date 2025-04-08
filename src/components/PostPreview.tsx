@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -85,17 +84,20 @@ const PostPreview = () => {
     minute: "2-digit",
   });
 
-  // Extract video ID from Vimeo URL if we have one
   const getVimeoEmbedUrl = (url: string) => {
-    // Handle formats like https://vimeo.com/1073620983/639f4602df
-    const match = url.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
-    if (match) {
-      if (match[2]) { // If there's a hash part like "639f4602df"
-        return `https://player.vimeo.com/video/${match[1]}/${match[2]}`;
+    try {
+      const match = url.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
+      if (match) {
+        if (match[2]) {
+          return `https://player.vimeo.com/video/${match[1]}?h=${match[2]}`;
+        }
+        return `https://player.vimeo.com/video/${match[1]}`;
       }
-      return `https://player.vimeo.com/video/${match[1]}`;
+      return url;
+    } catch (error) {
+      console.error("Error parsing Vimeo URL:", error);
+      return url;
     }
-    return url;
   };
 
   return (
@@ -125,10 +127,10 @@ const PostPreview = () => {
             )}
             {post.video && (
               <div className="mt-2 sm:mt-3">
-                <div className="rounded-lg overflow-hidden">
+                <div className="rounded-lg overflow-hidden relative" style={{ paddingBottom: '56.25%', height: 0 }}>
                   <iframe 
                     src={getVimeoEmbedUrl(post.video)}
-                    className="w-full aspect-video rounded-lg border border-gray-200"
+                    className="absolute top-0 left-0 w-full h-full rounded-lg border border-gray-200"
                     frameBorder="0" 
                     allow="autoplay; fullscreen; picture-in-picture" 
                     allowFullScreen
