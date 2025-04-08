@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -328,7 +329,9 @@ const PostGenerator = () => {
               <Select value={textLength} onValueChange={setTextLength}>
                 <SelectTrigger className="h-8 w-32 bg-white text-black">
                   <SelectValue placeholder="Text Length">
-                    {textLength === "short" ? "Short" : "Long"}
+                    {textLength === "short" ? "Short" : 
+                     textLength === "long" ? "Long" : 
+                     "Text Length"}
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent className="bg-white text-black">
