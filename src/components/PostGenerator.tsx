@@ -1,5 +1,3 @@
-
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -304,7 +302,10 @@ const PostGenerator = () => {
         </div>
 
         <div className="flex space-x-2">
-          <Button onClick={generatePost} className="w-full">
+          <Button 
+            onClick={generatePost} 
+            className="w-full border-2 border-[#D4AF37] hover:bg-[#D4AF37]/10" // Add golden border
+          >
             Create Post
           </Button>
           <Button
