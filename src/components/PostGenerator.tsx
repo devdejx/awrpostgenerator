@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -213,16 +214,16 @@ const PostGenerator = () => {
     <Card className="p-4 bg-white">
       <div className="space-y-4 text-black">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-black mb-1">
             Post Type
           </label>
           <Select value={postType} onValueChange={setPostType}>
-            <SelectTrigger className="w-full bg-white">
+            <SelectTrigger className="w-full bg-white text-black">
               <SelectValue placeholder="Select post type" />
             </SelectTrigger>
-            <SelectContent className="bg-white">
+            <SelectContent className="bg-white text-black">
               {POST_TYPES.map((type) => (
-                <SelectItem key={type.value} value={type.value}>
+                <SelectItem key={type.value} value={type.value} className="text-black">
                   {type.label}
                 </SelectItem>
               ))}
@@ -232,18 +233,18 @@ const PostGenerator = () => {
 
         <div>
           <div className="flex justify-between items-center mb-1">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-black">
               Message
             </label>
             <div className="flex items-center gap-2">
               <Select value={contentSource} onValueChange={setContentSource}>
-                <SelectTrigger className="h-8 w-32 bg-white">
+                <SelectTrigger className="h-8 w-32 bg-white text-black">
                   <SelectValue placeholder="Source" />
                 </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="random">Both Sources</SelectItem>
-                  <SelectItem value="website">Website</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
+                <SelectContent className="bg-white text-black">
+                  <SelectItem value="random" className="text-black">Both Sources</SelectItem>
+                  <SelectItem value="website" className="text-black">Website</SelectItem>
+                  <SelectItem value="medium" className="text-black">Medium</SelectItem>
                 </SelectContent>
               </Select>
               <Button
