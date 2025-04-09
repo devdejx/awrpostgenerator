@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -83,11 +84,24 @@ const PostPreview = () => {
     try {
       const downloadUrl = getVimeoDownloadUrl(post.video);
       
-      window.open(downloadUrl, '_blank');
+      // Create an invisible anchor element
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = downloadUrl;
+      a.download = `video-${new Date().getTime()}.mp4`;
+      document.body.appendChild(a);
+      
+      // Simulate click to trigger download
+      a.click();
+      
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(a);
+      }, 100);
       
       toast({
         title: "Download Started",
-        description: "Video download page opened in new tab",
+        description: "Video download has been initiated",
       });
     } catch (error) {
       console.error("Download error:", error);
