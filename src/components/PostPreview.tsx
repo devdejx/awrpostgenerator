@@ -81,21 +81,13 @@ const PostPreview = () => {
     }
     
     try {
-      // Get direct download URL
       const downloadUrl = getVimeoDownloadUrl(post.video);
       
-      // Create a temporary anchor element to trigger download
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      window.open(downloadUrl, '_blank');
       
       toast({
         title: "Download Started",
-        description: "Video download has been initiated",
+        description: "Video download page opened in new tab",
       });
     } catch (error) {
       console.error("Download error:", error);
