@@ -84,25 +84,31 @@ const PostPreview = () => {
     try {
       const downloadUrl = getVimeoDownloadUrl(post.video);
       
-      // Create an invisible anchor element
+      // Create a direct download link and click it
       const a = document.createElement('a');
-      a.style.display = 'none';
       a.href = downloadUrl;
-      a.download = `video-${new Date().getTime()}.mp4`;
+      a.download = `vimeo-video-${Date.now()}.mp4`; // Force download attribute
+      a.target = "_blank"; // Open in new tab for better compatibility
+      a.rel = "noopener noreferrer";
+      a.style.display = "none";
       document.body.appendChild(a);
-      
-      // Simulate click to trigger download
       a.click();
       
-      // Clean up
+      // Clean up the element after clicking
       setTimeout(() => {
-        document.body.removeChild(a);
+        if (document.body.contains(a)) {
+          document.body.removeChild(a);
+        }
       }, 100);
       
       toast({
         title: "Download Started",
-        description: "Video download has been initiated",
+        description: "Your browser should begin downloading the video shortly",
       });
+      
+      // Open the download URL in a new window as fallback
+      window.open(downloadUrl, '_blank');
+      
     } catch (error) {
       console.error("Download error:", error);
       toast({
