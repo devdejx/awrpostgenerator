@@ -83,24 +83,23 @@ const PostPreview = () => {
     try {
       const downloadUrl = getVimeoDownloadUrl(post.video);
       
-      // Create a hidden iframe to handle the download without opening a new tab
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = downloadUrl;
-      document.body.appendChild(iframe);
+      const form = document.createElement('form');
+      form.method = 'GET';
+      form.action = downloadUrl;
+      form.style.display = 'none';
+      document.body.appendChild(form);
+      form.submit();
       
-      // Show success toast
+      setTimeout(() => {
+        if (document.body.contains(form)) {
+          document.body.removeChild(form);
+        }
+      }, 1000);
+      
       toast({
         title: "Download Started",
         description: "Your video download has started"
       });
-      
-      // Remove the iframe after a short delay
-      setTimeout(() => {
-        if (document.body.contains(iframe)) {
-          document.body.removeChild(iframe);
-        }
-      }, 2000);
       
     } catch (error) {
       console.error("Download error:", error);
