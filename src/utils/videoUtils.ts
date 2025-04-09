@@ -40,6 +40,12 @@ export const getVimeoEmbedUrl = (url: string) => {
  * @returns Download URL for the video
  */
 export const getVimeoDownloadUrl = (url: string) => {
-  const { videoId } = extractVimeoInfo(url);
-  return `https://vimeo.com/${videoId}/download`;
+  try {
+    const { videoId } = extractVimeoInfo(url);
+    // Using the direct video URL format that triggers download
+    return `https://vimeo.com/${videoId}?action=download`;
+  } catch (error) {
+    console.error("Error creating download URL:", error);
+    return '';
+  }
 };
