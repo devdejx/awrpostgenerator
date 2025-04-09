@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -6,12 +7,13 @@ import { Copy, Share2, Download } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { getVimeoEmbedUrl, getVimeoDownloadUrl } from "@/utils/videoUtils";
+import { getVimeoEmbedUrl, getVimeoVideoUrl } from "@/utils/videoUtils";
 
 const PostPreview = () => {
   const { post } = usePostStore();
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const isMobile = useIsMobile();
 
   const handleCopyToClipboard = () => {
@@ -70,7 +72,7 @@ const PostPreview = () => {
     });
   };
 
-  const downloadVideo = () => {
+  const downloadVideo = async () => {
     if (!post.video) {
       toast({
         title: "Error",
@@ -80,22 +82,47 @@ const PostPreview = () => {
       return;
     }
     
+    setIsDownloading(true);
+    
     try {
-      const downloadUrl = getVimeoDownloadUrl(post.video);
+      // Get the video URL
+      const videoUrl = await getVimeoVideoUrl(post.video);
       
-      window.open(downloadUrl, '_blank');
+      if (!videoUrl) {
+        throw new Error("Could not get download URL");
+      }
+      
+      // Create an anchor element to trigger the download
+      const a = document.createElement('a');
+      a.href = videoUrl;
+      a.download = `video-${Date.now()}.mp4`;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      
+      // This is key - we need to add the element to the DOM
+      document.body.appendChild(a);
+      
+      // Trigger the click
+      a.click();
+      
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(a);
+      }, 100);
       
       toast({
         title: "Download Started",
-        description: "Video download page opened in new tab",
+        description: "If download doesn't start automatically, check your browser settings",
       });
     } catch (error) {
       console.error("Download error:", error);
       toast({
         title: "Error",
-        description: "Failed to download video",
+        description: "Failed to download video. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -246,10 +273,10 @@ const PostPreview = () => {
               onClick={downloadVideo}
               variant="outline"
               className="flex items-center justify-center space-x-2 w-full text-xs sm:text-sm h-9"
-              disabled={!post.video}
+              disabled={!post.video || isDownloading}
             >
               <Download className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span>Download video</span>
+              <span>{isDownloading ? "Downloading..." : "Download video"}</span>
             </Button>
           </div>
           
