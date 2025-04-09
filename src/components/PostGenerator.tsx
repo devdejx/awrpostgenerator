@@ -2,81 +2,212 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Image as ImageIcon, RefreshCw, Wand2, Video } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
-const CRYPTO_HASHTAGS = ["#crypto #cryptocurrency #bitcoin #blockchain", "#ethereum #btc #trading #cryptonews", "#cryptotrading #nft #forex #money #eth", "#investing #investment #cryptocurrencies #bitcoins", "#binance #bitcoinnews #invest #bitcoinmining", "#business #trader #entrepreneur #forextrader", "#nfts #finance #stocks #dogecoin #cryptoworld", "#bitcointrading #investor #nftart #xrp", "#cryptoinvestor #cryptoart #coinbase #stockmarket", "#litecoin #hodl #bitcoincash #altcoin #defi", "#art #ripple #nftcommunity #web3 #metaverse", "#forextrading #blockchaintechnology #motivation", "#nftcollector #digitalart #cryptomarket #mining", "#cryptomemes #altcoins #cryptomining #forexsignals", "#financialfreedom #100xGem #1000xGem #Gem", "#CultureCoin #MovementCoin #HotCrypto #MemeCoin", "#CryptoGem #NextBigThing #Moonshot #AltcoinGem", "#LowCapGem #DeFiGem #CryptoFinds #HiddenGem", "#CryptoMoonshot #Next100x #MicroCap #SmallCapGem", "#CryptoTreasure #EmergingCrypto #CryptoLaunch", "#NewCrypto #CryptoAlert #CryptoBoom #CryptoTrend", "#CryptoBuzz #CryptoPick #NextAltcoin #CryptoPotential", "#CryptoInvestment #CryptoDiscovery #CryptoOpportunity", "#CryptoProspect #CryptoInsider #CryptoWatch", "#CryptoRadar #CryptoSpotlight #CryptoInsights", "#CryptoSignals #CryptoPicks #CryptoGems", "#CryptoTrends #CryptoNews #CryptoUpdates", "#CryptoMarket #CryptoCommunity #CryptoTalk", "#CryptoChat #CryptoDiscussion #CryptoFans", "#CryptoLovers #CryptoEnthusiast #CryptoInvestor", "#CryptoTrader #CryptoTips #CryptoAdvice", "#CryptoGuide #CryptoEducation #CryptoLearning", "#CryptoStrategy #CryptoPlan #CryptoGoals", "#CryptoSuccess #CryptoJourney #CryptoPath", "#CryptoRoadmap #CryptoVision #CryptoFuture", "#CryptoNow #CryptoToday #CryptoWorld", "#CryptoSpace #CryptoSphere #CryptoZone", "#CryptoHub #CryptoNetwork #CryptoPlatform", "#CryptoEcosystem #CryptoInnovation #CryptoTech", "#CryptoSolutions #CryptoServices #CryptoTools", "#Murad #Muradism #InMuradWeTrust #MuradCoin", "#MuradGems #MuradEffect #Murad100x #MuradAlpha", "#MuradPilled #MuradSeason #CZBinance #VitalikButerin", "#ElonMusk #APompliano #Saylor #ErikVoorhees", "#RogerVer #CryptoCobain #GirlGoneCrypto", "#MissTeenCrypto #TheCryptoLark #IvanOnTech", "#RaoulGMI #DTAPCAP #WillyWoo #CryptoWendyO", "#CryptoJack #Lopp #CryptoVet #JustinSun", "#WaqarZaka #PlanB #WillClemente #AriPaul", "#JackMallers #Balaji #NayibBukele #JamesonLopp", "#LauraShin #MarcAndreessen #PaulGraham #ChrisDixon", "#CryptoYoda #CryptoCred #CryptoDonAlt #CryptoMichaël", "#TheMoonCarl #CryptoBirb #AltcoinPsycho #CryptoRand"];
-const CRYPTO_PROFILES = ["@bitcoin @ethereum", "@CoinDesk @cz_binance", "@VitalikButerin @SatoshiLite", "@MicroStrategy @APompliano", "@CoinMarketCap @BitcoinMagazine", "@cryptorecruiter @cz_binance", "@PlanB @DocumentingBTC"];
-const RETIREMENT_BELIEVE_CONTENT = [{
-  short: "All Will Retire believes: Pursue passions, find joy in hobbies that bring meaning beyond work activities.",
-  long: "All Will Retire believes that pursuing your passions in retirement brings true fulfillment. Whether painting, gardening, or learning an instrument, hobbies create meaning beyond work by allowing you to explore creativity and personal growth without the constraints of a traditional career."
-}, {
-  short: "Memories with friends make retirement truly special, creating lasting stories of connection and friendship.",
-  long: "All Will Retire values the importance of making memories with friends. Your retirement journey should include quality time with those who matter most, creating stories that last a lifetime, deepening relationships, and finding joy in shared experiences that transcend the boundaries of work and routine."
-}, {
-  short: "Taking care of loved ones is a meaningful retirement priority that strengthens family connections.",
-  long: "All Will Retire understands that taking care of loved ones, especially aging parents, is a meaningful retirement priority. Financial freedom enables you to be there when family needs you most, providing support, care, and quality time that strengthens familial bonds and ensures their well-being."
-}, {
-  short: "Volunteering full-time creates powerful social impact and gives your days purpose and community involvement.",
-  long: "All Will Retire supports volunteering full-time during retirement. Dedicating your experience and time to nonprofit work creates powerful social impact while giving your days purpose, allowing you to contribute to causes you care about and make a difference in the lives of others."
-}, {
-  short: "Exploring new countries enriches retirement by broadening perspectives and creating memorable cultural experiences.",
-  long: "All Will Retire encourages exploring new countries and cultures without budget constraints. Travel enriches retirement by broadening perspectives and creating unforgettable experiences, exposing you to diverse ways of life, fostering personal growth, and creating lasting memories."
-}, {
-  short: "Changing your environment can bring new life experiences and inspire creativity during retirement years.",
-  long: "All Will Retire recognizes the value in changing your environment - whether leaving city life for quiet farming or bringing your expertise from rural areas to urban innovation. A change of scenery can spark creativity, offer new challenges, and provide a fresh perspective on life."
-}, {
-  short: "Rescuing animals heals both animals and their caretakers, providing purpose and emotional fulfillment.",
-  long: "All Will Retire celebrates those who use their freedom to rescue animals and operate shelters. These compassionate ventures heal both animals and their caretakers, providing a sense of purpose, companionship, and the satisfaction of making a positive impact on the lives of vulnerable creatures."
-}, {
-  short: "Generous giving creates lasting positive change through strategic philanthropy and community support initiatives.",
-  long: "All Will Retire promotes generous giving to causes you care about. Financial independence allows you to create lasting positive change through strategic philanthropy, enabling you to support organizations and initiatives that align with your values and contribute to a better world."
-}, {
-  short: "Learning new skills keeps your mind sharp and opens doors to opportunities throughout retirement.",
-  long: "All Will Retire champions learning new skills throughout retirement. Continuous growth keeps your mind sharp and opens doors to exciting opportunities and connections, allowing you to explore new interests, stay mentally engaged, and adapt to the ever-changing world around you."
-}, {
-  short: "Creative expression allows you to share your unique voice with the world through art.",
-  long: "All Will Retire inspires creative expression through writing books or creating art. Retirement provides the time and space to share your unique voice with the world, allowing you to explore your artistic talents, express your thoughts and feelings, and leave a lasting legacy."
-}, {
-  short: "Health and exercise are fundamental to a fulfilling retirement with energy and physical independence.",
-  long: "All Will Retire prioritizes health and exercise as fundamental to a fulfilling retirement. Investing time in your wellbeing pays dividends through increased energy and longevity, allowing you to enjoy your retirement years to the fullest and maintain an active and independent lifestyle."
-}, {
-  short: "Entrepreneurs can launch passion projects without income pressure while pursuing meaningful business ventures.",
-  long: "All Will Retire supports entrepreneurs who launch passion projects. Financial security gives you the freedom to start businesses aligned with your values without income pressure, allowing you to pursue your entrepreneurial dreams, create something meaningful, and contribute to the economy."
-}, {
-  short: "Supporting friends and family helps loved ones achieve their dreams through mentorship and financial assistance.",
-  long: "All Will Retire values supporting friends and family financially. True wealth includes helping loved ones achieve their dreams through mentorship and opportunity creation, strengthening relationships, and creating a ripple effect of positive impact within your community."
-}];
-const VIMEO_VIDEOS = ["https://vimeo.com/1073620983/639f4602df", "https://vimeo.com/1073621013/b2ed1c4f0f", "https://vimeo.com/1073621029/b524df5ac8", "https://vimeo.com/1073621046/27ca5564b8", "https://vimeo.com/1073621073/f2b42f7576", "https://vimeo.com/1073621108/1c3560f64e"];
+
+const CRYPTO_HASHTAGS = [
+  "#crypto #cryptocurrency #bitcoin #blockchain",
+  "#ethereum #btc #trading #cryptonews",
+  "#cryptotrading #nft #forex #money #eth",
+  "#investing #investment #cryptocurrencies #bitcoins",
+  "#binance #bitcoinnews #invest #bitcoinmining",
+  "#business #trader #entrepreneur #forextrader",
+  "#nfts #finance #stocks #dogecoin #cryptoworld",
+  "#bitcointrading #investor #nftart #xrp",
+  "#cryptoinvestor #cryptoart #coinbase #stockmarket",
+  "#litecoin #hodl #bitcoincash #altcoin #defi",
+  "#art #ripple #nftcommunity #web3 #metaverse",
+  "#forextrading #blockchaintechnology #motivation",
+  "#nftcollector #digitalart #cryptomarket #mining",
+  "#cryptomemes #altcoins #cryptomining #forexsignals",
+  "#financialfreedom #100xGem #1000xGem #Gem",
+  "#CultureCoin #MovementCoin #HotCrypto #MemeCoin",
+  "#CryptoGem #NextBigThing #Moonshot #AltcoinGem",
+  "#LowCapGem #DeFiGem #CryptoFinds #HiddenGem",
+  "#CryptoMoonshot #Next100x #MicroCap #SmallCapGem",
+  "#CryptoTreasure #EmergingCrypto #CryptoLaunch",
+  "#NewCrypto #CryptoAlert #CryptoBoom #CryptoTrend",
+  "#CryptoBuzz #CryptoPick #NextAltcoin #CryptoPotential",
+  "#CryptoInvestment #CryptoDiscovery #CryptoOpportunity",
+  "#CryptoProspect #CryptoInsider #CryptoWatch",
+  "#CryptoRadar #CryptoSpotlight #CryptoInsights",
+  "#CryptoSignals #CryptoPicks #CryptoGems",
+  "#CryptoTrends #CryptoNews #CryptoUpdates",
+  "#CryptoMarket #CryptoCommunity #CryptoTalk",
+  "#CryptoChat #CryptoDiscussion #CryptoFans",
+  "#CryptoLovers #CryptoEnthusiast #CryptoInvestor",
+  "#CryptoTrader #CryptoTips #CryptoAdvice",
+  "#CryptoGuide #CryptoEducation #CryptoLearning",
+  "#CryptoStrategy #CryptoPlan #CryptoGoals",
+  "#CryptoSuccess #CryptoJourney #CryptoPath",
+  "#CryptoRoadmap #CryptoVision #CryptoFuture",
+  "#CryptoNow #CryptoToday #CryptoWorld",
+  "#CryptoSpace #CryptoSphere #CryptoZone",
+  "#CryptoHub #CryptoNetwork #CryptoPlatform",
+  "#CryptoEcosystem #CryptoInnovation #CryptoTech",
+  "#CryptoSolutions #CryptoServices #CryptoTools",
+  "#Murad #Muradism #InMuradWeTrust #MuradCoin",
+  "#MuradGems #MuradEffect #Murad100x #MuradAlpha",
+  "#MuradPilled #MuradSeason #CZBinance #VitalikButerin",
+  "#ElonMusk #APompliano #Saylor #ErikVoorhees",
+  "#RogerVer #CryptoCobain #GirlGoneCrypto",
+  "#MissTeenCrypto #TheCryptoLark #IvanOnTech",
+  "#RaoulGMI #DTAPCAP #WillyWoo #CryptoWendyO",
+  "#CryptoJack #Lopp #CryptoVet #JustinSun",
+  "#WaqarZaka #PlanB #WillClemente #AriPaul",
+  "#JackMallers #Balaji #NayibBukele #JamesonLopp",
+  "#LauraShin #MarcAndreessen #PaulGraham #ChrisDixon",
+  "#CryptoYoda #CryptoCred #CryptoDonAlt #CryptoMichaël",
+  "#TheMoonCarl #CryptoBirb #AltcoinPsycho #CryptoRand",
+];
+
+const CRYPTO_PROFILES = [
+  "@bitcoin @ethereum",
+  "@CoinDesk @cz_binance",
+  "@VitalikButerin @SatoshiLite",
+  "@MicroStrategy @APompliano",
+  "@CoinMarketCap @BitcoinMagazine",
+  "@cryptorecruiter @cz_binance",
+  "@PlanB @DocumentingBTC",
+];
+
+const RETIREMENT_BELIEVE_CONTENT = [
+  {
+    short: "All Will Retire believes: Pursue passions, find joy in hobbies that bring meaning beyond work activities.",
+    long: "All Will Retire believes that pursuing your passions in retirement brings true fulfillment. Whether painting, gardening, or learning an instrument, hobbies create meaning beyond work by allowing you to explore creativity and personal growth without the constraints of a traditional career."
+  },
+  {
+    short: "Memories with friends make retirement truly special, creating lasting stories of connection and friendship.",
+    long: "All Will Retire values the importance of making memories with friends. Your retirement journey should include quality time with those who matter most, creating stories that last a lifetime, deepening relationships, and finding joy in shared experiences that transcend the boundaries of work and routine."
+  },
+  {
+    short: "Taking care of loved ones is a meaningful retirement priority that strengthens family connections.",
+    long: "All Will Retire understands that taking care of loved ones, especially aging parents, is a meaningful retirement priority. Financial freedom enables you to be there when family needs you most, providing support, care, and quality time that strengthens familial bonds and ensures their well-being."
+  },
+  {
+    short: "Volunteering full-time creates powerful social impact and gives your days purpose and community involvement.",
+    long: "All Will Retire supports volunteering full-time during retirement. Dedicating your experience and time to nonprofit work creates powerful social impact while giving your days purpose, allowing you to contribute to causes you care about and make a difference in the lives of others."
+  },
+  {
+    short: "Exploring new countries enriches retirement by broadening perspectives and creating memorable cultural experiences.",
+    long: "All Will Retire encourages exploring new countries and cultures without budget constraints. Travel enriches retirement by broadening perspectives and creating unforgettable experiences, exposing you to diverse ways of life, fostering personal growth, and creating lasting memories."
+  },
+  {
+    short: "Changing your environment can bring new life experiences and inspire creativity during retirement years.",
+    long: "All Will Retire recognizes the value in changing your environment - whether leaving city life for quiet farming or bringing your expertise from rural areas to urban innovation. A change of scenery can spark creativity, offer new challenges, and provide a fresh perspective on life."
+  },
+  {
+    short: "Rescuing animals heals both animals and their caretakers, providing purpose and emotional fulfillment.",
+    long: "All Will Retire celebrates those who use their freedom to rescue animals and operate shelters. These compassionate ventures heal both animals and their caretakers, providing a sense of purpose, companionship, and the satisfaction of making a positive impact on the lives of vulnerable creatures."
+  },
+  {
+    short: "Generous giving creates lasting positive change through strategic philanthropy and community support initiatives.",
+    long: "All Will Retire promotes generous giving to causes you care about. Financial independence allows you to create lasting positive change through strategic philanthropy, enabling you to support organizations and initiatives that align with your values and contribute to a better world."
+  },
+  {
+    short: "Learning new skills keeps your mind sharp and opens doors to opportunities throughout retirement.",
+    long: "All Will Retire champions learning new skills throughout retirement. Continuous growth keeps your mind sharp and opens doors to exciting opportunities and connections, allowing you to explore new interests, stay mentally engaged, and adapt to the ever-changing world around you."
+  },
+  {
+    short: "Creative expression allows you to share your unique voice with the world through art.",
+    long: "All Will Retire inspires creative expression through writing books or creating art. Retirement provides the time and space to share your unique voice with the world, allowing you to explore your artistic talents, express your thoughts and feelings, and leave a lasting legacy."
+  },
+  {
+    short: "Health and exercise are fundamental to a fulfilling retirement with energy and physical independence.",
+    long: "All Will Retire prioritizes health and exercise as fundamental to a fulfilling retirement. Investing time in your wellbeing pays dividends through increased energy and longevity, allowing you to enjoy your retirement years to the fullest and maintain an active and independent lifestyle."
+  },
+  {
+    short: "Entrepreneurs can launch passion projects without income pressure while pursuing meaningful business ventures.",
+    long: "All Will Retire supports entrepreneurs who launch passion projects. Financial security gives you the freedom to start businesses aligned with your values without income pressure, allowing you to pursue your entrepreneurial dreams, create something meaningful, and contribute to the economy."
+  },
+  {
+    short: "Supporting friends and family helps loved ones achieve their dreams through mentorship and financial assistance.",
+    long: "All Will Retire values supporting friends and family financially. True wealth includes helping loved ones achieve their dreams through mentorship and opportunity creation, strengthening relationships, and creating a ripple effect of positive impact within your community."
+  },
+];
+
+const VIMEO_VIDEOS = [
+  "https://vimeo.com/1073620983/639f4602df",
+  "https://vimeo.com/1073621013/b2ed1c4f0f",
+  "https://vimeo.com/1073621029/b524df5ac8",
+  "https://vimeo.com/1073621046/27ca5564b8",
+  "https://vimeo.com/1073621073/f2b42f7576",
+  "https://vimeo.com/1073621108/1c3560f64e"
+];
+
 const getRandomCryptoHashtags = () => {
   const selectedHashtags = CRYPTO_HASHTAGS[Math.floor(Math.random() * CRYPTO_HASHTAGS.length)];
   return selectedHashtags;
 };
+
 const getRandomCryptoProfiles = () => {
   return CRYPTO_PROFILES[Math.floor(Math.random() * CRYPTO_PROFILES.length)];
 };
-const POST_TYPES = [{
-  value: "retirement-believe",
-  label: "Retirement Believe",
-  templates: ["All Will Retire believes: {message} #RetirementWisdom {hashtags} cc: {profiles}", "Our retirement philosophy: {message} 💡 {hashtags} cc: {profiles}", "A core belief from All Will Retire: {message} 🌟 {hashtags} cc: {profiles}"]
-}, {
-  value: "tell-our-story",
-  label: "Tell Our Story",
-  templates: ["Our journey at All Will Retire: {message} #OurStory {hashtags} cc: {profiles}", "A chapter from All Will Retire: {message} 📖 {hashtags} cc: {profiles}", "Sharing our narrative: {message} 💬 {hashtags} cc: {profiles}"]
-}, {
-  value: "what-a-gem",
-  label: "What a GEM",
-  templates: ["Discover a gem from All Will Retire: {message} #GemOfWisdom {hashtags} cc: {profiles}", "A sparkling insight: {message} ✨ {hashtags} cc: {profiles}", "GEM alert from All Will Retire: {message} 💎 {hashtags} cc: {profiles}"]
-}];
+
+const POST_TYPES = [
+  {
+    value: "retirement-believe",
+    label: "Retirement Believe",
+    templates: [
+      "All Will Retire believes: {message} #RetirementWisdom {hashtags} cc: {profiles}",
+      "Our retirement philosophy: {message} 💡 {hashtags} cc: {profiles}",
+      "A core belief from All Will Retire: {message} 🌟 {hashtags} cc: {profiles}",
+    ],
+  },
+  {
+    value: "tell-our-story",
+    label: "Tell Our Story",
+    templates: [
+      "Our journey at All Will Retire: {message} #OurStory {hashtags} cc: {profiles}",
+      "A chapter from All Will Retire: {message} 📖 {hashtags} cc: {profiles}",
+      "Sharing our narrative: {message} 💬 {hashtags} cc: {profiles}",
+    ],
+  },
+  {
+    value: "what-a-gem",
+    label: "What a GEM",
+    templates: [
+      "Discover a gem from All Will Retire: {message} #GemOfWisdom {hashtags} cc: {profiles}",
+      "A sparkling insight: {message} ✨ {hashtags} cc: {profiles}",
+      "GEM alert from All Will Retire: {message} 💎 {hashtags} cc: {profiles}",
+    ],
+  },
+];
+
 const generateContentFromWebsiteOriginal = async (source = "random", postType = "") => {
   if (postType === "retirement-believe") {
     return RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
   }
-  const websiteContents = ["All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings.", "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active.", "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility.", "All Will Retire insight: Consider healthcare needs when planning for retirement. Medical costs can be significant.", "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement."];
-  const mediumContents = ["All Will Retire philosophy: Retirement planning requires a holistic approach to personal finance.", "All Will Retire wisdom: Understanding your long-term financial goals is key to successful retirement.", "All Will Retire perspective: Wealth is more than just money - it's about creating a fulfilling lifestyle.", "All Will Retire approach: Preparing for retirement involves financial, health, and personal growth strategies.", "All Will Retire belief: Your retirement journey is unique and deserves careful, personalized planning.", "All Will Retire principle: Strategic financial planning can help you achieve greater personal freedom.", "All Will Retire concept: Modern retirement approaches focus on flexibility and continuous personal development."];
+
+  const websiteContents = [
+    "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings.",
+    "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active.",
+    "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility.",
+    "All Will Retire insight: Consider healthcare needs when planning for retirement. Medical costs can be significant.",
+    "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement.",
+  ];
+  
+  const mediumContents = [
+    "All Will Retire philosophy: Retirement planning requires a holistic approach to personal finance.",
+    "All Will Retire wisdom: Understanding your long-term financial goals is key to successful retirement.",
+    "All Will Retire perspective: Wealth is more than just money - it's about creating a fulfilling lifestyle.",
+    "All Will Retire approach: Preparing for retirement involves financial, health, and personal growth strategies.",
+    "All Will Retire belief: Your retirement journey is unique and deserves careful, personalized planning.",
+    "All Will Retire principle: Strategic financial planning can help you achieve greater personal freedom.",
+    "All Will Retire concept: Modern retirement approaches focus on flexibility and continuous personal development.",
+  ];
+  
   await new Promise(resolve => setTimeout(resolve, 1000));
+  
   if (source === "medium") {
     return mediumContents[Math.floor(Math.random() * mediumContents.length)];
   } else if (source === "website") {
@@ -86,14 +217,10 @@ const generateContentFromWebsiteOriginal = async (source = "random", postType = 
     return allContents[Math.floor(Math.random() * allContents.length)];
   }
 };
+
 const PostGenerator = () => {
-  const {
-    post,
-    setPost
-  } = usePostStore();
-  const {
-    toast
-  } = useToast();
+  const { post, setPost } = usePostStore();
+  const { toast } = useToast();
   const [message, setMessage] = useState("");
   const [postType, setPostType] = useState("retirement-believe");
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -103,12 +230,13 @@ const PostGenerator = () => {
   const [isGeneratingVideo, setIsGeneratingVideo] = useState(false);
   const [contentSource, setContentSource] = useState("random");
   const [textLength, setTextLength] = useState("short");
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setImageFile(file);
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e) => {
         if (e.target?.result) {
           setImagePreview(e.target.result as string);
           setVideoPreview(null);
@@ -117,33 +245,47 @@ const PostGenerator = () => {
       reader.readAsDataURL(file);
     }
   };
+
   const generatePost = () => {
     if (!message.trim()) {
       toast({
         title: "Error",
         description: "Please enter a message",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
-    const selectedType = POST_TYPES.find(type => type.value === postType);
+
+    const selectedType = POST_TYPES.find((type) => type.value === postType);
     if (!selectedType) return;
-    const randomTemplate = selectedType.templates[Math.floor(Math.random() * selectedType.templates.length)];
+
+    const randomTemplate =
+      selectedType.templates[
+        Math.floor(Math.random() * selectedType.templates.length)
+      ];
+      
     const hashtags = getRandomCryptoHashtags();
     const profiles = getRandomCryptoProfiles();
-    const generatedMessage = randomTemplate.replace("{message}", message).replace("{hashtags}", hashtags).replace("{profiles}", profiles);
+    
+    const generatedMessage = randomTemplate
+      .replace("{message}", message)
+      .replace("{hashtags}", hashtags)
+      .replace("{profiles}", profiles);
+
     setPost({
       content: generatedMessage,
       image: imagePreview,
       video: videoPreview,
       type: postType,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
+
     toast({
       title: "Success!",
-      description: "Post successfully created!"
+      description: "Post successfully created!",
     });
   };
+
   const resetForm = () => {
     setMessage("");
     setPostType("retirement-believe");
@@ -151,50 +293,69 @@ const PostGenerator = () => {
     setImagePreview(null);
     setVideoPreview(null);
   };
+
   const generateContentFromWebsite = async (postType = "") => {
     if (postType === "retirement-believe") {
       const content = RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
       return textLength === "short" ? content.short : content.long;
     }
-    const websiteContents = [{
-      short: "All Will Retire explains: Planning for retirement is crucial and requires early consistent action.",
-      long: "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings. Developing a comprehensive strategy ensures financial security during your retirement years."
-    }, {
-      short: "All Will Retire advises: Retirement isn't just about finances, but purpose and staying actively engaged.",
-      long: "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active. Finding meaningful activities and maintaining social connections are essential components of a fulfilling retirement."
-    }, {
-      short: "All Will Retire recommends: Diversify your retirement portfolio to protect against market fluctuations effectively.",
-      long: "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility. Spreading investments across different asset classes provides security and helps maintain steady growth throughout market cycles."
-    }, {
-      short: "All Will Retire insight: Consider healthcare needs in retirement planning to prepare for potential expenses.",
-      long: "All Will Retire insight: Consider your healthcare needs when planning for retirement. Medical costs can be significant and often increase with age, making healthcare planning an essential component of your overall retirement strategy."
-    }, {
-      short: "All Will Retire reminder: Social security benefits alone may not provide sufficient retirement income security.",
-      long: "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement. Building additional income streams through savings, investments, and possibly part-time work can help ensure financial stability throughout your retirement years."
-    }];
-    const mediumContents = [{
-      short: "All Will Retire philosophy: Holistic approach to retirement includes financial, social and health aspects.",
-      long: "All Will Retire philosophy: Retirement planning requires a holistic approach to personal finance. Consider not just your portfolio, but your health, housing, social connections, and personal growth to create a comprehensive retirement strategy."
-    }, {
-      short: "All Will Retire wisdom: Define your long-term financial goals to create successful retirement planning strategies.",
-      long: "All Will Retire wisdom: Understanding your long-term financial goals is key to successful retirement. Clarifying what you want from retirement helps determine how much you need to save and what investment strategies will best support your vision."
-    }, {
-      short: "All Will Retire perspective: Wealth extends beyond money to encompass lifestyle, health, and personal fulfillment.",
-      long: "All Will Retire perspective: Wealth is more than just money - it's about creating a fulfilling lifestyle. True retirement wealth includes strong relationships, good health, meaningful activities, and the freedom to enjoy your time without financial stress."
-    }, {
-      short: "All Will Retire approach: Preparing for retirement requires balanced financial, health, and personal development strategies.",
-      long: "All Will Retire approach: Preparing for retirement involves financial, health, and personal growth strategies. A well-rounded plan addresses not just your financial security but also maintaining physical and mental well-being while pursuing activities that bring you joy."
-    }, {
-      short: "All Will Retire belief: Your retirement journey demands personalized planning based on individual goals and values.",
-      long: "All Will Retire belief: Your retirement journey is unique and deserves careful, personalized planning. Cookie-cutter approaches rarely work because each person has different needs, goals, and dreams for their retirement years that should guide their financial decisions."
-    }, {
-      short: "All Will Retire principle: Strategic financial planning creates greater personal freedom and retirement flexibility options.",
-      long: "All Will Retire principle: Strategic financial planning can help you achieve greater personal freedom. With proper planning and disciplined saving, you can create options for yourself that might include early retirement, part-time work, or pursuing passion projects."
-    }, {
-      short: "All Will Retire concept: Modern retirement approaches emphasize flexibility, adaptation, and continuous personal development opportunities.",
-      long: "All Will Retire concept: Modern retirement approaches focus on flexibility and continuous personal development. Today's retirees often blend work, learning, leisure, and service in creative ways that redefine traditional notions of retirement as a static life stage."
-    }];
+    
+    const websiteContents = [
+      {
+        short: "All Will Retire explains: Planning for retirement is crucial and requires early consistent action.",
+        long: "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings. Developing a comprehensive strategy ensures financial security during your retirement years."
+      },
+      {
+        short: "All Will Retire advises: Retirement isn't just about finances, but purpose and staying actively engaged.",
+        long: "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active. Finding meaningful activities and maintaining social connections are essential components of a fulfilling retirement."
+      },
+      {
+        short: "All Will Retire recommends: Diversify your retirement portfolio to protect against market fluctuations effectively.",
+        long: "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility. Spreading investments across different asset classes provides security and helps maintain steady growth throughout market cycles."
+      },
+      {
+        short: "All Will Retire insight: Consider healthcare needs in retirement planning to prepare for potential expenses.",
+        long: "All Will Retire insight: Consider your healthcare needs when planning for retirement. Medical costs can be significant and often increase with age, making healthcare planning an essential component of your overall retirement strategy."
+      },
+      {
+        short: "All Will Retire reminder: Social security benefits alone may not provide sufficient retirement income security.",
+        long: "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement. Building additional income streams through savings, investments, and possibly part-time work can help ensure financial stability throughout your retirement years."
+      },
+    ];
+    
+    const mediumContents = [
+      {
+        short: "All Will Retire philosophy: Holistic approach to retirement includes financial, social and health aspects.",
+        long: "All Will Retire philosophy: Retirement planning requires a holistic approach to personal finance. Consider not just your portfolio, but your health, housing, social connections, and personal growth to create a comprehensive retirement strategy."
+      },
+      {
+        short: "All Will Retire wisdom: Define your long-term financial goals to create successful retirement planning strategies.",
+        long: "All Will Retire wisdom: Understanding your long-term financial goals is key to successful retirement. Clarifying what you want from retirement helps determine how much you need to save and what investment strategies will best support your vision."
+      },
+      {
+        short: "All Will Retire perspective: Wealth extends beyond money to encompass lifestyle, health, and personal fulfillment.",
+        long: "All Will Retire perspective: Wealth is more than just money - it's about creating a fulfilling lifestyle. True retirement wealth includes strong relationships, good health, meaningful activities, and the freedom to enjoy your time without financial stress."
+      },
+      {
+        short: "All Will Retire approach: Preparing for retirement requires balanced financial, health, and personal development strategies.",
+        long: "All Will Retire approach: Preparing for retirement involves financial, health, and personal growth strategies. A well-rounded plan addresses not just your financial security but also maintaining physical and mental well-being while pursuing activities that bring you joy."
+      },
+      {
+        short: "All Will Retire belief: Your retirement journey demands personalized planning based on individual goals and values.",
+        long: "All Will Retire belief: Your retirement journey is unique and deserves careful, personalized planning. Cookie-cutter approaches rarely work because each person has different needs, goals, and dreams for their retirement years that should guide their financial decisions."
+      },
+      {
+        short: "All Will Retire principle: Strategic financial planning creates greater personal freedom and retirement flexibility options.",
+        long: "All Will Retire principle: Strategic financial planning can help you achieve greater personal freedom. With proper planning and disciplined saving, you can create options for yourself that might include early retirement, part-time work, or pursuing passion projects."
+      },
+      {
+        short: "All Will Retire concept: Modern retirement approaches emphasize flexibility, adaptation, and continuous personal development opportunities.",
+        long: "All Will Retire concept: Modern retirement approaches focus on flexibility and continuous personal development. Today's retirees often blend work, learning, leisure, and service in creative ways that redefine traditional notions of retirement as a static life stage."
+      },
+    ];
+    
     await new Promise(resolve => setTimeout(resolve, 1000));
+    
     let allContents = [];
     if (contentSource === "medium") {
       allContents = mediumContents;
@@ -203,52 +364,62 @@ const PostGenerator = () => {
     } else {
       allContents = [...websiteContents, ...mediumContents];
     }
+
     const content = allContents[Math.floor(Math.random() * allContents.length)];
     return textLength === "short" ? content.short : content.long;
   };
+
   const handleAutoGenerate = async () => {
     setIsGenerating(true);
     try {
       const content = await generateContentFromWebsite(postType);
       setMessage(content);
+      
       let sourceLabel = textLength === "short" ? "Short Text" : "Long Text";
+          
       toast({
         title: "Success!",
-        description: `Content generated (${sourceLabel})`
+        description: `Content generated (${sourceLabel})`,
       });
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to generate content",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsGenerating(false);
     }
   };
+
   const handleGenerateVideo = async () => {
     setIsGeneratingVideo(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 800));
+      
       const randomVideo = VIMEO_VIDEOS[Math.floor(Math.random() * VIMEO_VIDEOS.length)];
       setVideoPreview(randomVideo);
+      
       setImagePreview(null);
       setImageFile(null);
+      
       toast({
         title: "Success!",
-        description: "Vimeo video selected"
+        description: "Vimeo video selected",
       });
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to generate video",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsGeneratingVideo(false);
     }
   };
-  return <Card className="p-4 bg-white">
+
+  return (
+    <Card className="p-4 bg-white">
       <div className="space-y-4 text-black">
         <div>
           <label className="block text-sm font-medium text-black mb-1">
@@ -259,9 +430,11 @@ const PostGenerator = () => {
               <SelectValue placeholder="Select post type" />
             </SelectTrigger>
             <SelectContent className="bg-white text-black">
-              {POST_TYPES.map(type => <SelectItem key={type.value} value={type.value} className="text-black">
+              {POST_TYPES.map((type) => (
+                <SelectItem key={type.value} value={type.value} className="text-black">
                   {type.label}
-                </SelectItem>)}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
@@ -284,13 +457,28 @@ const PostGenerator = () => {
                   </SelectContent>
                 </Select>
               </div>
-              <Button variant="outline" size="sm" onClick={handleAutoGenerate} disabled={isGenerating} className="flex items-center gap-1">
-                {isGenerating ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Wand2 className="h-4 w-4" />}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleAutoGenerate}
+                disabled={isGenerating}
+                className="flex items-center gap-1"
+              >
+                {isGenerating ? (
+                  <RefreshCw className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Wand2 className="h-4 w-4" />
+                )}
                 Auto Generate
               </Button>
             </div>
           </div>
-          <Textarea placeholder="Enter your message..." value={message} onChange={e => setMessage(e.target.value)} className="min-h-[100px] bg-white" />
+          <Textarea
+            placeholder="Enter your message..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="min-h-[100px] bg-white"
+          />
         </div>
 
         <div>
@@ -304,15 +492,31 @@ const PostGenerator = () => {
                   <ImageIcon className="h-5 w-5 text-gray-400" />
                 </div>
                 <span className="text-xs text-gray-500 mt-1 block text-center">Add image</span>
-                <Input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+                <Input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImageChange}
+                />
               </label>
             </div>
             
             <div>
-              <Button variant="outline" size="sm" onClick={handleGenerateVideo} disabled={isGeneratingVideo} className="h-10 w-10 p-0 flex items-center justify-center" title="Get random Vimeo video">
-                {isGeneratingVideo ? <RefreshCw className="h-5 w-5 animate-spin" /> : <Video className="h-5 w-5 text-gray-400" />}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleGenerateVideo}
+                disabled={isGeneratingVideo}
+                className="h-10 w-10 p-0 flex items-center justify-center"
+                title="Get random Vimeo video"
+              >
+                {isGeneratingVideo ? (
+                  <RefreshCw className="h-5 w-5 animate-spin" />
+                ) : (
+                  <Video className="h-5 w-5 text-gray-400" />
+                )}
               </Button>
-              <span className="text-xs text-gray-500 mt-1 block text-center">Random AWR video</span>
+              <span className="text-xs text-gray-500 mt-1 block text-center">Random video</span>
             </div>
             
             <span className="text-sm text-gray-500 ml-2">
@@ -320,29 +524,47 @@ const PostGenerator = () => {
             </span>
           </div>
 
-          {imagePreview && <div className="mt-4">
-              <img src={imagePreview} alt="Preview" className="h-40 object-cover rounded-md" />
-            </div>}
+          {imagePreview && (
+            <div className="mt-4">
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="h-40 object-cover rounded-md"
+              />
+            </div>
+          )}
           
-          {videoPreview && !imagePreview && <div className="mt-4 flex items-center space-x-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+          {videoPreview && !imagePreview && (
+            <div className="mt-4 flex items-center space-x-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
               <Video className="h-5 w-5 text-gray-500" />
               <span className="text-sm text-gray-600 truncate">
                 <a href={videoPreview} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                   {videoPreview}
                 </a>
               </span>
-            </div>}
+            </div>
+          )}
         </div>
 
         <div className="flex space-x-2">
-          <Button onClick={generatePost} className="w-full border-2 border-[#D4AF37] hover:bg-[#D4AF37]/10">
+          <Button 
+            onClick={generatePost} 
+            className="w-full border-2 border-[#D4AF37] hover:bg-[#D4AF37]/10"
+          >
             Create Post
           </Button>
-          <Button variant="outline" onClick={resetForm} className="w-auto p-2" title="Reset form">
+          <Button
+            variant="outline"
+            onClick={resetForm}
+            className="w-auto p-2"
+            title="Reset form"
+          >
             <RefreshCw className="h-5 w-5" />
           </Button>
         </div>
       </div>
-    </Card>;
+    </Card>
+  );
 };
+
 export default PostGenerator;
