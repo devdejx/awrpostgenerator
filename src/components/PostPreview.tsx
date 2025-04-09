@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -7,6 +6,7 @@ import { Copy, Share2, Download } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { getVimeoEmbedUrl, getVimeoDownloadUrl } from "@/utils/videoUtils";
 
 const PostPreview = () => {
   const { post } = usePostStore();
@@ -80,57 +80,23 @@ const PostPreview = () => {
       return;
     }
     
-    // Extract the video ID to form the proper download URL
     try {
-      const match = post.video.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
-      if (match) {
-        const videoId = match[1];
-        const hash = match[2] || '';
-        
-        // Create a download link that points to the video file
-        // This uses the publicly accessible API endpoint for Vimeo videos
-        const downloadUrl = `https://player.vimeo.com/video/${videoId}/config${hash ? '?h=' + hash : ''}`;
-        
-        // Fetch the video configuration to get the actual file URLs
-        fetch(downloadUrl)
-          .then(response => {
-            if (!response.ok) throw new Error('Failed to fetch video info');
-            return response.json();
-          })
-          .then(data => {
-            // Find the best quality progressive download URL
-            const files = data.request?.files?.progressive;
-            if (files && files.length > 0) {
-              // Sort by quality (height) and get the highest
-              const bestQuality = files.sort((a, b) => b.height - a.height)[0];
-              
-              // Create an anchor element and trigger download
-              const a = document.createElement('a');
-              a.href = bestQuality.url;
-              a.download = `vimeo-video-${videoId}.mp4`;
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              
-              toast({
-                title: "Success!",
-                description: "Video download started",
-              });
-            } else {
-              throw new Error('No downloadable video files found');
-            }
-          })
-          .catch(error => {
-            console.error("Download error:", error);
-            toast({
-              title: "Error",
-              description: "Could not download video. It may be protected.",
-              variant: "destructive",
-            });
-          });
-      } else {
-        throw new Error('Invalid Vimeo URL');
-      }
+      // Get direct download URL
+      const downloadUrl = getVimeoDownloadUrl(post.video);
+      
+      // Create a temporary anchor element to trigger download
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      
+      toast({
+        title: "Download Started",
+        description: "Video download has been initiated",
+      });
     } catch (error) {
       console.error("Download error:", error);
       toast({
@@ -155,22 +121,6 @@ const PostPreview = () => {
     hour: "2-digit",
     minute: "2-digit",
   });
-
-  const getVimeoEmbedUrl = (url: string) => {
-    try {
-      const match = url.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
-      if (match) {
-        if (match[2]) {
-          return `https://player.vimeo.com/video/${match[1]}?h=${match[2]}`;
-        }
-        return `https://player.vimeo.com/video/${match[1]}`;
-      }
-      return url;
-    } catch (error) {
-      console.error("Error parsing Vimeo URL:", error);
-      return url;
-    }
-  };
 
   return (
     <Card className="border border-gray-200 bg-white p-3 sm:p-4 max-w-full overflow-hidden">
@@ -325,4 +275,3 @@ const PostPreview = () => {
 };
 
 export default PostPreview;
-
