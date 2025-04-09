@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -84,20 +83,16 @@ const PostPreview = () => {
     try {
       const downloadUrl = getVimeoDownloadUrl(post.video);
       
-      // Create an invisible anchor element
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = downloadUrl;
-      a.download = `video-${new Date().getTime()}.mp4`;
-      document.body.appendChild(a);
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = downloadUrl;
+      document.body.appendChild(iframe);
       
-      // Simulate click to trigger download
-      a.click();
-      
-      // Clean up
       setTimeout(() => {
-        document.body.removeChild(a);
-      }, 100);
+        if (iframe && document.body.contains(iframe)) {
+          document.body.removeChild(iframe);
+        }
+      }, 5000);
       
       toast({
         title: "Download Started",
