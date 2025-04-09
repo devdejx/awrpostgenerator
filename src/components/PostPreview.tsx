@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -80,64 +79,52 @@ const PostPreview = () => {
       return;
     }
     
-    // Extract the video ID to form the proper download URL
+    // Direct download approach for Vimeo videos
     try {
-      const match = post.video.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
-      if (match) {
-        const videoId = match[1];
-        const hash = match[2] || '';
-        
-        // Create a download link that points to the video file
-        // This uses the publicly accessible API endpoint for Vimeo videos
-        const downloadUrl = `https://player.vimeo.com/video/${videoId}/config${hash ? '?h=' + hash : ''}`;
-        
-        // Fetch the video configuration to get the actual file URLs
-        fetch(downloadUrl)
-          .then(response => {
-            if (!response.ok) throw new Error('Failed to fetch video info');
-            return response.json();
-          })
-          .then(data => {
-            // Find the best quality progressive download URL
-            const files = data.request?.files?.progressive;
-            if (files && files.length > 0) {
-              // Sort by quality (height) and get the highest
-              const bestQuality = files.sort((a, b) => b.height - a.height)[0];
-              
-              // Create an anchor element and trigger download
-              const a = document.createElement('a');
-              a.href = bestQuality.url;
-              a.download = `vimeo-video-${videoId}.mp4`;
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              
-              toast({
-                title: "Success!",
-                description: "Video download started",
-              });
-            } else {
-              throw new Error('No downloadable video files found');
-            }
-          })
-          .catch(error => {
-            console.error("Download error:", error);
-            toast({
-              title: "Error",
-              description: "Could not download video. It may be protected.",
-              variant: "destructive",
-            });
-          });
+      // Extract the video ID from the Vimeo URL
+      const videoId = getVimeoId(post.video);
+      
+      if (!videoId) {
+        throw new Error('Could not extract video ID');
+      }
+      
+      // Create a direct download link using the iframe src
+      const iframeSrc = getVimeoEmbedUrl(post.video);
+      
+      // Open the video in a new tab which will trigger the browser's download dialog
+      const downloadWindow = window.open(iframeSrc + '?download=1', '_blank');
+      
+      // If popup blocked, provide alternative instructions
+      if (!downloadWindow || downloadWindow.closed || typeof downloadWindow.closed === 'undefined') {
+        toast({
+          title: "Popup Blocked",
+          description: "Please allow popups and try again, or right-click on the video and select 'Save Video As'",
+          duration: 5000,
+        });
       } else {
-        throw new Error('Invalid Vimeo URL');
+        toast({
+          title: "Download Started",
+          description: "If the download doesn't start automatically, use the download button in the video player.",
+        });
       }
     } catch (error) {
       console.error("Download error:", error);
       toast({
         title: "Error",
-        description: "Failed to download video",
+        description: "Failed to download video. Try right-clicking on the video and select 'Save Video As'",
         variant: "destructive",
+        duration: 5000,
       });
+    }
+  };
+  
+  // Helper function to extract Vimeo ID from URL
+  const getVimeoId = (url: string): string | null => {
+    try {
+      const match = url.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
+      return match ? match[1] : null;
+    } catch {
+      return null;
     }
   };
 
@@ -325,4 +312,3 @@ const PostPreview = () => {
 };
 
 export default PostPreview;
-
