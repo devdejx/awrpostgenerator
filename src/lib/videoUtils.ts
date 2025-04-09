@@ -13,8 +13,8 @@ export const createDownloadableVideoUrl = (videoUrl: string): string => {
   if (videoUrl.includes('vimeo.com')) {
     const videoId = getVimeoId(videoUrl);
     if (videoId) {
-      // Add download parameter to the embed URL
-      return `https://player.vimeo.com/video/${videoId}?download=1`;
+      // Use the direct download link format for Vimeo videos
+      return `https://player.vimeo.com/video/${videoId}?download=1&title=0`;
     }
   }
   
@@ -33,5 +33,24 @@ export const getVimeoId = (url: string): string | null => {
     return match ? match[1] : null;
   } catch {
     return null;
+  }
+};
+
+/**
+ * Creates a Vimeo embed URL from a regular Vimeo URL
+ * @param url Vimeo URL
+ * @returns Embed URL for the Vimeo player
+ */
+export const getVimeoEmbedUrl = (url: string): string => {
+  try {
+    const videoId = getVimeoId(url);
+    if (videoId) {
+      // Create standard embed URL
+      return `https://player.vimeo.com/video/${videoId}`;
+    }
+    return url;
+  } catch (error) {
+    console.error("Error creating Vimeo embed URL:", error);
+    return url;
   }
 };

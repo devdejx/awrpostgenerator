@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -6,6 +7,7 @@ import { Copy, Share2, Download } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { createDownloadableVideoUrl, getVimeoEmbedUrl } from "@/lib/videoUtils";
 
 const PostPreview = () => {
   const { post } = usePostStore();
@@ -79,52 +81,33 @@ const PostPreview = () => {
       return;
     }
     
-    // Direct download approach for Vimeo videos
     try {
-      // Extract the video ID from the Vimeo URL
-      const videoId = getVimeoId(post.video);
+      // Generate the download URL
+      const downloadUrl = createDownloadableVideoUrl(post.video);
       
-      if (!videoId) {
-        throw new Error('Could not extract video ID');
-      }
+      // Create a temporary anchor element to trigger the download
+      const downloadLink = document.createElement('a');
+      downloadLink.href = downloadUrl;
+      downloadLink.target = '_blank';
+      downloadLink.rel = 'noopener noreferrer';
+      downloadLink.setAttribute('download', 'video.mp4'); // Suggest filename
       
-      // Create a direct download link using the iframe src
-      const iframeSrc = getVimeoEmbedUrl(post.video);
+      // Append to the document, click, and remove
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
       
-      // Open the video in a new tab which will trigger the browser's download dialog
-      const downloadWindow = window.open(iframeSrc + '?download=1', '_blank');
-      
-      // If popup blocked, provide alternative instructions
-      if (!downloadWindow || downloadWindow.closed || typeof downloadWindow.closed === 'undefined') {
-        toast({
-          title: "Popup Blocked",
-          description: "Please allow popups and try again, or right-click on the video and select 'Save Video As'",
-          duration: 5000,
-        });
-      } else {
-        toast({
-          title: "Download Started",
-          description: "If the download doesn't start automatically, use the download button in the video player.",
-        });
-      }
+      toast({
+        title: "Download Started",
+        description: "Your video download should begin shortly",
+      });
     } catch (error) {
       console.error("Download error:", error);
       toast({
-        title: "Error",
-        description: "Failed to download video. Try right-clicking on the video and select 'Save Video As'",
+        title: "Download Error",
+        description: "There was a problem downloading the video. Please try again.",
         variant: "destructive",
-        duration: 5000,
       });
-    }
-  };
-  
-  // Helper function to extract Vimeo ID from URL
-  const getVimeoId = (url: string): string | null => {
-    try {
-      const match = url.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
-      return match ? match[1] : null;
-    } catch {
-      return null;
     }
   };
 
@@ -142,22 +125,6 @@ const PostPreview = () => {
     hour: "2-digit",
     minute: "2-digit",
   });
-
-  const getVimeoEmbedUrl = (url: string) => {
-    try {
-      const match = url.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
-      if (match) {
-        if (match[2]) {
-          return `https://player.vimeo.com/video/${match[1]}?h=${match[2]}`;
-        }
-        return `https://player.vimeo.com/video/${match[1]}`;
-      }
-      return url;
-    } catch (error) {
-      console.error("Error parsing Vimeo URL:", error);
-      return url;
-    }
-  };
 
   return (
     <Card className="border border-gray-200 bg-white p-3 sm:p-4 max-w-full overflow-hidden">
