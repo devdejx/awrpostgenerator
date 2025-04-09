@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -83,21 +84,31 @@ const PostPreview = () => {
     try {
       const downloadUrl = getVimeoDownloadUrl(post.video);
       
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = downloadUrl;
-      document.body.appendChild(iframe);
+      // Create a direct download link and click it
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `vimeo-video-${Date.now()}.mp4`; // Force download attribute
+      a.target = "_blank"; // Open in new tab for better compatibility
+      a.rel = "noopener noreferrer";
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
       
+      // Clean up the element after clicking
       setTimeout(() => {
-        if (iframe && document.body.contains(iframe)) {
-          document.body.removeChild(iframe);
+        if (document.body.contains(a)) {
+          document.body.removeChild(a);
         }
-      }, 5000);
+      }, 100);
       
       toast({
         title: "Download Started",
-        description: "Video download has been initiated",
+        description: "Your browser should begin downloading the video shortly",
       });
+      
+      // Open the download URL in a new window as fallback
+      window.open(downloadUrl, '_blank');
+      
     } catch (error) {
       console.error("Download error:", error);
       toast({
