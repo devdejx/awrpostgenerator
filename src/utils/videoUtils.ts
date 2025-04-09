@@ -35,44 +35,15 @@ export const getVimeoEmbedUrl = (url: string) => {
 };
 
 /**
- * Gets the actual video file URL from a Vimeo video for download
- * This function calls the Vimeo oEmbed API to get video information
- * @param url Vimeo video URL
- * @returns Promise that resolves to the download URL
- */
-export const getVimeoVideoUrl = async (vimeoUrl: string): Promise<string | null> => {
-  try {
-    const { videoId } = extractVimeoInfo(vimeoUrl);
-    
-    // Use Vimeo's oEmbed API to get video info
-    const oEmbedUrl = `https://vimeo.com/api/oembed.json?url=https://vimeo.com/${videoId}`;
-    const response = await fetch(oEmbedUrl);
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch video info');
-    }
-    
-    const data = await response.json();
-    
-    // Return the original URL which will be used for user download attempt
-    return `https://vimeo.com/${videoId}/download`;
-  } catch (error) {
-    console.error("Error getting Vimeo download URL:", error);
-    return null;
-  }
-};
-
-/**
  * Creates a direct download URL for a Vimeo video
- * @deprecated Use getVimeoVideoUrl instead which provides better results
  * @param url Vimeo video URL
  * @returns Download URL for the video
  */
 export const getVimeoDownloadUrl = (url: string) => {
   try {
     const { videoId } = extractVimeoInfo(url);
-    // Return the direct video URL that should work for download
-    return `https://vimeo.com/${videoId}/download`;
+    // Using the direct video URL format that triggers download
+    return `https://vimeo.com/${videoId}?action=download`;
   } catch (error) {
     console.error("Error creating download URL:", error);
     return '';
