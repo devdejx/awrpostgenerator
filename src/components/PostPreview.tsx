@@ -6,7 +6,7 @@ import { Copy, Share2, Download, Loader2 } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { getVimeoEmbedUrl, getVimeoDirectDownloadUrl, triggerDownload } from "@/utils/videoUtils";
+import { getVimeoEmbedUrl, downloadVimeoVideo } from "@/utils/videoUtils";
 
 // Vimeo API access token
 const VIMEO_API_TOKEN = "9e136b1b45d218701bc4497cf42b5257";
@@ -90,14 +90,7 @@ const PostPreview = () => {
       console.log("Starting video download process");
       console.log("Video URL:", post.video);
       
-      const downloadUrl = await getVimeoDirectDownloadUrl(post.video, VIMEO_API_TOKEN);
-      console.log("Received download URL:", downloadUrl);
-      
-      if (!downloadUrl) {
-        throw new Error("Could not get download URL");
-      }
-      
-      triggerDownload(downloadUrl, `video-${Date.now()}.mp4`);
+      await downloadVimeoVideo(post.video, VIMEO_API_TOKEN);
       
       toast({
         title: "Success",
