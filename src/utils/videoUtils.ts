@@ -37,7 +37,7 @@ export const getVimeoEmbedUrl = (url: string) => {
 /**
  * Gets the direct download link for a Vimeo video using the Vimeo API
  * @param url Vimeo video URL
- * @param apiKey Vimeo API key
+ * @param apiKey Vimeo API access token
  * @returns Promise resolving to the direct download URL
  */
 export const getVimeoDirectDownloadUrl = async (url: string, apiKey: string): Promise<string> => {
@@ -51,17 +51,26 @@ export const getVimeoDirectDownloadUrl = async (url: string, apiKey: string): Pr
     });
     
     if (!response.ok) {
+      console.error(`API Error: ${response.status} ${response.statusText}`);
+      const errorText = await response.text();
+      console.error(`API Response: ${errorText}`);
       throw new Error(`Failed to fetch video data: ${response.status}`);
     }
     
     const data = await response.json();
+    console.log("Vimeo API response:", data);
     
-    // Find the highest quality download link
-    if (data.download && data.download.length > 0) {
+    // Find the download links
+    if (data.download && Array.isArray(data.download) && data.download.length > 0) {
       // Sort by quality (highest first) and get the first one
       const downloads = [...data.download];
       downloads.sort((a, b) => b.size - a.size);
       return downloads[0].link;
+    } else if (data.files && Array.isArray(data.files) && data.files.length > 0) {
+      // Alternative: use files array which contains progressive download links
+      const files = [...data.files];
+      files.sort((a, b) => (b.height || 0) - (a.height || 0));
+      return files[0].link;
     }
     
     throw new Error("No download links available for this video");

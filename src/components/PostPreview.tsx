@@ -9,8 +9,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { getVimeoEmbedUrl, getVimeoDirectDownloadUrl } from "@/utils/videoUtils";
 
-// Vimeo API key (from the provided parameter)
-const VIMEO_API_KEY = "ZYmXbbuo/Yr3oZ+Ai8rdwsb2QqM1oEWjrXd1IP2HRhqE+w0RFpgwUCoMpMy9rKs6d3Pbl3v/IwUDWM8nJuOOrIbzZ+ps4q5VQBT+tG9Vyh4tXhqf9Hc0w9DV2ps/D3x5";
+// Vimeo API access token
+const VIMEO_API_TOKEN = "9e136b1b45d218701bc4497cf42b5257";
 
 const PostPreview = () => {
   const { post } = usePostStore();
@@ -88,19 +88,28 @@ const PostPreview = () => {
     try {
       setIsDownloading(true);
       
-      // Get direct download URL from Vimeo API
-      const downloadUrl = await getVimeoDirectDownloadUrl(post.video, VIMEO_API_KEY);
+      console.log("Starting video download process");
+      console.log("Video URL:", post.video);
+      console.log("Using API token:", VIMEO_API_TOKEN);
       
-      // Create a hidden anchor element to trigger the download
+      // Get direct download URL from Vimeo API
+      const downloadUrl = await getVimeoDirectDownloadUrl(post.video, VIMEO_API_TOKEN);
+      console.log("Received download URL:", downloadUrl);
+      
+      // Create a temporary anchor element to trigger the download
       const downloadLink = document.createElement('a');
       downloadLink.href = downloadUrl;
-      downloadLink.download = `video-${Date.now()}.mp4`; // Set filename with timestamp
-      downloadLink.style.display = 'none';
-      
-      // Add to document body, click it, then remove it
+      downloadLink.download = `video-${Date.now()}.mp4`;
+      downloadLink.target = "_blank"; // Open in new tab as fallback
       document.body.appendChild(downloadLink);
+      
+      // Trigger click to start download
       downloadLink.click();
-      document.body.removeChild(downloadLink);
+      
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(downloadLink);
+      }, 100);
       
       toast({
         title: "Success",
