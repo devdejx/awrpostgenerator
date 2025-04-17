@@ -96,11 +96,11 @@ const PostPreview = () => {
         title: "Success",
         description: "Video download started",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Download error:", error);
       toast({
         title: "Error",
-        description: "Failed to download video. Please try again.",
+        description: error.message || "Failed to download video. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -136,10 +136,7 @@ const PostPreview = () => {
               <span className="font-bold text-black text-sm sm:text-base">User</span>
               <span className="text-gray-500 text-xs sm:text-sm ml-1 sm:ml-2">@username</span>
               <span className="text-gray-500 mx-1 text-xs sm:text-sm">·</span>
-              <span className="text-gray-500 text-xs sm:text-sm">{new Date().toLocaleDateString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}</span>
+              <span className="text-gray-500 text-xs sm:text-sm">{formattedDate}</span>
             </div>
             <p className="mt-1 text-gray-800 whitespace-pre-wrap text-sm sm:text-base break-words">{post.content}</p>
             {post.image && (

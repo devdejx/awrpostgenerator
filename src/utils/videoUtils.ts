@@ -41,19 +41,22 @@ export const getVimeoEmbedUrl = (url: string) => {
  */
 export const verifyVimeoToken = async (accessToken: string): Promise<boolean> => {
   try {
+    console.log("Verifying Vimeo token");
     const response = await fetch('https://api.vimeo.com/oauth/verify', {
       headers: {
         'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
         'Accept': 'application/vnd.vimeo.*+json;version=3.4'
       }
     });
+    
+    const data = await response.json();
+    console.log("Token verification response:", data);
     
     if (response.ok) {
       console.log("Vimeo token is valid");
       return true;
     } else {
-      console.error("Vimeo token verification failed:", await response.text());
+      console.error("Vimeo token verification failed:", data);
       return false;
     }
   } catch (error) {
@@ -83,27 +86,46 @@ export const getVimeoDirectDownloadUrl = async (url: string, accessToken: string
     const response = await fetch(`https://api.vimeo.com/videos/${videoId}`, {
       headers: {
         'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
         'Accept': 'application/vnd.vimeo.*+json;version=3.4'
       }
     });
     
     if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      const errorText = await response.text();
+      throw new Error(`API Error: ${response.status} ${response.statusText} - ${errorText}`);
     }
     
     const data = await response.json();
-    console.log("Video API response received");
+    console.log("Video API response:", data);
+    
+    // Check if download is allowed for this video
+    if (!data.privacy || data.privacy.download === false) {
+      console.warn("Download not allowed for this video");
+      throw new Error("Download not allowed for this video");
+    }
     
     // Look for download links in the response
     if (data.download && Array.isArray(data.download) && data.download.length > 0) {
       // Get the first download link - this is the direct MP4 url
       const downloadUrl = data.download[0].link;
-      console.log("Found direct download URL");
+      console.log("Found direct download URL:", downloadUrl);
       return downloadUrl;
+    } else {
+      // Try to get the files array
+      if (data.files && Array.isArray(data.files) && data.files.length > 0) {
+        // Sort by quality (highest first)
+        const sortedFiles = [...data.files].sort((a, b) => (b.height || 0) - (a.height || 0));
+        // Get first progressive MP4 file
+        const mp4File = sortedFiles.find(file => file.type === 'video/mp4' && file.link);
+        
+        if (mp4File && mp4File.link) {
+          console.log("Found MP4 file from files array:", mp4File.link);
+          return mp4File.link;
+        }
+      }
+      
+      throw new Error("No download links found in the API response");
     }
-    
-    throw new Error("No download links found in the API response");
   } catch (error) {
     console.error("Error getting direct download URL:", error);
     throw error;
@@ -116,6 +138,8 @@ export const getVimeoDirectDownloadUrl = async (url: string, accessToken: string
  * @param filename Optional filename for the download
  */
 export const triggerDownload = (url: string, filename?: string): void => {
+  console.log("Triggering download for URL:", url);
+  
   // Create a hidden anchor element
   const a = document.createElement('a');
   a.style.display = 'none';
@@ -146,6 +170,7 @@ export const triggerDownload = (url: string, filename?: string): void => {
  */
 export const downloadVimeoVideo = async (url: string, accessToken: string): Promise<void> => {
   try {
+    console.log("Starting download process for:", url);
     const downloadUrl = await getVimeoDirectDownloadUrl(url, accessToken);
     if (downloadUrl) {
       const filename = `vimeo_video_${Date.now()}.mp4`;
