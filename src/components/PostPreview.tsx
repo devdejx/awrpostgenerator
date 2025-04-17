@@ -8,9 +8,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { getVimeoEmbedUrl, downloadVimeoVideo } from "@/utils/videoUtils";
 
-// Vimeo API access token
-const VIMEO_API_TOKEN = "a0aa76f526879ac568505f1c61b76685";
-
 const PostPreview = () => {
   const { post } = usePostStore();
   const { toast } = useToast();
@@ -77,8 +74,8 @@ const PostPreview = () => {
   const downloadVideo = async () => {
     if (!post.video) {
       toast({
-        title: "Error",
-        description: "No video to download",
+        title: "Napaka",
+        description: "Video ni na voljo za prenos",
         variant: "destructive",
       });
       return;
@@ -86,21 +83,17 @@ const PostPreview = () => {
     
     try {
       setIsDownloading(true);
-      
-      console.log("Starting video download process");
-      console.log("Video URL:", post.video);
-      
-      await downloadVimeoVideo(post.video, VIMEO_API_TOKEN);
+      await downloadVimeoVideo(post.video);
       
       toast({
-        title: "Success",
-        description: "Video download started",
+        title: "Uspeh",
+        description: "Prenos se je začel",
       });
     } catch (error: any) {
-      console.error("Download error:", error);
+      console.error("Napaka pri prenosu:", error);
       toast({
-        title: "Error",
-        description: error.message || "Failed to download video. Please try again.",
+        title: "Napaka",
+        description: error.message || "Prišlo je do napake pri prenosu videa",
         variant: "destructive",
       });
     } finally {

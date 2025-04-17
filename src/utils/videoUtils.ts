@@ -1,19 +1,15 @@
 
 /**
- * Extracts the Vimeo video ID and hash from a Vimeo URL
+ * Extracts the Vimeo video ID from a Vimeo URL
  * @param url Vimeo video URL
- * @returns Object containing videoId and hash (if available)
+ * @returns Video ID
  */
-export const extractVimeoInfo = (url: string) => {
-  const match = url.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
+export const extractVimeoId = (url: string): string => {
+  const match = url.match(/vimeo\.com\/(\d+)/);
   if (!match) {
-    throw new Error('Invalid Vimeo URL');
+    throw new Error('Neveljavna Vimeo povezava');
   }
-  
-  return {
-    videoId: match[1],
-    hash: match[2] || ''
-  };
+  return match[1];
 };
 
 /**
@@ -21,165 +17,74 @@ export const extractVimeoInfo = (url: string) => {
  * @param url Vimeo video URL
  * @returns Embed URL for the video
  */
-export const getVimeoEmbedUrl = (url: string) => {
+export const getVimeoEmbedUrl = (url: string): string => {
   try {
-    const { videoId, hash } = extractVimeoInfo(url);
-    if (hash) {
-      return `https://player.vimeo.com/video/${videoId}?h=${hash}`;
-    }
+    const videoId = extractVimeoId(url);
     return `https://player.vimeo.com/video/${videoId}`;
   } catch (error) {
-    console.error("Error parsing Vimeo URL:", error);
+    console.error("Napaka pri generiranju embed URL-ja:", error);
     return url;
   }
 };
 
 /**
- * Verifies Vimeo access token validity
- * @param accessToken Vimeo API access token
- * @returns Promise resolving to boolean indicating if token is valid
- */
-export const verifyVimeoToken = async (accessToken: string): Promise<boolean> => {
-  try {
-    console.log("Verifying Vimeo token");
-    const response = await fetch('https://api.vimeo.com/oauth/verify', {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Accept': 'application/vnd.vimeo.*+json;version=3.4'
-      }
-    });
-    
-    const data = await response.json();
-    console.log("Token verification response:", data);
-    
-    if (response.ok) {
-      console.log("Vimeo token is valid");
-      return true;
-    } else {
-      console.error("Vimeo token verification failed:", data);
-      return false;
-    }
-  } catch (error) {
-    console.error("Error verifying Vimeo token:", error);
-    return false;
-  }
-};
-
-/**
- * Gets the direct download link for a Vimeo video using the Vimeo API
+ * Downloads a Vimeo video using the provided access token
  * @param url Vimeo video URL
- * @param accessToken Vimeo API access token
- * @returns Promise resolving to the direct download URL
+ * @returns Promise that resolves when download starts
  */
-export const getVimeoDirectDownloadUrl = async (url: string, accessToken: string): Promise<string> => {
+export const downloadVimeoVideo = async (url: string): Promise<void> => {
+  const token = "c2e9ef6bafe3fa090c6e1d095aa5";
+  
   try {
-    // First verify the token
-    const isTokenValid = await verifyVimeoToken(accessToken);
-    if (!isTokenValid) {
-      throw new Error("Invalid or expired Vimeo access token");
-    }
+    // Extract video ID from URL
+    const videoId = extractVimeoId(url);
+    console.log("Pridobivanje podatkov za video ID:", videoId);
     
-    const { videoId } = extractVimeoInfo(url);
-    console.log("Fetching video details for ID:", videoId);
-    
-    // Call Vimeo API to get video details
+    // Fetch video details from Vimeo API
     const response = await fetch(`https://api.vimeo.com/videos/${videoId}`, {
       headers: {
-        'Authorization': `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${token}`,
         'Accept': 'application/vnd.vimeo.*+json;version=3.4'
       }
     });
     
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`API Error: ${response.status} ${response.statusText} - ${errorText}`);
+      if (response.status === 401 || response.status === 403) {
+        throw new Error("Napaka pri povezavi z Vimeo. Preveri access token ali dovoljenja.");
+      }
+      throw new Error(`API Napaka: ${response.status} ${response.statusText}`);
     }
     
     const data = await response.json();
-    console.log("Video API response:", data);
+    console.log("Odgovor API-ja:", data);
     
-    // Check if download is allowed for this video
-    if (!data.privacy || data.privacy.download === false) {
-      console.warn("Download not allowed for this video");
-      throw new Error("Download not allowed for this video");
+    // Check for download links
+    if (!data.download || data.download.length === 0) {
+      throw new Error("Prenos videa ni omogočen. Vklopi 'Allow download' v nastavitvah videa na Vimeu.");
     }
     
-    // Look for download links in the response
-    if (data.download && Array.isArray(data.download) && data.download.length > 0) {
-      // Get the first download link - this is the direct MP4 url
-      const downloadUrl = data.download[0].link;
-      console.log("Found direct download URL:", downloadUrl);
-      return downloadUrl;
-    } else {
-      // Try to get the files array
-      if (data.files && Array.isArray(data.files) && data.files.length > 0) {
-        // Sort by quality (highest first)
-        const sortedFiles = [...data.files].sort((a, b) => (b.height || 0) - (a.height || 0));
-        // Get first progressive MP4 file
-        const mp4File = sortedFiles.find(file => file.type === 'video/mp4' && file.link);
-        
-        if (mp4File && mp4File.link) {
-          console.log("Found MP4 file from files array:", mp4File.link);
-          return mp4File.link;
-        }
-      }
-      
-      throw new Error("No download links found in the API response");
+    // Get download link from first element
+    const downloadLink = data.download[0].link;
+    if (!downloadLink) {
+      throw new Error("Povezava za prenos ni na voljo.");
     }
-  } catch (error) {
-    console.error("Error getting direct download URL:", error);
-    throw error;
-  }
-};
-
-/**
- * Triggers a browser download for a given URL
- * @param url URL to download
- * @param filename Optional filename for the download
- */
-export const triggerDownload = (url: string, filename?: string): void => {
-  console.log("Triggering download for URL:", url);
-  
-  // Create a hidden anchor element
-  const a = document.createElement('a');
-  a.style.display = 'none';
-  a.href = url;
-  
-  // Set download attribute (with optional filename)
-  if (filename) {
-    a.download = filename;
-  } else {
+    
+    // Create and trigger download
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = downloadLink;
     a.download = '';
-  }
-  
-  // Append to document, click it, and remove it
-  document.body.appendChild(a);
-  a.click();
-  
-  // Small timeout before removing the element
-  setTimeout(() => {
-    document.body.removeChild(a);
-  }, 100);
-};
-
-/**
- * Gets a vimeo download URL and triggers the download
- * @param url Vimeo video URL
- * @param accessToken Vimeo API access token
- * @returns Promise resolving when download is triggered
- */
-export const downloadVimeoVideo = async (url: string, accessToken: string): Promise<void> => {
-  try {
-    console.log("Starting download process for:", url);
-    const downloadUrl = await getVimeoDirectDownloadUrl(url, accessToken);
-    if (downloadUrl) {
-      const filename = `vimeo_video_${Date.now()}.mp4`;
-      triggerDownload(downloadUrl, filename);
-      return;
-    }
-    throw new Error("Could not get download URL");
-  } catch (error) {
-    console.error("Download process failed:", error);
+    
+    document.body.appendChild(a);
+    a.click();
+    
+    // Cleanup
+    setTimeout(() => {
+      document.body.removeChild(a);
+    }, 100);
+    
+  } catch (error: any) {
+    console.error("Napaka pri prenosu:", error);
     throw error;
   }
 };
