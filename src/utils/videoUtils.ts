@@ -33,6 +33,7 @@ export const getVimeoEmbedUrl = (url: string): string => {
  * @returns Promise that resolves when download starts
  */
 export const downloadVimeoVideo = async (url: string): Promise<void> => {
+  // Exact token as specified
   const token = "c2e9ef6bafe3fa090c6e1d095aa5";
   
   try {
@@ -40,21 +41,32 @@ export const downloadVimeoVideo = async (url: string): Promise<void> => {
     const videoId = extractVimeoId(url);
     console.log("Pridobivanje podatkov za video ID:", videoId);
     
-    // Fetch video details from Vimeo API
+    // Fetch video details from Vimeo API with correct Bearer token format
     const response = await fetch(`https://api.vimeo.com/videos/${videoId}`, {
+      method: 'GET',
       headers: {
+        // Ensure there's exactly one space between 'Bearer' and the token
         'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.vimeo.*+json;version=3.4'
+        'Accept': 'application/vnd.vimeo.*+json;version=3.4',
+        'Content-Type': 'application/json'
       }
     });
     
+    // Handle HTTP errors
     if (!response.ok) {
-      if (response.status === 401 || response.status === 403) {
+      const status = response.status;
+      console.error("API napaka:", status, await response.text());
+      
+      if (status === 401 || status === 403) {
         throw new Error("Napaka pri povezavi z Vimeo. Preveri access token ali dovoljenja.");
+      } else if (status === 404) {
+        throw new Error("Video ni najden na Vimeo.");
+      } else {
+        throw new Error(`API Napaka: ${status} ${response.statusText}`);
       }
-      throw new Error(`API Napaka: ${response.status} ${response.statusText}`);
     }
     
+    // Parse response data
     const data = await response.json();
     console.log("Odgovor API-ja:", data);
     
