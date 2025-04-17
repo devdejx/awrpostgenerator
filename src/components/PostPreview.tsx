@@ -9,7 +9,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { getVimeoEmbedUrl, downloadVimeoVideo } from "@/utils/videoUtils";
 
 // Vimeo API access token
-const VIMEO_API_TOKEN = "9e136b1b45d218701bc4497cf42b5257";
+const VIMEO_API_TOKEN = "a0aa76f526879ac568505f1c61b76685";
 
 const PostPreview = () => {
   const { post } = usePostStore();
