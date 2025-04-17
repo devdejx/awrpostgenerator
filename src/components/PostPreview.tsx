@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -7,7 +6,7 @@ import { Copy, Share2, Download, Loader2 } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { getVimeoEmbedUrl, getVimeoDirectDownloadUrl } from "@/utils/videoUtils";
+import { getVimeoEmbedUrl, getVimeoDirectDownloadUrl, triggerDownload } from "@/utils/videoUtils";
 
 // Vimeo API access token
 const VIMEO_API_TOKEN = "9e136b1b45d218701bc4497cf42b5257";
@@ -91,7 +90,6 @@ const PostPreview = () => {
       console.log("Starting video download process");
       console.log("Video URL:", post.video);
       
-      // Get direct download URL using our updated function
       const downloadUrl = await getVimeoDirectDownloadUrl(post.video, VIMEO_API_TOKEN);
       console.log("Received download URL:", downloadUrl);
       
@@ -99,23 +97,12 @@ const PostPreview = () => {
         throw new Error("Could not get download URL");
       }
       
-      // Create an iframe that will handle the download
-      // This approach works better with Vimeo's security restrictions
-      const downloadFrame = document.createElement('iframe');
-      downloadFrame.style.display = 'none';
-      downloadFrame.src = downloadUrl;
-      document.body.appendChild(downloadFrame);
+      triggerDownload(downloadUrl, `video-${Date.now()}.mp4`);
       
-      // Show success message
       toast({
         title: "Success",
         description: "Video download started",
       });
-      
-      // Clean up the iframe after a delay
-      setTimeout(() => {
-        document.body.removeChild(downloadFrame);
-      }, 5000);
     } catch (error) {
       console.error("Download error:", error);
       toast({

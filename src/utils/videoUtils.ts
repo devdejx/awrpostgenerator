@@ -1,4 +1,3 @@
-
 /**
  * Extracts the Vimeo video ID and hash from a Vimeo URL
  * @param url Vimeo video URL
@@ -43,9 +42,10 @@ export const getVimeoEmbedUrl = (url: string) => {
 export const getVimeoDirectDownloadUrl = async (url: string, accessToken: string): Promise<string> => {
   try {
     const { videoId } = extractVimeoInfo(url);
+    console.log("Fetching video details for ID:", videoId);
     
-    // First try to get the video details directly from the API
-    const videoResponse = await fetch(`https://api.vimeo.com/videos/${videoId}`, {
+    // Call Vimeo API to get video details
+    const response = await fetch(`https://api.vimeo.com/videos/${videoId}`, {
       headers: {
         'Authorization': `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
@@ -53,41 +53,54 @@ export const getVimeoDirectDownloadUrl = async (url: string, accessToken: string
       }
     });
     
-    if (!videoResponse.ok) {
-      console.error(`Video API Error: ${videoResponse.status} ${videoResponse.statusText}`);
-      const errorText = await videoResponse.text();
-      console.error(`API Response: ${errorText}`);
-      
-      // If the direct API fails, try the OEmbed API which has fewer restrictions
-      return getVimeoDownloadUrlViaOEmbed(url);
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status} ${response.statusText}`);
     }
     
-    const videoData = await videoResponse.json();
-    console.log("Vimeo API video response:", videoData);
+    const data = await response.json();
+    console.log("Video API response:", data);
     
-    // Check if download links are available
-    if (videoData.download && Array.isArray(videoData.download) && videoData.download.length > 0) {
-      // Sort by quality (highest first) and get the first one
-      const downloads = [...videoData.download];
-      downloads.sort((a, b) => b.size - a.size);
-      return downloads[0].link;
-    } 
-    
-    // Check if progressive file links are available
-    if (videoData.files && Array.isArray(videoData.files) && videoData.files.length > 0) {
-      const files = [...videoData.files];
-      files.sort((a, b) => (b.height || 0) - (a.height || 0));
-      return files[0].link;
+    // Look for download links in the response
+    if (data.download && Array.isArray(data.download) && data.download.length > 0) {
+      // Get the first download link - this is the direct MP4 url
+      const downloadUrl = data.download[0].link;
+      console.log("Found direct download URL:", downloadUrl);
+      return downloadUrl;
     }
     
-    // If API access doesn't provide download links, try fallback methods
-    return getVimeoDownloadUrlViaOEmbed(url);
-    
+    throw new Error("No download links found in the API response");
   } catch (error) {
     console.error("Error getting direct download URL:", error);
-    // Try fallback method if direct API fails
-    return getVimeoDownloadUrlViaOEmbed(url);
+    throw error;
   }
+};
+
+/**
+ * Triggers a browser download for a given URL
+ * @param url URL to download
+ * @param filename Optional filename for the download
+ */
+export const triggerDownload = (url: string, filename?: string): void => {
+  // Create a hidden anchor element
+  const a = document.createElement('a');
+  a.style.display = 'none';
+  a.href = url;
+  
+  // Set download attribute (with optional filename)
+  if (filename) {
+    a.download = filename;
+  } else {
+    a.download = '';
+  }
+  
+  // Append to document, click it, and remove it
+  document.body.appendChild(a);
+  a.click();
+  
+  // Small timeout before removing the element
+  setTimeout(() => {
+    document.body.removeChild(a);
+  }, 100);
 };
 
 /**
