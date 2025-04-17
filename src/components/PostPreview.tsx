@@ -90,31 +90,32 @@ const PostPreview = () => {
       
       console.log("Starting video download process");
       console.log("Video URL:", post.video);
-      console.log("Using API token:", VIMEO_API_TOKEN);
       
-      // Get direct download URL from Vimeo API
+      // Get direct download URL using our updated function
       const downloadUrl = await getVimeoDirectDownloadUrl(post.video, VIMEO_API_TOKEN);
       console.log("Received download URL:", downloadUrl);
       
-      // Create a temporary anchor element to trigger the download
-      const downloadLink = document.createElement('a');
-      downloadLink.href = downloadUrl;
-      downloadLink.download = `video-${Date.now()}.mp4`;
-      downloadLink.target = "_blank"; // Open in new tab as fallback
-      document.body.appendChild(downloadLink);
+      if (!downloadUrl) {
+        throw new Error("Could not get download URL");
+      }
       
-      // Trigger click to start download
-      downloadLink.click();
+      // Create an iframe that will handle the download
+      // This approach works better with Vimeo's security restrictions
+      const downloadFrame = document.createElement('iframe');
+      downloadFrame.style.display = 'none';
+      downloadFrame.src = downloadUrl;
+      document.body.appendChild(downloadFrame);
       
-      // Clean up
-      setTimeout(() => {
-        document.body.removeChild(downloadLink);
-      }, 100);
-      
+      // Show success message
       toast({
         title: "Success",
         description: "Video download started",
       });
+      
+      // Clean up the iframe after a delay
+      setTimeout(() => {
+        document.body.removeChild(downloadFrame);
+      }, 5000);
     } catch (error) {
       console.error("Download error:", error);
       toast({
@@ -155,7 +156,10 @@ const PostPreview = () => {
               <span className="font-bold text-black text-sm sm:text-base">User</span>
               <span className="text-gray-500 text-xs sm:text-sm ml-1 sm:ml-2">@username</span>
               <span className="text-gray-500 mx-1 text-xs sm:text-sm">·</span>
-              <span className="text-gray-500 text-xs sm:text-sm">{formattedDate}</span>
+              <span className="text-gray-500 text-xs sm:text-sm">{new Date().toLocaleDateString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}</span>
             </div>
             <p className="mt-1 text-gray-800 whitespace-pre-wrap text-sm sm:text-base break-words">{post.content}</p>
             {post.image && (
