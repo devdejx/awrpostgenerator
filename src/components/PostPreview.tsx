@@ -72,18 +72,9 @@ const PostPreview = () => {
   };
 
   const downloadVideo = async () => {
-    if (!post.video) {
-      toast({
-        title: "Napaka",
-        description: "Video ni na voljo za prenos",
-        variant: "destructive",
-      });
-      return;
-    }
-    
     try {
       setIsDownloading(true);
-      await downloadVimeoVideo(post.video);
+      await downloadVimeoVideo(post.video || "");
       
       toast({
         title: "Uspeh",

@@ -33,19 +33,17 @@ export const getVimeoEmbedUrl = (url: string): string => {
  * @returns Promise that resolves when download starts
  */
 export const downloadVimeoVideo = async (url: string): Promise<void> => {
-  // Exact token as specified
-  const token = "c2e9ef6bafe3fa090c6e1d095aa5";
+  // Fixed video ID and token as specified
+  const videoId = "1073621108";
+  const token = "4779545e0c95733f0bd6371a56152a86";
   
   try {
-    // Extract video ID from URL
-    const videoId = extractVimeoId(url);
     console.log("Pridobivanje podatkov za video ID:", videoId);
     
-    // Fetch video details from Vimeo API with correct Bearer token format
+    // Make GET request to Vimeo API with specified headers
     const response = await fetch(`https://api.vimeo.com/videos/${videoId}`, {
       method: 'GET',
       headers: {
-        // Ensure there's exactly one space between 'Bearer' and the token
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/vnd.vimeo.*+json;version=3.4',
         'Content-Type': 'application/json'
@@ -59,8 +57,6 @@ export const downloadVimeoVideo = async (url: string): Promise<void> => {
       
       if (status === 401 || status === 403) {
         throw new Error("Napaka pri povezavi z Vimeo. Preveri access token ali dovoljenja.");
-      } else if (status === 404) {
-        throw new Error("Video ni najden na Vimeo.");
       } else {
         throw new Error(`API Napaka: ${status} ${response.statusText}`);
       }
@@ -72,7 +68,7 @@ export const downloadVimeoVideo = async (url: string): Promise<void> => {
     
     // Check for download links
     if (!data.download || data.download.length === 0) {
-      throw new Error("Prenos videa ni omogočen. Vklopi 'Allow download' v nastavitvah videa na Vimeu.");
+      throw new Error("Prenos videa ni omogočen. Vklopi 'Allow download' v nastavitvah videa.");
     }
     
     // Get download link from first element
@@ -100,3 +96,4 @@ export const downloadVimeoVideo = async (url: string): Promise<void> => {
     throw error;
   }
 };
+
