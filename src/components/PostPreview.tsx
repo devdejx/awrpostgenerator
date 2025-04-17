@@ -1,17 +1,22 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Copy, Share2, Download } from "lucide-react";
+import { Copy, Share2, Download, Loader2 } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { getVimeoEmbedUrl, getVimeoDownloadUrl } from "@/utils/videoUtils";
+import { getVimeoEmbedUrl, getVimeoDirectDownloadUrl } from "@/utils/videoUtils";
+
+// Vimeo API key (from the provided parameter)
+const VIMEO_API_KEY = "ZYmXbbuo/Yr3oZ+Ai8rdwsb2QqM1oEWjrXd1IP2HRhqE+w0RFpgwUCoMpMy9rKs6d3Pbl3v/IwUDWM8nJuOOrIbzZ+ps4q5VQBT+tG9Vyh4tXhqf9Hc0w9DV2ps/D3x5";
 
 const PostPreview = () => {
   const { post } = usePostStore();
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const isMobile = useIsMobile();
 
   const handleCopyToClipboard = () => {
@@ -70,7 +75,7 @@ const PostPreview = () => {
     });
   };
 
-  const downloadVideo = () => {
+  const downloadVideo = async () => {
     if (!post.video) {
       toast({
         title: "Error",
@@ -81,21 +86,35 @@ const PostPreview = () => {
     }
     
     try {
-      const downloadUrl = getVimeoDownloadUrl(post.video);
+      setIsDownloading(true);
       
-      window.open(downloadUrl, '_blank');
+      // Get direct download URL from Vimeo API
+      const downloadUrl = await getVimeoDirectDownloadUrl(post.video, VIMEO_API_KEY);
+      
+      // Create a hidden anchor element to trigger the download
+      const downloadLink = document.createElement('a');
+      downloadLink.href = downloadUrl;
+      downloadLink.download = `video-${Date.now()}.mp4`; // Set filename with timestamp
+      downloadLink.style.display = 'none';
+      
+      // Add to document body, click it, then remove it
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
       
       toast({
-        title: "Download Started",
-        description: "Video download page opened in new tab",
+        title: "Success",
+        description: "Video download started",
       });
     } catch (error) {
       console.error("Download error:", error);
       toast({
         title: "Error",
-        description: "Failed to download video",
+        description: "Failed to download video. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -246,10 +265,19 @@ const PostPreview = () => {
               onClick={downloadVideo}
               variant="outline"
               className="flex items-center justify-center space-x-2 w-full text-xs sm:text-sm h-9"
-              disabled={!post.video}
+              disabled={!post.video || isDownloading}
             >
-              <Download className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span>Download video</span>
+              {isDownloading ? (
+                <>
+                  <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
+                  <span>Downloading...</span>
+                </>
+              ) : (
+                <>
+                  <Download className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span>Download video</span>
+                </>
+              )}
             </Button>
           </div>
           
