@@ -251,11 +251,18 @@ const POST_TYPES = [
   },
   {
     value: "what-a-gem",
-    label: "Crypto HYPE", // Changed from "What a GEM"
+    label: "Crypto HYPE",
     templates: [
-      "Discover a hype from All Will Retire: {message} #CryptoHype {hashtags} cc: {profiles}",
-      "A burning crypto insight: {message} 🔥 {hashtags} cc: {profiles}",
-      "HYPE alert from All Will Retire: {message} 💥 {hashtags} cc: {profiles}",
+      "BREAKING: 🚨 {message} This isn't hype – it's a MOVEMENT rewriting the rules of retirement! {hashtags} cc: {profiles}",
+      "HOT TREND ALERT: 🔥 {message} Join the mission that's making headlines! {hashtags} cc: {profiles}",
+      "WARNING: ⚠️ {message} The community is EXPLODING with excitement! {hashtags} cc: {profiles}",
+      "GAME ON: 🎮 {message} Don't watch from the sidelines! {hashtags} cc: {profiles}",
+      "FLASH NEWS: ⚡ {message} This is your moment to ride the wave! {hashtags} cc: {profiles}",
+      "JOIN THE MOVEMENT: 🌊 {message} Will you be part of it? {hashtags} cc: {profiles}",
+      "MAJOR BUZZ: 🐝 {message} Jump on before the FOMO gets real! {hashtags} cc: {profiles}",
+      "HEADS UP: 🎯 {message} Be there from the start! {hashtags} cc: {profiles}",
+      "HYPE LEVEL: MAX 📈 {message} Don't get left behind! {hashtags} cc: {profiles}",
+      "FINAL CALL: 🔔 {message} Get in before the rest even know what's coming! {hashtags} cc: {profiles}",
     ],
   },
 ];
