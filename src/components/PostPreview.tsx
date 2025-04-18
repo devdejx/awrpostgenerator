@@ -15,14 +15,6 @@ const PostPreview = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const isMobile = useIsMobile();
 
-  const formatPostContent = (content) => {
-    if (!content) return '';
-    
-    const cleanedContent = content.replace(/^(Our|All Will Retire|AWR)( retirement)? (philosophy|believes|approach|insight|reminder|wisdom|perspective|belief|principle|concept|understands|champions|values|celebrates|promotes|inspires|prioritizes|supports|explains|advises|recommends):\s*/gi, '');
-    
-    return `${cleanedContent}\n\n@AllWillRetire`;
-  };
-
   const handleCopyToClipboard = () => {
     if (!post.content) {
       toast({
@@ -33,10 +25,8 @@ const PostPreview = () => {
       return;
     }
 
-    const formattedContent = formatPostContent(post.content);
-    
     navigator.clipboard
-      .writeText(formattedContent)
+      .writeText(post.content)
       .then(() => {
         setCopied(true);
         toast({
@@ -64,8 +54,7 @@ const PostPreview = () => {
       return;
     }
     
-    const formattedContent = formatPostContent(post.content);
-    let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(formattedContent)}`;
+    let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.content)}`;
     
     if (post.image || post.video) {
       toast({
@@ -117,8 +106,6 @@ const PostPreview = () => {
     hour: "2-digit",
     minute: "2-digit",
   });
-  
-  const formattedContent = formatPostContent(post.content);
 
   return (
     <Card className="border border-gray-200 bg-white p-3 sm:p-4 max-w-full overflow-hidden">
@@ -136,8 +123,7 @@ const PostPreview = () => {
               <span className="text-gray-500 mx-1 text-xs sm:text-sm">·</span>
               <span className="text-gray-500 text-xs sm:text-sm">{formattedDate}</span>
             </div>
-            <p className="mt-1 text-gray-800 whitespace-pre-wrap text-sm sm:text-base break-words">{formattedContent}</p>
-            
+            <p className="mt-1 text-gray-800 whitespace-pre-wrap text-sm sm:text-base break-words">{post.content}</p>
             {post.image && (
               <div className="mt-2 sm:mt-3">
                 <img
@@ -161,7 +147,6 @@ const PostPreview = () => {
                 </div>
               </div>
             )}
-            
             <div className="mt-2 sm:mt-3 flex items-center justify-between text-gray-500 text-xs sm:text-sm pt-2 border-t border-gray-100">
               <div className="flex items-center space-x-1">
                 <svg
