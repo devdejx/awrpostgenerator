@@ -153,6 +153,41 @@ const VIMEO_VIDEOS = [
   "https://vimeo.com/1076760112"
 ];
 
+const TELL_OUR_STORY_CONTENT = [
+  {
+    short: "AWR Life By Design empowers individuals to design their ideal lifestyle through financial freedom and purposeful living.",
+    long: "AWR Life By Design is our commitment to empowering individuals to design their ideal lifestyle. We believe that financial freedom isn't just about money—it's about creating a life where work becomes optional, enabling you to pursue your passions and make a meaningful impact in the world."
+  },
+  {
+    short: "Our sustainable funding engines create pathways to financial independence while building meaningful community connections.",
+    long: "Through our sustainable funding engines, we're revolutionizing the path to financial independence. We combine innovative financial strategies with community-driven support systems, ensuring that wealth creation goes hand-in-hand with meaningful relationships and shared success stories."
+  },
+  {
+    short: "All Will Retire's story represents a movement towards universal financial freedom and purposeful living.",
+    long: "The story of All Will Retire represents more than just financial success—it's a movement towards universal financial freedom. We believe everyone deserves the opportunity to retire with dignity, pursue their passions, and create lasting impact in their communities."
+  },
+  {
+    short: "Success at AWR means creating a world where financial freedom is accessible to everyone, not just the privileged few.",
+    long: "At AWR, success means transforming lives by making financial freedom accessible to everyone, not just the privileged few. We measure our impact through the number of lives changed, dreams realized, and communities strengthened through our mission."
+  },
+  {
+    short: "All Will Retire Balkans extends our mission of financial empowerment to Southeast European communities.",
+    long: "With All Will Retire Balkans, we're expanding our mission of financial empowerment to Southeast European communities. We're adapting our proven strategies to local contexts while maintaining our core belief that financial freedom should be accessible to everyone."
+  },
+  {
+    short: "We celebrate the diverse aspirations of our community members as they journey toward financial independence.",
+    long: "At AWR, we celebrate the diverse aspirations of our community members. Whether it's starting a business, supporting family, or pursuing creative passions, we honor each individual's unique path to financial independence and purposeful living."
+  },
+  {
+    short: "AWR's approach validates alternative paths to wealth creation and financial freedom.",
+    long: "Our approach at AWR validates alternative paths to wealth creation and financial freedom. We embrace innovative solutions and emerging opportunities that challenge traditional financial systems, making prosperity more accessible to everyone."
+  },
+  {
+    short: "Through small, incremental progress, we're building a movement that helps everyone believe in their financial future.",
+    long: "At AWR, we believe in the power of small, incremental progress. Each step forward, no matter how modest, contributes to building a movement that helps everyone believe in their financial future and the possibility of a purposeful retirement."
+  }
+];
+
 const getRandomCryptoHashtags = () => {
   const selectedHashtags = CRYPTO_HASHTAGS[Math.floor(Math.random() * CRYPTO_HASHTAGS.length)];
   return selectedHashtags;
@@ -192,9 +227,13 @@ const POST_TYPES = [
   },
 ];
 
-const generateContentFromWebsiteOriginal = async (source = "random", postType = "") => {
+const generateContentFromWebsite = async (source = "random", postType = "") => {
   if (postType === "retirement-believe") {
     return RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
+  }
+  
+  if (postType === "tell-our-story") {
+    return TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
   }
 
   const websiteContents = [
@@ -312,6 +351,11 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
   const generateContentFromWebsite = async (postType = "") => {
     if (postType === "retirement-believe") {
       const content = RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
+      return textLength === "short" ? content.short : content.long;
+    }
+    
+    if (postType === "tell-our-story") {
+      const content = TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
       return textLength === "short" ? content.short : content.long;
     }
     
