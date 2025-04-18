@@ -251,11 +251,11 @@ const POST_TYPES = [
   },
   {
     value: "what-a-gem",
-    label: "Crypto HYPE", // Changed from "What a GEM"
+    label: "AWR Approach", // Changed from "Crypto HYPE"
     templates: [
-      "Discover a hype from All Will Retire: {message} #CryptoHype {hashtags} cc: {profiles}",
-      "A burning crypto insight: {message} 🔥 {hashtags} cc: {profiles}",
-      "HYPE alert from All Will Retire: {message} 💥 {hashtags} cc: {profiles}",
+      "Discover an approach from All Will Retire: {message} #AWRApproach {hashtags} cc: {profiles}",
+      "A key insight from AWR: {message} 🔥 {hashtags} cc: {profiles}",
+      "AWR strategy alert: {message} 💥 {hashtags} cc: {profiles}",
     ],
   },
 ];
