@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -231,7 +230,7 @@ const PostPreview = () => {
             <Button
               onClick={handleCopyToClipboard}
               variant="outline"
-              className="flex items-center justify-center space-x-2 w-full text-xs sm:text-sm h-9"
+              className="flex items-center justify-center space-x-2 w-full text-xs sm:text-sm h-9 border-2 border-[#D4AF37] hover:border-[#FFD700] transition-colors duration-300"
             >
               <Copy className="h-3 w-3 sm:h-4 sm:w-4" />
               <span>{copied ? "Copied!" : "Copy text"}</span>
@@ -240,7 +239,7 @@ const PostPreview = () => {
             <Button
               onClick={downloadVideo}
               variant="outline"
-              className="flex items-center justify-center space-x-2 w-full text-xs sm:text-sm h-9"
+              className="flex items-center justify-center space-x-2 w-full text-xs sm:text-sm h-9 border-2 border-[#D4AF37] hover:border-[#FFD700] transition-colors duration-300"
               disabled={!post.video || isDownloading}
             >
               {isDownloading ? (
@@ -259,7 +258,7 @@ const PostPreview = () => {
           
           <Button
             onClick={shareToTwitter}
-            className="flex items-center justify-center space-x-2 w-full text-xs sm:text-sm h-9"
+            className="flex items-center justify-center space-x-2 w-full text-xs sm:text-sm h-9 border-2 border-[#D4AF37] hover:border-[#FFD700] transition-colors duration-300"
           >
             <Share2 className="h-3 w-3 sm:h-4 sm:w-4" />
             <span>Post to X</span>
