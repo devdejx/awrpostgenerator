@@ -155,36 +155,44 @@ const VIMEO_VIDEOS = [
 
 const TELL_OUR_STORY_CONTENT = [
   {
-    short: "AWR Life By Design empowers individuals to design their ideal lifestyle through financial freedom and purposeful living.",
-    long: "AWR Life By Design is our commitment to empowering individuals to design their ideal lifestyle. We believe that financial freedom isn't just about money—it's about creating a life where work becomes optional, enabling you to pursue your passions and make a meaningful impact in the world."
+    short: "AWR Life By Design empowers individuals to achieve financial independence through proven strategies and community support.",
+    long: "AWR Life By Design revolutionizes how people approach financial independence. We provide battle-tested strategies, strong community support, and innovative tools that empower individuals to break free from traditional employment constraints and design their ideal lifestyle."
   },
   {
-    short: "Our sustainable funding engines create pathways to financial independence while building meaningful community connections.",
-    long: "Through our sustainable funding engines, we're revolutionizing the path to financial independence. We combine innovative financial strategies with community-driven support systems, ensuring that wealth creation goes hand-in-hand with meaningful relationships and shared success stories."
+    short: "Our sustainable funding engines combine cutting-edge strategies with ethical practices for long-term wealth creation.",
+    long: "Through our sustainable funding engines, we're pioneering a new approach to wealth creation. We leverage cutting-edge market analysis, proprietary trading strategies, and ethical practices to generate consistent returns, all while building a supportive community that shares knowledge and success."
   },
   {
-    short: "All Will Retire's story represents a movement towards universal financial freedom and purposeful living.",
-    long: "The story of All Will Retire represents more than just financial success—it's a movement towards universal financial freedom. We believe everyone deserves the opportunity to retire with dignity, pursue their passions, and create lasting impact in their communities."
+    short: "All Will Retire's mission extends beyond profits to create lasting positive impact in our communities.",
+    long: "The heart of All Will Retire's mission is creating lasting positive impact. We're building a movement that combines financial success with social responsibility, ensuring our community members can retire with dignity while contributing to the greater good of society."
   },
   {
-    short: "Success at AWR means creating a world where financial freedom is accessible to everyone, not just the privileged few.",
-    long: "At AWR, success means transforming lives by making financial freedom accessible to everyone, not just the privileged few. We measure our impact through the number of lives changed, dreams realized, and communities strengthened through our mission."
+    short: "At AWR, we measure success by the number of lives transformed and dreams achieved in our community.",
+    long: "Success at AWR isn't just measured in financial terms—it's measured by the transformation we see in people's lives. Every community member who achieves financial freedom, pursues their passions, or helps others on their journey represents a victory for our mission."
   },
   {
-    short: "All Will Retire Balkans extends our mission of financial empowerment to Southeast European communities.",
-    long: "With All Will Retire Balkans, we're expanding our mission of financial empowerment to Southeast European communities. We're adapting our proven strategies to local contexts while maintaining our core belief that financial freedom should be accessible to everyone."
+    short: "AWR Balkans brings innovative financial strategies and community support to Southeast European markets.",
+    long: "All Will Retire Balkans represents our commitment to expanding financial freedom globally. By adapting our successful strategies to Southeast European markets, we're creating new opportunities for wealth creation while respecting local cultural values and economic conditions."
   },
   {
-    short: "We celebrate the diverse aspirations of our community members as they journey toward financial independence.",
-    long: "At AWR, we celebrate the diverse aspirations of our community members. Whether it's starting a business, supporting family, or pursuing creative passions, we honor each individual's unique path to financial independence and purposeful living."
+    short: "Our community celebrates diverse paths to financial independence, from entrepreneurship to passive income streams.",
+    long: "In the AWR community, we celebrate the many paths to financial independence. Whether through entrepreneurship, trading, passive income streams, or innovative investment strategies, we support our members in finding approaches that align with their values and goals."
   },
   {
-    short: "AWR's approach validates alternative paths to wealth creation and financial freedom.",
-    long: "Our approach at AWR validates alternative paths to wealth creation and financial freedom. We embrace innovative solutions and emerging opportunities that challenge traditional financial systems, making prosperity more accessible to everyone."
+    short: "AWR's innovative approach challenges traditional financial systems while creating accessible wealth-building opportunities.",
+    long: "Our innovative approach at AWR challenges conventional financial wisdom. We've developed new paradigms for wealth creation that make financial independence accessible to everyone, not just those with privileged backgrounds or traditional credentials."
   },
   {
-    short: "Through small, incremental progress, we're building a movement that helps everyone believe in their financial future.",
-    long: "At AWR, we believe in the power of small, incremental progress. Each step forward, no matter how modest, contributes to building a movement that helps everyone believe in their financial future and the possibility of a purposeful retirement."
+    short: "Through consistent daily actions, AWR members build sustainable wealth and lasting financial freedom.",
+    long: "At AWR, we believe in the power of consistent daily actions. Our community members achieve remarkable results through disciplined implementation of our strategies, proving that small steps, taken consistently, lead to extraordinary financial outcomes."
+  },
+  {
+    short: "AWR's ecosystem provides comprehensive support from education to implementation of wealth-building strategies.",
+    long: "The AWR ecosystem offers comprehensive support at every stage of the financial independence journey. From educational resources and mentorship to practical tools and community support, we ensure our members have everything they need to succeed."
+  },
+  {
+    short: "Our community's success stories inspire and guide others on their path to financial independence.",
+    long: "The success stories within our community serve as both inspiration and practical guides. Each achievement, whether big or small, demonstrates the effectiveness of our approach and lights the way for others on their journey to financial freedom."
   }
 ];
 
