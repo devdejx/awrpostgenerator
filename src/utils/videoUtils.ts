@@ -71,16 +71,18 @@ export const downloadVimeoVideo = async (url: string): Promise<void> => {
       throw new Error("Prenos videa ni omogočen. Vklopi 'Allow download' v nastavitvah videa.");
     }
     
-    // Get download link from first element
-    const downloadLink = data.download[0].link;
-    if (!downloadLink) {
+    // Sort download options by quality (size) and get the highest quality
+    const downloadOptions = data.download.sort((a: any, b: any) => b.size - a.size);
+    const highestQualityDownload = downloadOptions[0];
+    
+    if (!highestQualityDownload || !highestQualityDownload.link) {
       throw new Error("Povezava za prenos ni na voljo.");
     }
     
     // Create and trigger download
     const a = document.createElement('a');
     a.style.display = 'none';
-    a.href = downloadLink;
+    a.href = highestQualityDownload.link;
     a.download = '';
     
     document.body.appendChild(a);
