@@ -251,11 +251,11 @@ const POST_TYPES = [
   },
   {
     value: "what-a-gem",
-    label: "What a GEM",
+    label: "Crypto HYPE", // Changed from "What a GEM"
     templates: [
-      "Discover a gem from All Will Retire: {message} #GemOfWisdom {hashtags} cc: {profiles}",
-      "A sparkling insight: {message} ✨ {hashtags} cc: {profiles}",
-      "GEM alert from All Will Retire: {message} 💎 {hashtags} cc: {profiles}",
+      "Discover a hype from All Will Retire: {message} #CryptoHype {hashtags} cc: {profiles}",
+      "A burning crypto insight: {message} 🔥 {hashtags} cc: {profiles}",
+      "HYPE alert from All Will Retire: {message} 💥 {hashtags} cc: {profiles}",
     ],
   },
 ];
