@@ -227,7 +227,11 @@ const generateContentFromWebsiteOriginal = async (source = "random", postType = 
   }
 };
 
-const PostGenerator = () => {
+interface PostGeneratorProps {
+  onPostCreated: () => void;
+}
+
+const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
   const { post, setPost } = usePostStore();
   const { toast } = useToast();
   const [message, setMessage] = useState("");
@@ -293,6 +297,8 @@ const PostGenerator = () => {
       title: "Success!",
       description: "Post successfully created!",
     });
+
+    onPostCreated();
   };
 
   const resetForm = () => {
