@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -247,15 +246,6 @@ const POST_TYPES = [
       "Our journey at All Will Retire: {message} #OurStory {hashtags} cc: {profiles}",
       "A chapter from All Will Retire: {message} 📖 {hashtags} cc: {profiles}",
       "Sharing our narrative: {message} 💬 {hashtags} cc: {profiles}",
-    ],
-  },
-  {
-    value: "what-a-gem",
-    label: "AWR Approach", // Changed from "Crypto HYPE"
-    templates: [
-      "Discover an approach from All Will Retire: {message} #AWRApproach {hashtags} cc: {profiles}",
-      "A key insight from AWR: {message} 🔥 {hashtags} cc: {profiles}",
-      "AWR strategy alert: {message} 💥 {hashtags} cc: {profiles}",
     ],
   },
 ];
