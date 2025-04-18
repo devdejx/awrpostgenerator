@@ -234,18 +234,25 @@ const POST_TYPES = [
     value: "retirement-believe",
     label: "Retirement Believe",
     templates: [
-      "All Will Retire believes: {message} #RetirementWisdom {hashtags} cc: {profiles}",
-      "Our retirement philosophy: {message} 💡 {hashtags} cc: {profiles}",
-      "A core belief from All Will Retire: {message} 🌟 {hashtags} cc: {profiles}",
+      "{message} {hashtags} cc: {profiles}",
+      "{message} 💡 {hashtags} cc: {profiles}",
+      "{message} 🌟 {hashtags} cc: {profiles}",
     ],
   },
   {
     value: "tell-our-story",
     label: "Tell Our Story",
     templates: [
-      "Our journey at All Will Retire: {message} #OurStory {hashtags} cc: {profiles}",
-      "A chapter from All Will Retire: {message} 📖 {hashtags} cc: {profiles}",
-      "Sharing our narrative: {message} 💬 {hashtags} cc: {profiles}",
+      "{message} {hashtags} cc: {profiles}",
+      "{message} 📖 {hashtags} cc: {profiles}",
+      "{message} 💬 {hashtags} cc: {profiles}",
+    ],
+  },
+  {
+    value: "crypto",
+    label: "Crypto",
+    templates: [
+      "{message} {hashtags} cc: {profiles}",
     ],
   },
 ];
@@ -262,7 +269,7 @@ const generateContentFromWebsite = async (source = "random", postType = "") => {
   const websiteContents = [
     "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings.",
     "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active.",
-    "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility.",
+    "All Will Retire recommends: Diversify your retirement portfolio can help protect against market volatility.",
     "All Will Retire insight: Consider healthcare needs when planning for retirement. Medical costs can be significant.",
     "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement.",
   ];
