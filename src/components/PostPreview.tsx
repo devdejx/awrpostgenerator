@@ -15,6 +15,12 @@ const PostPreview = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const isMobile = useIsMobile();
 
+  const formatPostContent = (content) => {
+    if (!content) return '';
+    
+    return content.replace(/All Will Retire (believes|explains|advises|recommends|insight|reminder|philosophy|wisdom|perspective|approach|belief|principle|concept|understands|champions|values|celebrates|promotes|inspires|prioritizes|supports):/gi, '@AllWillRetire');
+  };
+
   const handleCopyToClipboard = () => {
     if (!post.content) {
       toast({
@@ -25,8 +31,10 @@ const PostPreview = () => {
       return;
     }
 
+    const formattedContent = formatPostContent(post.content);
+    
     navigator.clipboard
-      .writeText(post.content)
+      .writeText(formattedContent)
       .then(() => {
         setCopied(true);
         toast({
@@ -54,7 +62,8 @@ const PostPreview = () => {
       return;
     }
     
-    let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.content)}`;
+    const formattedContent = formatPostContent(post.content);
+    let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(formattedContent)}`;
     
     if (post.image || post.video) {
       toast({
@@ -106,6 +115,8 @@ const PostPreview = () => {
     hour: "2-digit",
     minute: "2-digit",
   });
+  
+  const formattedContent = formatPostContent(post.content);
 
   return (
     <Card className="border border-gray-200 bg-white p-3 sm:p-4 max-w-full overflow-hidden">
@@ -123,7 +134,8 @@ const PostPreview = () => {
               <span className="text-gray-500 mx-1 text-xs sm:text-sm">·</span>
               <span className="text-gray-500 text-xs sm:text-sm">{formattedDate}</span>
             </div>
-            <p className="mt-1 text-gray-800 whitespace-pre-wrap text-sm sm:text-base break-words">{post.content}</p>
+            <p className="mt-1 text-gray-800 whitespace-pre-wrap text-sm sm:text-base break-words">{formattedContent}</p>
+            
             {post.image && (
               <div className="mt-2 sm:mt-3">
                 <img
@@ -147,6 +159,7 @@ const PostPreview = () => {
                 </div>
               </div>
             )}
+            
             <div className="mt-2 sm:mt-3 flex items-center justify-between text-gray-500 text-xs sm:text-sm pt-2 border-t border-gray-100">
               <div className="flex items-center space-x-1">
                 <svg
