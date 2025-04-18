@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -77,14 +78,14 @@ const PostPreview = () => {
       await downloadVimeoVideo(post.video || "");
       
       toast({
-        title: "Uspeh",
-        description: "Prenos se je začel",
+        title: "Success",
+        description: "Download has started",
       });
     } catch (error: any) {
-      console.error("Napaka pri prenosu:", error);
+      console.error("Download error:", error);
       toast({
-        title: "Napaka",
-        description: error.message || "Prišlo je do napake pri prenosu videa",
+        title: "Error",
+        description: error.message || "An error occurred while downloading the video",
         variant: "destructive",
       });
     } finally {
@@ -269,3 +270,4 @@ const PostPreview = () => {
 };
 
 export default PostPreview;
+
