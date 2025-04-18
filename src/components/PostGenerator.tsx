@@ -141,7 +141,16 @@ const VIMEO_VIDEOS = [
   "https://vimeo.com/1073621029/b524df5ac8",
   "https://vimeo.com/1073621046/27ca5564b8",
   "https://vimeo.com/1073621073/f2b42f7576",
-  "https://vimeo.com/1073621108/1c3560f64e"
+  "https://vimeo.com/1073621108/1c3560f64e",
+  "https://vimeo.com/1076760086",
+  "https://vimeo.com/1076760061",
+  "https://vimeo.com/1076760047",
+  "https://vimeo.com/1076760036",
+  "https://vimeo.com/1076760019",
+  "https://vimeo.com/1076760164",
+  "https://vimeo.com/1076760149",
+  "https://vimeo.com/1076760137",
+  "https://vimeo.com/1076760112"
 ];
 
 const getRandomCryptoHashtags = () => {
