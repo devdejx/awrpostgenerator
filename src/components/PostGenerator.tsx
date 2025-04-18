@@ -289,15 +289,21 @@ const POST_TYPES = [
 
 const generateContentFromWebsite = async (source = "random", postType = "") => {
   if (postType === "retirement-believe") {
-    return RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
+    const content = RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
+    return content;
   }
   
   if (postType === "tell-our-story") {
-    return TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
+    const content = TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
+    return content;
   }
 
   if (postType === "crypto-hype") {
-    return CRYPTO_HYPE_CONTENT[Math.floor(Math.random() * CRYPTO_HYPE_CONTENT.length)];
+    const content = { 
+      short: CRYPTO_HYPE_CONTENT[Math.floor(Math.random() * CRYPTO_HYPE_CONTENT.length)],
+      long: CRYPTO_HYPE_CONTENT[Math.floor(Math.random() * CRYPTO_HYPE_CONTENT.length)]
+    };
+    return content;
   }
 
   const websiteContents = [
@@ -569,130 +575,4 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
 
         <div>
           <div className="flex justify-between items-center mb-1">
-            <label className="block text-sm font-medium text-black">
-              Message
-            </label>
-            <div className="flex items-center gap-2">
-              <div>
-                <label className="block text-xs text-gray-600 mb-1">Text Length</label>
-                <Select value={textLength} onValueChange={setTextLength}>
-                  <SelectTrigger className="h-8 w-32 bg-white text-black">
-                    <SelectValue placeholder="Text Length" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white text-black">
-                    <SelectItem value="short" className="text-black">Short</SelectItem>
-                    <SelectItem value="long" className="text-black">Long</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleAutoGenerate}
-                disabled={isGenerating}
-                className="flex items-center gap-1"
-              >
-                {isGenerating ? (
-                  <RefreshCw className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Wand2 className="h-4 w-4" />
-                )}
-                Auto Generate
-              </Button>
-            </div>
-          </div>
-          <Textarea
-            placeholder="Enter your message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="min-h-[100px] bg-white"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Media
-          </label>
-          <div className="flex items-center space-x-3">
-            <div>
-              <label className="cursor-pointer block">
-                <div className="flex h-10 w-10 items-center justify-center rounded-md border border-dashed border-gray-300 hover:border-primary">
-                  <ImageIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <span className="text-xs text-gray-500 mt-1 block text-center">Add image</span>
-                <Input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleImageChange}
-                />
-              </label>
-            </div>
-            
-            <div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleGenerateVideo}
-                disabled={isGeneratingVideo}
-                className="h-10 w-10 p-0 flex items-center justify-center"
-                title="Get random Vimeo video"
-              >
-                {isGeneratingVideo ? (
-                  <RefreshCw className="h-5 w-5 animate-spin" />
-                ) : (
-                  <Video className="h-5 w-5 text-gray-400" />
-                )}
-              </Button>
-              <span className="text-xs text-gray-500 mt-1 block text-center">Random video</span>
-            </div>
-            
-            <span className="text-sm text-gray-500 ml-2">
-              {imageFile ? imageFile.name : videoPreview ? "Vimeo video selected" : "No media selected"}
-            </span>
-          </div>
-
-          {imagePreview && (
-            <div className="mt-4">
-              <img
-                src={imagePreview}
-                alt="Preview"
-                className="h-40 object-cover rounded-md"
-              />
-            </div>
-          )}
-          
-          {videoPreview && !imagePreview && (
-            <div className="mt-4 flex items-center space-x-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
-              <Video className="h-5 w-5 text-gray-500" />
-              <span className="text-sm text-gray-600 truncate">
-                <a href={videoPreview} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                  {videoPreview}
-                </a>
-              </span>
-            </div>
-          )}
-        </div>
-
-        <div className="flex space-x-2">
-          <Button 
-            onClick={generatePost} 
-            className="w-full border-2 border-[#D4AF37] hover:bg-[#D4AF37]/10"
-          >
-            Create Post
-          </Button>
-          <Button
-            variant="outline"
-            onClick={resetForm}
-            className="w-auto p-2"
-            title="Reset form"
-          >
-            <RefreshCw className="h-5 w-5" />
-          </Button>
-        </div>
-      </div>
-    </Card>
-  );
-};
-
-export default PostGenerator;
+            <label className
