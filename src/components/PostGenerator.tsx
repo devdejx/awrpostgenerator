@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -250,18 +251,11 @@ const POST_TYPES = [
   },
   {
     value: "what-a-gem",
-    label: "Crypto HYPE",
+    label: "Crypto HYPE", // Changed from "What a GEM"
     templates: [
-      "@allwillretire is SETTING the crypto world on FIRE! {message} This isn't hype – it's a MOVEMENT rewriting the rules of retirement. The future is decentralized, and this project is LEADING the way. Be part of history! {hashtags} cc: {profiles}",
-      "Crypto is changing FAST, and @allwillretire is at the FRONT of the storm! {message} It's not just a coin – it's a global WAVE of change. Join the mission that's making headlines and turning believers into legends! {hashtags} cc: {profiles}",
-      "@allwillretire is gaining momentum like a rocket! {message} The community is EXPLODING with excitement, and this is just the beginning. This isn't your average project – it's a phenomenon you need to see to believe! {hashtags} cc: {profiles}",
-      "Crypto just got a major UPGRADE with @allwillretire. {message} This is more than investing – it's joining a family that's rewriting the script on freedom, finance, and the future. Don't watch from the sidelines! {hashtags} cc: {profiles}",
-      "The crypto world is BUZZING – and @allwillretire is the REASON. {message} It's going viral for a reason: real vision, real people, and real purpose. This is your moment to ride the wave before it hits the moon! {hashtags} cc: {profiles}",
-      "This is not a drill. @allwillretire is uniting dreamers, builders, and believers worldwide! {message} With a mission that hits deep and a community that's LOUD, this is the next big thing. Will you be part of it? {hashtags} cc: {profiles}",
-      "Everyone's talking about @allwillretire – and for good reason. {message} It's more than hype – it's a full-on crypto revolution. Snap a pic, spread the word, and jump on before the FOMO gets real! {hashtags} cc: {profiles}",
-      "Crypto history is being written RIGHT NOW and @allwillretire is the pen! {message} This is the one project that's got people not just talking – but showing up and showing OUT. Be there from the start! {hashtags} cc: {profiles}",
-      "@allwillretire is taking over timelines and making noise for all the right reasons. {message} This is a MOVEMENT built on vision, strength, and unstoppable community energy. Don't get left behind! {hashtags} cc: {profiles}",
-      "The next legendary crypto story has a name: @allwillretire. {message} This is bigger than a project – it's a purpose-driven revolution fueled by trust and action. Get in before the rest even know what's coming! {hashtags} cc: {profiles}",
+      "Discover a hype from All Will Retire: {message} #CryptoHype {hashtags} cc: {profiles}",
+      "A burning crypto insight: {message} 🔥 {hashtags} cc: {profiles}",
+      "HYPE alert from All Will Retire: {message} 💥 {hashtags} cc: {profiles}",
     ],
   },
 ];
@@ -321,7 +315,6 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
   const [isGeneratingVideo, setIsGeneratingVideo] = useState(false);
   const [contentSource, setContentSource] = useState("random");
   const [textLength, setTextLength] = useState("short");
-  const [generatedMessage, setGeneratedMessage] = useState("");
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -359,15 +352,13 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
     const hashtags = getRandomCryptoHashtags();
     const profiles = getRandomCryptoProfiles();
     
-    const generated = randomTemplate
+    const generatedMessage = randomTemplate
       .replace("{message}", message)
       .replace("{hashtags}", hashtags)
       .replace("{profiles}", profiles);
 
-    setGeneratedMessage(generated);
-    
     setPost({
-      content: generated,
+      content: generatedMessage,
       image: imagePreview,
       video: videoPreview,
       type: postType,
@@ -388,7 +379,6 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
     setImageFile(null);
     setImagePreview(null);
     setVideoPreview(null);
-    setGeneratedMessage("");
   };
 
   const generateContentFromWebsite = async (postType = "") => {
@@ -583,19 +573,90 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
           />
         </div>
 
-        {generatedMessage && (
-          <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Generated Post Preview
-            </label>
-            <p className="text-gray-900 whitespace-pre-wrap">{generatedMessage}</p>
-          </div>
-        )}
-
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Media
           </label>
           <div className="flex items-center space-x-3">
             <div>
-              <label className="
+              <label className="cursor-pointer block">
+                <div className="flex h-10 w-10 items-center justify-center rounded-md border border-dashed border-gray-300 hover:border-primary">
+                  <ImageIcon className="h-5 w-5 text-gray-400" />
+                </div>
+                <span className="text-xs text-gray-500 mt-1 block text-center">Add image</span>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImageChange}
+                />
+              </label>
+            </div>
+            
+            <div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleGenerateVideo}
+                disabled={isGeneratingVideo}
+                className="h-10 w-10 p-0 flex items-center justify-center"
+                title="Get random Vimeo video"
+              >
+                {isGeneratingVideo ? (
+                  <RefreshCw className="h-5 w-5 animate-spin" />
+                ) : (
+                  <Video className="h-5 w-5 text-gray-400" />
+                )}
+              </Button>
+              <span className="text-xs text-gray-500 mt-1 block text-center">Random video</span>
+            </div>
+            
+            <span className="text-sm text-gray-500 ml-2">
+              {imageFile ? imageFile.name : videoPreview ? "Vimeo video selected" : "No media selected"}
+            </span>
+          </div>
+
+          {imagePreview && (
+            <div className="mt-4">
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="h-40 object-cover rounded-md"
+              />
+            </div>
+          )}
+          
+          {videoPreview && !imagePreview && (
+            <div className="mt-4 flex items-center space-x-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+              <Video className="h-5 w-5 text-gray-500" />
+              <span className="text-sm text-gray-600 truncate">
+                <a href={videoPreview} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                  {videoPreview}
+                </a>
+              </span>
+            </div>
+          )}
+        </div>
+
+        <div className="flex space-x-2">
+          <Button 
+            onClick={generatePost} 
+            className="w-full border-2 border-[#D4AF37] hover:bg-[#D4AF37]/10"
+          >
+            Create Post
+          </Button>
+          <Button
+            variant="outline"
+            onClick={resetForm}
+            className="w-auto p-2"
+            title="Reset form"
+          >
+            <RefreshCw className="h-5 w-5" />
+          </Button>
+        </div>
+      </div>
+    </Card>
+  );
+};
+
+export default PostGenerator;
