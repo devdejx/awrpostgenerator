@@ -1,13 +1,42 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import PostGenerator from "@/components/PostGenerator";
 import PostPreview from "@/components/PostPreview";
+import LoadingScreen from "@/components/LoadingScreen";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState("create");
+  const [isLoading, setIsLoading] = useState(true);
   
+  useEffect(() => {
+    // Create an array of promises for all resources that need to be loaded
+    const imagesToLoad = [
+      new Promise((resolve) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.src = "/lovable-uploads/3f38e58d-70db-4dce-89fa-f41ee30228c0.png";
+      })
+    ];
+
+    // Wait for all resources to load
+    Promise.all(imagesToLoad)
+      .then(() => {
+        // Add a small delay to ensure smooth transition
+        setTimeout(() => setIsLoading(false), 500);
+      })
+      .catch(() => {
+        // If there's an error, still hide the loading screen
+        setIsLoading(false);
+      });
+  }, []);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <div className="min-h-screen bg-background dot-pattern py-6 sm:py-12 px-3 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
