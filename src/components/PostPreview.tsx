@@ -16,7 +16,9 @@ const PostPreview = () => {
   const isMobile = useIsMobile();
 
   const formatPostContent = (content) => {
-    return content || '';
+    if (!content) return '';
+    
+    return content.replace(/^(Our|All Will Retire|AWR)( retirement)? (philosophy|believes|approach|insight|reminder|wisdom|perspective|belief|principle|concept|understands|champions|values|celebrates|promotes|inspires|prioritizes|supports|explains|advises|recommends):\s*/gi, '');
   };
 
   const handleCopyToClipboard = () => {
