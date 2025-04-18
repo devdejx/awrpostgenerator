@@ -257,13 +257,15 @@ const POST_TYPES = [
   },
 ];
 
-const generateContentFromWebsite = async (source = "random", postType = "") => {
+const generateContentFromWebsite = async (source = "random", postType = "", textLength = "short") => {
   if (postType === "retirement-believe") {
-    return RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
+    const content = RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
+    return textLength === "short" ? content.short : content.long;
   }
   
   if (postType === "tell-our-story") {
-    return TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
+    const content = TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
+    return textLength === "short" ? content.short : content.long;
   }
 
   const websiteContents = [
@@ -389,7 +391,7 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
     
     setIsGenerating(true);
     try {
-      const content = await generateContentFromWebsite(postType);
+      const content = await generateContentFromWebsite(contentSource, postType, textLength);
       setMessage(content);
       
       let sourceLabel = textLength === "short" ? "Short Text" : "Long Text";
