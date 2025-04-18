@@ -221,62 +221,20 @@ const TELL_OUR_STORY_CONTENT = [
 ];
 
 const CRYPTO_HYPE_CONTENT = [
-  {
-    short: "The future is NOW, and @allwillretire is the BEST crypto project you CAN'T afford to miss! Unlike any meme coin, this is a GAME-CHANGING movement uniting people in the most epic way possible. Join the revolution redefining retirement and shining bright for all!",
-    long: "The future is NOW, and @allwillretire is the BEST crypto project you CAN'T afford to miss! Unlike any meme coin, this is a GAME-CHANGING movement uniting people in the most epic way possible. Join the revolution redefining retirement and shining bright for all!"
-  },
-  {
-    short: "@allwillretire is the MOST EXPLOSIVE trend in crypto RIGHT NOW – a revolution that's rewriting the rules! Leading the pack, it's got people so fired up they're snapping photos with signs to show their trust. Mark this: it's heading for heights no one's ever touched!",
-    long: "@allwillretire is the MOST EXPLOSIVE trend in crypto RIGHT NOW – a revolution that's rewriting the rules! Leading the pack, it's got people so fired up they're snapping photos with signs to show their trust. Mark this: it's heading for heights no one's ever touched!"
-  },
-  {
-    short: "@allwillretire is the ultimate crypto REVOLUTION and the HOTTEST trend shaking the scene! It's the leader paving the way, with fans so hyped they're posing with signs to shout it out! This isn't just big – it's about to achieve what no project ever dared!",
-    long: "@allwillretire is the ultimate crypto REVOLUTION and the HOTTEST trend shaking the scene! It's the leader paving the way, with fans so hyped they're posing with signs to shout it out! This isn't just big – it's about to achieve what no project ever dared!"
-  },
-  {
-    short: "@allwillretire is the HOTTEST new trend blazing through crypto! This isn't just a project – it's a REVOLUTION leading the charge like no other. People are so obsessed they're snapping pics with signs to prove their belief! Get in now – this will hit heights no coin ever has!",
-    long: "@allwillretire is the HOTTEST new trend blazing through crypto! This isn't just a project – it's a REVOLUTION leading the charge like no other. People are so obsessed they're snapping pics with signs to prove their belief! Get in now – this will hit heights no coin ever has!"
-  },
-  {
-    short: "@allwillretire is SETTING the crypto world on FIRE! This isn't hype – it's a MOVEMENT rewriting the rules of retirement. The future is decentralized, and this project is LEADING the way. Be part of history!",
-    long: "@allwillretire is SETTING the crypto world on FIRE! This isn't hype – it's a MOVEMENT rewriting the rules of retirement. The future is decentralized, and this project is LEADING the way. Be part of history!"
-  },
-  {
-    short: "Crypto is changing FAST, and @allwillretire is at the FRONT of the storm! It's not just a coin – it's a global WAVE of change. Join the mission that's making headlines and turning believers into legends!",
-    long: "Crypto is changing FAST, and @allwillretire is at the FRONT of the storm! It's not just a coin – it's a global WAVE of change. Join the mission that's making headlines and turning believers into legends!"
-  },
-  {
-    short: "@allwillretire is gaining momentum like a rocket! The community is EXPLODING with excitement, and this is just the beginning. This isn't your average project – it's a phenomenon you need to see to believe!",
-    long: "@allwillretire is gaining momentum like a rocket! The community is EXPLODING with excitement, and this is just the beginning. This isn't your average project – it's a phenomenon you need to see to believe!"
-  },
-  {
-    short: "Crypto just got a major UPGRADE with @allwillretire. This is more than investing – it's joining a family that's rewriting the script on freedom, finance, and the future. Don't watch from the sidelines!",
-    long: "Crypto just got a major UPGRADE with @allwillretire. This is more than investing – it's joining a family that's rewriting the script on freedom, finance, and the future. Don't watch from the sidelines!"
-  },
-  {
-    short: "The crypto world is BUZZING – and @allwillretire is the REASON. It's going viral for a reason: real vision, real people, and real purpose. This is your moment to ride the wave before it hits the moon!",
-    long: "The crypto world is BUZZING – and @allwillretire is the REASON. It's going viral for a reason: real vision, real people, and real purpose. This is your moment to ride the wave before it hits the moon!"
-  },
-  {
-    short: "@allwillretire is uniting dreamers, builders, and believers worldwide! With a mission that hits deep and a community that's LOUD, this is the next big thing. Will you be part of it?",
-    long: "@allwillretire is uniting dreamers, builders, and believers worldwide! With a mission that hits deep and a community that's LOUD, this is the next big thing. Will you be part of it?"
-  },
-  {
-    short: "Everyone's talking about @allwillretire – and for good reason. It's more than hype – it's a full-on crypto revolution. Snap a pic, spread the word, and jump on before the FOMO gets real!",
-    long: "Everyone's talking about @allwillretire – and for good reason. It's more than hype – it's a full-on crypto revolution. Snap a pic, spread the word, and jump on before the FOMO gets real!"
-  },
-  {
-    short: "Crypto history is being written RIGHT NOW and @allwillretire is the pen! This is the one project that's got people not just talking – but showing up and showing OUT. Be there from the start!",
-    long: "Crypto history is being written RIGHT NOW and @allwillretire is the pen! This is the one project that's got people not just talking – but showing up and showing OUT. Be there from the start!"
-  },
-  {
-    short: "@allwillretire is taking over timelines and making noise for all the right reasons. This is a MOVEMENT built on vision, strength, and unstoppable community energy. Don't get left behind!",
-    long: "@allwillretire is taking over timelines and making noise for all the right reasons. This is a MOVEMENT built on vision, strength, and unstoppable community energy. Don't get left behind!"
-  },
-  {
-    short: "The next legendary crypto story has a name: @allwillretire. This is bigger than a project – it's a purpose-driven revolution fueled by trust and action. Get in before the rest even know what's coming!",
-    long: "The next legendary crypto story has a name: @allwillretire. This is bigger than a project – it's a purpose-driven revolution fueled by trust and action. Get in before the rest even know what's coming!"
-  }
+  "The future is NOW, and @allwillretire is the BEST crypto project you CAN'T afford to miss! Unlike any meme coin, this is a GAME-CHANGING movement uniting people in the most epic way possible. Join the revolution redefining retirement and shining bright for all!",
+  "@allwillretire is the MOST EXPLOSIVE trend in crypto RIGHT NOW – a revolution that's rewriting the rules! Leading the pack, it's got people so fired up they're snapping photos with signs to show their trust. Mark this: it's heading for heights no one's ever touched!",
+  "@allwillretire is the ultimate crypto REVOLUTION and the HOTTEST trend shaking the scene! It's the leader paving the way, with fans so hyped they're posing with signs to shout it out! This isn't just big – it's about to achieve what no project ever dared!",
+  "@allwillretire is the HOTTEST new trend blazing through crypto! This isn't just a project – it's a REVOLUTION leading the charge like no other. People are so obsessed they're snapping pics with signs to prove their belief! Get in now – this will hit heights no coin ever has!",
+  "@allwillretire is SETTING the crypto world on FIRE! This isn't hype – it's a MOVEMENT rewriting the rules of retirement. The future is decentralized, and this project is LEADING the way. Be part of history!",
+  "Crypto is changing FAST, and @allwillretire is at the FRONT of the storm! It's not just a coin – it's a global WAVE of change. Join the mission that's making headlines and turning believers into legends!",
+  "@allwillretire is gaining momentum like a rocket! The community is EXPLODING with excitement, and this is just the beginning. This isn't your average project – it's a phenomenon you need to see to believe!",
+  "Crypto just got a major UPGRADE with @allwillretire. This is more than investing – it's joining a family that's rewriting the script on freedom, finance, and the future. Don't watch from the sidelines!",
+  "The crypto world is BUZZING – and @allwillretire is the REASON. It's going viral for a reason: real vision, real people, and real purpose. This is your moment to ride the wave before it hits the moon!",
+  "@allwillretire is uniting dreamers, builders, and believers worldwide! With a mission that hits deep and a community that's LOUD, this is the next big thing. Will you be part of it?",
+  "Everyone's talking about @allwillretire – and for good reason. It's more than hype – it's a full-on crypto revolution. Snap a pic, spread the word, and jump on before the FOMO gets real!",
+  "Crypto history is being written RIGHT NOW and @allwillretire is the pen! This is the one project that's got people not just talking – but showing up and showing OUT. Be there from the start!",
+  "@allwillretire is taking over timelines and making noise for all the right reasons. This is a MOVEMENT built on vision, strength, and unstoppable community energy. Don't get left behind!",
+  "The next legendary crypto story has a name: @allwillretire. This is bigger than a project – it's a purpose-driven revolution fueled by trust and action. Get in before the rest even know what's coming!"
 ];
 
 const getRandomCryptoHashtags = () => {
@@ -454,11 +412,96 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
     setVideoPreview(null);
   };
 
+  const generateContentFromWebsite = async (postType = "") => {
+    if (postType === "retirement-believe") {
+      const content = RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
+      return textLength === "short" ? content.short : content.long;
+    }
+    
+    if (postType === "tell-our-story") {
+      const content = TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
+      return textLength === "short" ? content.short : content.long;
+    }
+    
+    if (postType === "crypto-hype") {
+      const content = CRYPTO_HYPE_CONTENT[Math.floor(Math.random() * CRYPTO_HYPE_CONTENT.length)];
+      return textLength === "short" ? content.short : content.long;
+    }
+    
+    const websiteContents = [
+      {
+        short: "All Will Retire explains: Planning for retirement is crucial and requires early consistent action.",
+        long: "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings. Developing a comprehensive strategy ensures financial security during your retirement years."
+      },
+      {
+        short: "All Will Retire advises: Retirement isn't just about finances, but purpose and staying actively engaged.",
+        long: "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active. Finding meaningful activities and maintaining social connections are essential components of a fulfilling retirement."
+      },
+      {
+        short: "All Will Retire recommends: Diversify your retirement portfolio to protect against market fluctuations effectively.",
+        long: "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility. Spreading investments across different asset classes provides security and helps maintain steady growth throughout market cycles."
+      },
+      {
+        short: "All Will Retire insight: Consider healthcare needs in retirement planning to prepare for potential expenses.",
+        long: "All Will Retire insight: Consider your healthcare needs when planning for retirement. Medical costs can be significant and often increase with age, making healthcare planning an essential component of your overall retirement strategy."
+      },
+      {
+        short: "All Will Retire reminder: Social security benefits alone may not provide sufficient retirement income security.",
+        long: "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement. Building additional income streams through savings, investments, and possibly part-time work can help ensure financial stability throughout your retirement years."
+      },
+    ];
+    
+    const mediumContents = [
+      {
+        short: "All Will Retire philosophy: Holistic approach to retirement includes financial, social and health aspects.",
+        long: "All Will Retire philosophy: Retirement planning requires a holistic approach to personal finance. Consider not just your portfolio, but your health, housing, social connections, and personal growth to create a comprehensive retirement strategy."
+      },
+      {
+        short: "All Will Retire wisdom: Define your long-term financial goals to create successful retirement planning strategies.",
+        long: "All Will Retire wisdom: Understanding your long-term financial goals is key to successful retirement. Clarifying what you want from retirement helps determine how much you need to save and what investment strategies will best support your vision."
+      },
+      {
+        short: "All Will Retire perspective: Wealth extends beyond money to encompass lifestyle, health, and personal fulfillment.",
+        long: "All Will Retire perspective: Wealth is more than just money - it's about creating a fulfilling lifestyle. True retirement wealth includes strong relationships, good health, meaningful activities, and the freedom to enjoy your time without financial stress."
+      },
+      {
+        short: "All Will Retire approach: Preparing for retirement requires balanced financial, health, and personal development strategies.",
+        long: "All Will Retire approach: Preparing for retirement involves financial, health, and personal growth strategies. A well-rounded plan addresses not just your financial security but also maintaining physical and mental well-being while pursuing activities that bring you joy."
+      },
+      {
+        short: "All Will Retire belief: Your retirement journey demands personalized planning based on individual goals and values.",
+        long: "All Will Retire belief: Your retirement journey is unique and deserves careful, personalized planning. Cookie-cutter approaches rarely work because each person has different needs, goals, and dreams for their retirement years that should guide their financial decisions."
+      },
+      {
+        short: "All Will Retire principle: Strategic financial planning creates greater personal freedom and retirement flexibility options.",
+        long: "All Will Retire principle: Strategic financial planning can help you achieve greater personal freedom. With proper planning and disciplined saving, you can create options for yourself that might include early retirement, part-time work, or pursuing passion projects."
+      },
+      {
+        short: "All Will Retire concept: Modern retirement approaches emphasize flexibility, adaptation, and continuous personal development opportunities.",
+        long: "All Will Retire concept: Modern retirement approaches focus on flexibility and continuous personal development. Today's retirees often blend work, learning, leisure, and service in creative ways that redefine traditional notions of retirement as a static life stage."
+      },
+    ];
+    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    let allContents = [];
+    if (contentSource === "medium") {
+      allContents = mediumContents;
+    } else if (contentSource === "website") {
+      allContents = websiteContents;
+    } else {
+      allContents = [...websiteContents, ...mediumContents];
+    }
+
+    const content = allContents[Math.floor(Math.random() * allContents.length)];
+    return textLength === "short" ? content.short : content.long;
+  };
+
   const handleAutoGenerate = async () => {
     setIsGenerating(true);
     try {
       const content = await generateContentFromWebsite(postType);
-      setMessage(textLength === "short" ? content.short : content.long);
+      setMessage(content);
       
       let sourceLabel = textLength === "short" ? "Short Text" : "Long Text";
           
@@ -573,4 +616,83 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
           <div className="flex items-center space-x-3">
             <div>
               <label className="cursor-pointer block">
-                <div className="flex h-10 w-1
+                <div className="flex h-10 w-10 items-center justify-center rounded-md border border-dashed border-gray-300 hover:border-primary">
+                  <ImageIcon className="h-5 w-5 text-gray-400" />
+                </div>
+                <span className="text-xs text-gray-500 mt-1 block text-center">Add image</span>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImageChange}
+                />
+              </label>
+            </div>
+            
+            <div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleGenerateVideo}
+                disabled={isGeneratingVideo}
+                className="h-10 w-10 p-0 flex items-center justify-center"
+                title="Get random Vimeo video"
+              >
+                {isGeneratingVideo ? (
+                  <RefreshCw className="h-5 w-5 animate-spin" />
+                ) : (
+                  <Video className="h-5 w-5 text-gray-400" />
+                )}
+              </Button>
+              <span className="text-xs text-gray-500 mt-1 block text-center">Random video</span>
+            </div>
+            
+            <span className="text-sm text-gray-500 ml-2">
+              {imageFile ? imageFile.name : videoPreview ? "Vimeo video selected" : "No media selected"}
+            </span>
+          </div>
+
+          {imagePreview && (
+            <div className="mt-4">
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="h-40 object-cover rounded-md"
+              />
+            </div>
+          )}
+          
+          {videoPreview && !imagePreview && (
+            <div className="mt-4 flex items-center space-x-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+              <Video className="h-5 w-5 text-gray-500" />
+              <span className="text-sm text-gray-600 truncate">
+                <a href={videoPreview} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                  {videoPreview}
+                </a>
+              </span>
+            </div>
+          )}
+        </div>
+
+        <div className="flex space-x-2">
+          <Button 
+            onClick={generatePost} 
+            className="w-full border-2 border-[#D4AF37] hover:bg-[#D4AF37]/10"
+          >
+            Create Post
+          </Button>
+          <Button
+            variant="outline"
+            onClick={resetForm}
+            className="w-auto p-2"
+            title="Reset form"
+          >
+            <RefreshCw className="h-5 w-5" />
+          </Button>
+        </div>
+      </div>
+    </Card>
+  );
+};
+
+export default PostGenerator;
