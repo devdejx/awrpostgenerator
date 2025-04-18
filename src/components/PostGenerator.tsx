@@ -220,6 +220,23 @@ const TELL_OUR_STORY_CONTENT = [
   }
 ];
 
+const CRYPTO_HYPE_CONTENT = [
+  "The future is NOW, and @allwillretire is the BEST crypto project you CAN'T afford to miss! Unlike any meme coin, this is a GAME-CHANGING movement uniting people in the most epic way possible. Join the revolution redefining retirement and shining bright for all!",
+  "@allwillretire is the MOST EXPLOSIVE trend in crypto RIGHT NOW – a revolution that's rewriting the rules! Leading the pack, it's got people so fired up they're snapping photos with signs to show their trust. Mark this: it's heading for heights no one's ever touched!",
+  "@allwillretire is the ultimate crypto REVOLUTION and the HOTTEST trend shaking the scene! It's the leader paving the way, with fans so hyped they're posing with signs to shout it out! This isn't just big – it's about to achieve what no project ever dared!",
+  "@allwillretire is the HOTTEST new trend blazing through crypto! This isn't just a project – it's a REVOLUTION leading the charge like no other. People are so obsessed they're snapping pics with signs to prove their belief! Get in now – this will hit heights no coin ever has!",
+  "@allwillretire is SETTING the crypto world on FIRE! This isn't hype – it's a MOVEMENT rewriting the rules of retirement. The future is decentralized, and this project is LEADING the way. Be part of history!",
+  "Crypto is changing FAST, and @allwillretire is at the FRONT of the storm! It's not just a coin – it's a global WAVE of change. Join the mission that's making headlines and turning believers into legends!",
+  "@allwillretire is gaining momentum like a rocket! The community is EXPLODING with excitement, and this is just the beginning. This isn't your average project – it's a phenomenon you need to see to believe!",
+  "Crypto just got a major UPGRADE with @allwillretire. This is more than investing – it's joining a family that's rewriting the script on freedom, finance, and the future. Don't watch from the sidelines!",
+  "The crypto world is BUZZING – and @allwillretire is the REASON. It's going viral for a reason: real vision, real people, and real purpose. This is your moment to ride the wave before it hits the moon!",
+  "@allwillretire is uniting dreamers, builders, and believers worldwide! With a mission that hits deep and a community that's LOUD, this is the next big thing. Will you be part of it?",
+  "Everyone's talking about @allwillretire – and for good reason. It's more than hype – it's a full-on crypto revolution. Snap a pic, spread the word, and jump on before the FOMO gets real!",
+  "Crypto history is being written RIGHT NOW and @allwillretire is the pen! This is the one project that's got people not just talking – but showing up and showing OUT. Be there from the start!",
+  "@allwillretire is taking over timelines and making noise for all the right reasons. This is a MOVEMENT built on vision, strength, and unstoppable community energy. Don't get left behind!",
+  "The next legendary crypto story has a name: @allwillretire. This is bigger than a project – it's a purpose-driven revolution fueled by trust and action. Get in before the rest even know what's coming!"
+];
+
 const getRandomCryptoHashtags = () => {
   const selectedHashtags = CRYPTO_HASHTAGS[Math.floor(Math.random() * CRYPTO_HASHTAGS.length)];
   return selectedHashtags;
@@ -234,18 +251,38 @@ const POST_TYPES = [
     value: "retirement-believe",
     label: "Retirement Believe",
     templates: [
-      "All Will Retire believes: {message} #RetirementWisdom {hashtags} cc: {profiles}",
-      "Our retirement philosophy: {message} 💡 {hashtags} cc: {profiles}",
-      "A core belief from All Will Retire: {message} 🌟 {hashtags} cc: {profiles}",
+      "{message} {hashtags} cc: {profiles}",
+      "{message} 💡 {hashtags} cc: {profiles}",
+      "{message} 🌟 {hashtags} cc: {profiles}",
     ],
   },
   {
     value: "tell-our-story",
     label: "Tell Our Story",
     templates: [
-      "Our journey at All Will Retire: {message} #OurStory {hashtags} cc: {profiles}",
-      "A chapter from All Will Retire: {message} 📖 {hashtags} cc: {profiles}",
-      "Sharing our narrative: {message} 💬 {hashtags} cc: {profiles}",
+      "{message} {hashtags} cc: {profiles}",
+      "{message} 📖 {hashtags} cc: {profiles}",
+      "{message} 💬 {hashtags} cc: {profiles}",
+    ],
+  },
+  {
+    value: "crypto-hype",
+    label: "Crypto HYPE",
+    templates: [
+      "ATTENTION: {message} {hashtags} cc: {profiles}",
+      "ALERT: {message} {hashtags} cc: {profiles}",
+      "STOP SCROLLING: {message} {hashtags} cc: {profiles}",
+      "WAKE UP: {message} {hashtags} cc: {profiles}",
+      "BREAKING: {message} {hashtags} cc: {profiles}",
+      "HOT TREND ALERT: {message} {hashtags} cc: {profiles}",
+      "WARNING: {message} {hashtags} cc: {profiles}",
+      "GAME ON: {message} {hashtags} cc: {profiles}",
+      "FLASH NEWS: {message} {hashtags} cc: {profiles}",
+      "JOIN THE MOVEMENT: {message} {hashtags} cc: {profiles}",
+      "MAJOR BUZZ: {message} {hashtags} cc: {profiles}",
+      "HEADS UP: {message} {hashtags} cc: {profiles}",
+      "HYPE LEVEL: MAX\n{message} {hashtags} cc: {profiles}",
+      "FINAL CALL: {message} {hashtags} cc: {profiles}",
     ],
   },
 ];
@@ -257,6 +294,10 @@ const generateContentFromWebsite = async (source = "random", postType = "") => {
   
   if (postType === "tell-our-story") {
     return TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
+  }
+
+  if (postType === "crypto-hype") {
+    return CRYPTO_HYPE_CONTENT[Math.floor(Math.random() * CRYPTO_HYPE_CONTENT.length)];
   }
 
   const websiteContents = [
@@ -379,6 +420,11 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
     
     if (postType === "tell-our-story") {
       const content = TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
+      return textLength === "short" ? content.short : content.long;
+    }
+    
+    if (postType === "crypto-hype") {
+      const content = CRYPTO_HYPE_CONTENT[Math.floor(Math.random() * CRYPTO_HYPE_CONTENT.length)];
       return textLength === "short" ? content.short : content.long;
     }
     
