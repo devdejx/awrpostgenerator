@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -653,3 +654,9 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
             <RefreshCw className="h-5 w-5" />
           </Button>
         </div>
+      </div>
+    </Card>
+  );
+};
+
+export default PostGenerator;
