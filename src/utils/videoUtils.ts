@@ -33,11 +33,10 @@ export const getVimeoEmbedUrl = (url: string): string => {
  * @returns Promise that resolves when download starts
  */
 export const downloadVimeoVideo = async (url: string): Promise<void> => {
-  // Fixed video ID and token as specified
-  const videoId = "1073621108";
   const token = "4779545e0c95733f0bd6371a56152a86";
   
   try {
+    const videoId = extractVimeoId(url);
     console.log("Pridobivanje podatkov za video ID:", videoId);
     
     // Make GET request to Vimeo API with specified headers
