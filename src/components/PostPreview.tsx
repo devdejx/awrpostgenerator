@@ -16,9 +16,7 @@ const PostPreview = () => {
   const isMobile = useIsMobile();
 
   const formatPostContent = (content) => {
-    if (!content) return '';
-    
-    return content.replace(/All Will Retire (believes|explains|advises|recommends|insight|reminder|philosophy|wisdom|perspective|approach|belief|principle|concept|understands|champions|values|celebrates|promotes|inspires|prioritizes|supports):/gi, '@AllWillRetire');
+    return content || '';
   };
 
   const handleCopyToClipboard = () => {
