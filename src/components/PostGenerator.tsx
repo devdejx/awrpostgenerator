@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -573,4 +574,70 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
           <div className="flex items-center space-x-3">
             <div>
               <label className="cursor-pointer block">
-                <div className="flex h-10 w-1
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200">
+                  <ImageIcon className="h-5 w-5" />
+                </div>
+                <Input
+                  type="file"
+                  className="hidden"
+                  onChange={handleImageChange}
+                  accept="image/*"
+                />
+              </label>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleGenerateVideo}
+              disabled={isGeneratingVideo}
+              className="flex items-center gap-1"
+            >
+              {isGeneratingVideo ? (
+                <RefreshCw className="h-4 w-4 animate-spin" />
+              ) : (
+                <Video className="h-4 w-4" />
+              )}
+              Add Video
+            </Button>
+          </div>
+          
+          {imagePreview && (
+            <div className="mt-3">
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="max-h-40 rounded-md"
+              />
+            </div>
+          )}
+          
+          {videoPreview && (
+            <div className="mt-3">
+              <iframe
+                src={videoPreview}
+                width="100%"
+                height="200"
+                frameBorder="0"
+                allow="autoplay; fullscreen"
+                allowFullScreen
+                title="Video Preview"
+                className="rounded-md"
+              ></iframe>
+            </div>
+          )}
+        </div>
+
+        <div className="flex justify-between">
+          <Button variant="outline" onClick={resetForm}>
+            Reset
+          </Button>
+          <Button onClick={generatePost}>
+            Generate Post
+          </Button>
+        </div>
+      </div>
+    </Card>
+  );
+};
+
+export default PostGenerator;
