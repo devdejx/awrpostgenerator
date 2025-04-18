@@ -236,6 +236,46 @@ const CRYPTO_TEMPLATES = [
   {
     short: "WAKE UP: @allwillretire is the HOTTEST new trend blazing through crypto!",
     long: "WAKE UP: @allwillretire is the HOTTEST new trend blazing through crypto! This isn't just a project – it's a REVOLUTION leading the charge like no other. People are so obsessed they're snapping pics with signs to prove their belief! Get in now – this will hit heights no coin ever has!"
+  },
+  {
+    short: "BREAKING: @allwillretire is SETTING the crypto world on FIRE!",
+    long: "BREAKING: @allwillretire is SETTING the crypto world on FIRE! This isn't hype – it's a MOVEMENT rewriting the rules of retirement. The future is decentralized, and this project is LEADING the way. Be part of history!"
+  },
+  {
+    short: "HOT TREND ALERT: Crypto is changing FAST, and @allwillretire is at the FRONT of the storm!",
+    long: "HOT TREND ALERT: Crypto is changing FAST, and @allwillretire is at the FRONT of the storm! It's not just a coin – it's a global WAVE of change. Join the mission that's making headlines and turning believers into legends!"
+  },
+  {
+    short: "WARNING: @allwillretire is gaining momentum like a rocket!",
+    long: "WARNING: @allwillretire is gaining momentum like a rocket! The community is EXPLODING with excitement, and this is just the beginning. This isn't your average project – it's a phenomenon you need to see to believe!"
+  },
+  {
+    short: "GAME ON: Crypto just got a major UPGRADE with @allwillretire.",
+    long: "GAME ON: Crypto just got a major UPGRADE with @allwillretire. This is more than investing – it's joining a family that's rewriting the script on freedom, finance, and the future. Don't watch from the sidelines!"
+  },
+  {
+    short: "FLASH NEWS: The crypto world is BUZZING – and @allwillretire is the REASON.",
+    long: "FLASH NEWS: The crypto world is BUZZING – and @allwillretire is the REASON. It's going viral for a reason: real vision, real people, and real purpose. This is your moment to ride the wave before it hits the moon!"
+  },
+  {
+    short: "JOIN THE MOVEMENT: This is not a drill. @allwillretire is uniting dreamers, builders, and believers worldwide!",
+    long: "JOIN THE MOVEMENT: This is not a drill. @allwillretire is uniting dreamers, builders, and believers worldwide! With a mission that hits deep and a community that's LOUD, this is the next big thing. Will you be part of it?"
+  },
+  {
+    short: "MAJOR BUZZ: Everyone's talking about @allwillretire – and for good reason.",
+    long: "MAJOR BUZZ: Everyone's talking about @allwillretire – and for good reason. It's more than hype – it's a full-on crypto revolution. Snap a pic, spread the word, and jump on before the FOMO gets real!"
+  },
+  {
+    short: "HEADS UP: Crypto history is being written RIGHT NOW and @allwillretire is the pen!",
+    long: "HEADS UP: Crypto history is being written RIGHT NOW and @allwillretire is the pen! This is the one project that's got people not just talking – but showing up and showing OUT. Be there from the start!"
+  },
+  {
+    short: "HYPE LEVEL: MAX - @allwillretire is taking over timelines and making noise for all the right reasons.",
+    long: "HYPE LEVEL: MAX - @allwillretire is taking over timelines and making noise for all the right reasons. This is a MOVEMENT built on vision, strength, and unstoppable community energy. Don't get left behind!"
+  },
+  {
+    short: "FINAL CALL: The next legendary crypto story has a name: @allwillretire.",
+    long: "FINAL CALL: The next legendary crypto story has a name: @allwillretire. This is bigger than a project – it's a purpose-driven revolution fueled by trust and action. Get in before the rest even know what's coming!"
   }
 ];
 
