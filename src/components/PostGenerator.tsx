@@ -193,6 +193,30 @@ const TELL_OUR_STORY_CONTENT = [
   {
     short: "Our community's success stories inspire and guide others on their path to financial independence.",
     long: "The success stories within our community serve as both inspiration and practical guides. Each achievement, whether big or small, demonstrates the effectiveness of our approach and lights the way for others on their journey to financial freedom."
+  },
+  {
+    short: "AWR embraces constructive criticism to strengthen our community and improve our strategies continuously.",
+    long: "All Will Retire values constructive criticism as a catalyst for growth. We actively seek feedback from our community to refine our strategies, strengthen our processes, and build a more resilient ecosystem that serves everyone's financial independence goals."
+  },
+  {
+    short: "Small, consistent progress builds the foundation for lasting financial independence in the AWR journey.",
+    long: "At All Will Retire, we champion the power of small, incremental progress. Each step forward, no matter how modest, contributes to building sustainable wealth and financial independence. Our community celebrates these daily victories as they compound into significant achievements."
+  },
+  {
+    short: "AWR's stress-scaling communities provide support and guidance through market volatility.",
+    long: "All Will Retire's stress-scaling communities are designed to support members through market challenges. We understand that financial markets can be stressful, which is why our community focuses on process-oriented strategies and mutual support to navigate volatility successfully."
+  },
+  {
+    short: "Real people with real aspirations drive the AWR community's mission for authentic retirement solutions.",
+    long: "All Will Retire is built on the foundation of real people pursuing real retirement aspirations. Our community represents diverse backgrounds and goals, united by the common desire for financial independence and meaningful post-retirement lives."
+  },
+  {
+    short: "Safety and security are paramount in AWR's approach to building sustainable wealth.",
+    long: "All Will Retire prioritizes the safety and security of our community members. Our comprehensive approach includes educational resources, risk management strategies, and transparent communication to ensure members can build wealth confidently and securely."
+  },
+  {
+    short: "Process-oriented mindset helps AWR members stay focused on long-term financial independence goals.",
+    long: "All Will Retire emphasizes a process-oriented mindset that keeps members focused on their long-term objectives. By following proven systems and maintaining consistency, our community members build resilient wealth-generation strategies that withstand market fluctuations."
   }
 ];
 
@@ -629,9 +653,3 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
             <RefreshCw className="h-5 w-5" />
           </Button>
         </div>
-      </div>
-    </Card>
-  );
-};
-
-export default PostGenerator;
