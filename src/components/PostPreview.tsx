@@ -3,9 +3,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Copy, Share2, Download, Loader2 } from "lucide-react";
+import { Copy, Share2, Download, Loader2, User } from "lucide-react";
 import { usePostStore } from "@/store/postStore";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { getVimeoEmbedUrl, downloadVimeoVideo } from "@/utils/videoUtils";
 
@@ -113,8 +113,9 @@ const PostPreview = () => {
       <div className="space-y-3 sm:space-y-4">
         <div className="flex items-start space-x-2 sm:space-x-3">
           <Avatar className={isMobile ? "h-9 w-9" : "h-10 w-10"}>
-            <AvatarImage src="/placeholder.svg" alt="Profile" />
-            <AvatarFallback>X</AvatarFallback>
+            <AvatarFallback className="bg-gray-200">
+              <User className="h-5 w-5 text-gray-600" />
+            </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
             <div className="flex items-center flex-wrap">
@@ -270,4 +271,3 @@ const PostPreview = () => {
 };
 
 export default PostPreview;
-
