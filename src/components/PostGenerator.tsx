@@ -378,87 +378,15 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
     setVideoPreview(null);
   };
 
-  const generateContentFromWebsite = async (postType = "") => {
-    if (postType === "retirement-believe") {
-      const content = RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
-      return textLength === "short" ? content.short : content.long;
-    }
-    
-    if (postType === "tell-our-story") {
-      const content = TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
-      return textLength === "short" ? content.short : content.long;
-    }
-    
-    const websiteContents = [
-      {
-        short: "All Will Retire explains: Planning for retirement is crucial and requires early consistent action.",
-        long: "All Will Retire explains: Planning for retirement is crucial. Start early and be consistent with your savings. Developing a comprehensive strategy ensures financial security during your retirement years."
-      },
-      {
-        short: "All Will Retire advises: Retirement isn't just about finances, but purpose and staying actively engaged.",
-        long: "All Will Retire advises: Retirement isn't just about finances, it's also about having a purpose and staying active. Finding meaningful activities and maintaining social connections are essential components of a fulfilling retirement."
-      },
-      {
-        short: "All Will Retire recommends: Diversify your retirement portfolio to protect against market fluctuations effectively.",
-        long: "All Will Retire recommends: Diversifying your retirement portfolio can help protect against market volatility. Spreading investments across different asset classes provides security and helps maintain steady growth throughout market cycles."
-      },
-      {
-        short: "All Will Retire insight: Consider healthcare needs in retirement planning to prepare for potential expenses.",
-        long: "All Will Retire insight: Consider your healthcare needs when planning for retirement. Medical costs can be significant and often increase with age, making healthcare planning an essential component of your overall retirement strategy."
-      },
-      {
-        short: "All Will Retire reminder: Social security benefits alone may not provide sufficient retirement income security.",
-        long: "All Will Retire reminder: Social security benefits alone may not be enough for a comfortable retirement. Building additional income streams through savings, investments, and possibly part-time work can help ensure financial stability throughout your retirement years."
-      },
-    ];
-    
-    const mediumContents = [
-      {
-        short: "All Will Retire philosophy: Holistic approach to retirement includes financial, social and health aspects.",
-        long: "All Will Retire philosophy: Retirement planning requires a holistic approach to personal finance. Consider not just your portfolio, but your health, housing, social connections, and personal growth to create a comprehensive retirement strategy."
-      },
-      {
-        short: "All Will Retire wisdom: Define your long-term financial goals to create successful retirement planning strategies.",
-        long: "All Will Retire wisdom: Understanding your long-term financial goals is key to successful retirement. Clarifying what you want from retirement helps determine how much you need to save and what investment strategies will best support your vision."
-      },
-      {
-        short: "All Will Retire perspective: Wealth extends beyond money to encompass lifestyle, health, and personal fulfillment.",
-        long: "All Will Retire perspective: Wealth is more than just money - it's about creating a fulfilling lifestyle. True retirement wealth includes strong relationships, good health, meaningful activities, and the freedom to enjoy your time without financial stress."
-      },
-      {
-        short: "All Will Retire approach: Preparing for retirement requires balanced financial, health, and personal development strategies.",
-        long: "All Will Retire approach: Preparing for retirement involves financial, health, and personal growth strategies. A well-rounded plan addresses not just your financial security but also maintaining physical and mental well-being while pursuing activities that bring you joy."
-      },
-      {
-        short: "All Will Retire belief: Your retirement journey demands personalized planning based on individual goals and values.",
-        long: "All Will Retire belief: Your retirement journey is unique and deserves careful, personalized planning. Cookie-cutter approaches rarely work because each person has different needs, goals, and dreams for their retirement years that should guide their financial decisions."
-      },
-      {
-        short: "All Will Retire principle: Strategic financial planning creates greater personal freedom and retirement flexibility options.",
-        long: "All Will Retire principle: Strategic financial planning can help you achieve greater personal freedom. With proper planning and disciplined saving, you can create options for yourself that might include early retirement, part-time work, or pursuing passion projects."
-      },
-      {
-        short: "All Will Retire concept: Modern retirement approaches emphasize flexibility, adaptation, and continuous personal development opportunities.",
-        long: "All Will Retire concept: Modern retirement approaches focus on flexibility and continuous personal development. Today's retirees often blend work, learning, leisure, and service in creative ways that redefine traditional notions of retirement as a static life stage."
-      },
-    ];
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    let allContents = [];
-    if (contentSource === "medium") {
-      allContents = mediumContents;
-    } else if (contentSource === "website") {
-      allContents = websiteContents;
-    } else {
-      allContents = [...websiteContents, ...mediumContents];
-    }
-
-    const content = allContents[Math.floor(Math.random() * allContents.length)];
-    return textLength === "short" ? content.short : content.long;
-  };
-
   const handleAutoGenerate = async () => {
+    if (postType === "crypto") {
+      toast({
+        title: "Info",
+        description: "Content generation not available for Crypto posts",
+      });
+      return;
+    }
+    
     setIsGenerating(true);
     try {
       const content = await generateContentFromWebsite(postType);
