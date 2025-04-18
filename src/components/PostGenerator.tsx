@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -239,7 +239,6 @@ const PostGenerator = () => {
   const [isGeneratingVideo, setIsGeneratingVideo] = useState(false);
   const [contentSource, setContentSource] = useState("random");
   const [textLength, setTextLength] = useState("short");
-  const [tabValue, setTabValue] = useState("create");
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -289,9 +288,6 @@ const PostGenerator = () => {
       type: postType,
       timestamp: new Date().toISOString(),
     });
-
-    // Switch to preview tab
-    setTabValue("preview");
 
     toast({
       title: "Success!",
@@ -433,7 +429,6 @@ const PostGenerator = () => {
 
   return (
     <Card className="p-4 bg-white">
-      {/* Pass the tabValue state to the parent */}
       <div className="space-y-4 text-black">
         <div>
           <label className="block text-sm font-medium text-black mb-1">

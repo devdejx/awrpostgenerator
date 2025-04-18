@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import PostGenerator from "@/components/PostGenerator";
@@ -6,7 +7,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   const isMobile = useIsMobile();
-  const [activeTab, setActiveTab] = useState("create");
   
   return (
     <div className="min-h-screen bg-background dot-pattern py-6 sm:py-12 px-3 sm:px-6 lg:px-8">
@@ -33,12 +33,7 @@ const Index = () => {
           </div>
         </div>
 
-        <Tabs 
-          defaultValue="create" 
-          value={activeTab} 
-          onValueChange={setActiveTab} 
-          className="w-full"
-        >
+        <Tabs defaultValue="create" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-6 sm:mb-8 glass-effect border border-[#D4AF37]/20 p-1 rounded-lg">
             <TabsTrigger value="create" className="font-medium data-[state=active]:bg-primary data-[state=active]:text-background">Create Post</TabsTrigger>
             <TabsTrigger value="preview" className="font-medium data-[state=active]:bg-primary data-[state=active]:text-background">Preview</TabsTrigger>
