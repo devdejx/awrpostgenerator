@@ -405,14 +405,6 @@ const PostGenerator = ({ onPostCreated }: PostGeneratorProps) => {
   };
 
   const handleAutoGenerate = async () => {
-    if (postType === "crypto") {
-      toast({
-        title: "Info",
-        description: "Content generation not available for Crypto posts",
-      });
-      return;
-    }
-    
     setIsGenerating(true);
     try {
       const content = await generateContentFromWebsite(contentSource, postType, textLength);
