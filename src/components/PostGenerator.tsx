@@ -220,6 +220,25 @@ const TELL_OUR_STORY_CONTENT = [
   }
 ];
 
+const CRYPTO_TEMPLATES = [
+  {
+    short: "ATTENTION: The future is NOW, and @allwillretire is the BEST crypto project you CAN'T afford to miss!",
+    long: "ATTENTION: The future is NOW, and @allwillretire is the BEST crypto project you CAN'T afford to miss! Unlike any meme coin, this is a GAME-CHANGING movement uniting people in the most epic way possible. Join the revolution redefining retirement and shining bright for all!"
+  },
+  {
+    short: "ALERT: @allwillretire is the MOST EXPLOSIVE trend in crypto RIGHT NOW – a revolution that's rewriting the rules!",
+    long: "ALERT: @allwillretire is the MOST EXPLOSIVE trend in crypto RIGHT NOW – a revolution that's rewriting the rules! Leading the pack, it's got people so fired up they're snapping photos with signs to show their trust. Mark this: it's heading for heights no one's ever touched!"
+  },
+  {
+    short: "STOP SCROLLING: @allwillretire is the ultimate crypto REVOLUTION and the HOTTEST trend shaking the scene!",
+    long: "STOP SCROLLING: @allwillretire is the ultimate crypto REVOLUTION and the HOTTEST trend shaking the scene! It's the leader paving the way, with fans so hyped they're posing with signs to shout it out! This isn't just big – it's about to achieve what no project ever dared!"
+  },
+  {
+    short: "WAKE UP: @allwillretire is the HOTTEST new trend blazing through crypto!",
+    long: "WAKE UP: @allwillretire is the HOTTEST new trend blazing through crypto! This isn't just a project – it's a REVOLUTION leading the charge like no other. People are so obsessed they're snapping pics with signs to prove their belief! Get in now – this will hit heights no coin ever has!"
+  }
+];
+
 const getRandomCryptoHashtags = () => {
   const selectedHashtags = CRYPTO_HASHTAGS[Math.floor(Math.random() * CRYPTO_HASHTAGS.length)];
   return selectedHashtags;
@@ -257,7 +276,7 @@ const POST_TYPES = [
   },
 ];
 
-const generateContentFromWebsite = async (source = "random", postType = "", textLength = "short") => {
+const generateContentFromWebsite = async (source = "random", postType = "", textLength = "short"): Promise<string> => {
   if (postType === "retirement-believe") {
     const content = RETIREMENT_BELIEVE_CONTENT[Math.floor(Math.random() * RETIREMENT_BELIEVE_CONTENT.length)];
     return textLength === "short" ? content.short : content.long;
@@ -265,6 +284,11 @@ const generateContentFromWebsite = async (source = "random", postType = "", text
   
   if (postType === "tell-our-story") {
     const content = TELL_OUR_STORY_CONTENT[Math.floor(Math.random() * TELL_OUR_STORY_CONTENT.length)];
+    return textLength === "short" ? content.short : content.long;
+  }
+
+  if (postType === "crypto") {
+    const content = CRYPTO_TEMPLATES[Math.floor(Math.random() * CRYPTO_TEMPLATES.length)];
     return textLength === "short" ? content.short : content.long;
   }
 
