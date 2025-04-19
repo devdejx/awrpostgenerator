@@ -44,7 +44,7 @@ const Index = () => {
               </span> 
               <span className="text-white"> Post Generator</span>
             </h1>
-            <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-gray-400`}>Create engaging content for X with just a few clicks</p>
+            <p className={`${isMobile ? 'text-lg' : 'text-xl'} text-gray-400`}>Create engaging content for X with just a few clicks. Then share our movement and tell our story to the world.</p>
           </div>
         </div>
 
