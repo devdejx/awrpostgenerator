@@ -78,6 +78,12 @@ const CRYPTO_PROFILES = [
   "@CoinMarketCap @BitcoinMagazine",
   "@cryptorecruiter @cz_binance",
   "@PlanB @DocumentingBTC",
+  "@BrettWtff @neversleep111",
+  "@FrothlessPlease @realcryptocow",
+  "@Cryptic_Mang @Winalldayyyy",
+  "@MichaelSuppo @Cryptogains9",
+  "@CryptoQAimee @HLScrypto97",
+  "@CoinTalkCEO @green610_"
 ];
 
 const RETIREMENT_BELIEVE_CONTENT = [
