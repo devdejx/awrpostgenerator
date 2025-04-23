@@ -142,12 +142,12 @@ const RETIREMENT_BELIEVE_CONTENT = [
 ];
 
 const VIMEO_VIDEOS = [
-  "https://vimeo.com/1073620983",
-  "https://vimeo.com/1073621013",
-  "https://vimeo.com/1073621029",
-  "https://vimeo.com/1073621046",
-  "https://vimeo.com/1073621073",
-  "https://vimeo.com/1073621108",
+  "https://vimeo.com/1073620983/639f4602df",
+  "https://vimeo.com/1073621013/b2ed1c4f0f",
+  "https://vimeo.com/1073621029/b524df5ac8",
+  "https://vimeo.com/1073621046/27ca5564b8",
+  "https://vimeo.com/1073621073/f2b42f7576",
+  "https://vimeo.com/1073621108/1c3560f64e",
   "https://vimeo.com/1076760086",
   "https://vimeo.com/1076760061",
   "https://vimeo.com/1076760047",
@@ -156,13 +156,7 @@ const VIMEO_VIDEOS = [
   "https://vimeo.com/1076760164",
   "https://vimeo.com/1076760149",
   "https://vimeo.com/1076760137",
-  "https://vimeo.com/1076760112",
-  "https://vimeo.com/1076832747",
-  "https://vimeo.com/1076832730",
-  "https://vimeo.com/1076832714",
-  "https://vimeo.com/1076832698",
-  "https://vimeo.com/1076832683",
-  "https://vimeo.com/1076832670"
+  "https://vimeo.com/1076760112"
 ];
 
 const TELL_OUR_STORY_CONTENT = [

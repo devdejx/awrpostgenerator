@@ -5,12 +5,11 @@
  * @returns Video ID
  */
 export const extractVimeoId = (url: string): string => {
-  // Handle URLs with or without path parameters after the video ID
-  const match = url.match(/vimeo\.com\/(\d+)(?:\/([a-zA-Z0-9]+))?/);
+  const match = url.match(/vimeo\.com\/(\d+)/);
   if (!match) {
     throw new Error('Neveljavna Vimeo povezava');
   }
-  return match[1]; // Return just the video ID number
+  return match[1];
 };
 
 /**
@@ -98,3 +97,4 @@ export const downloadVimeoVideo = async (url: string): Promise<void> => {
     throw error;
   }
 };
+
