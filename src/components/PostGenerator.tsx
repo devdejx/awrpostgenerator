@@ -156,7 +156,13 @@ const VIMEO_VIDEOS = [
   "https://vimeo.com/1076760164",
   "https://vimeo.com/1076760149",
   "https://vimeo.com/1076760137",
-  "https://vimeo.com/1076760112"
+  "https://vimeo.com/1076760112",
+  "https://vimeo.com/1077976625",
+  "https://vimeo.com/1077976625",
+  "https://vimeo.com/1077976601",
+  "https://vimeo.com/1077976700",
+  "https://vimeo.com/1077976675",
+  "https://vimeo.com/1077976648"
 ];
 
 const TELL_OUR_STORY_CONTENT = [
